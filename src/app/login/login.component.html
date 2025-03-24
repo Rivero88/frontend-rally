@@ -1,0 +1,9 @@
+<form (ngSubmit)="login()">
+    <input type="text" [(ngModel)]="username" name="username" placeholder="Usuario" required />
+    <br/>
+    <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required />
+    <br/>
+    <button type="submit">Iniciar sesión</button>
+</form>
+
+<h1>{{this.tokenR}}</h1>

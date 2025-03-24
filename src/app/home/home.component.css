@@ -1,0 +1,42 @@
+/* Centrado en el contenedor */
+.container {
+  display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  margin-top: 50px;
+}
+
+/* Estilo para el botón */
+button {
+  padding: 12px 24px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Efecto al pasar el ratón por el botón */
+button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Efecto al hacer clic en el botón */
+button:active {
+  background-color: #1e7e34;
+  transform: scale(1);
+}
+
+/* Deshabilitado */
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+  
