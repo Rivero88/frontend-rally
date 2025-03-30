@@ -1,0 +1,29 @@
+*{
+    font-family: 'Poppins', sans-serif !important; /* Cambia la fuente de todo el documento */
+}
+/* .page-background {
+    background-color: #f3f1ed;
+    min-height: 100vh; /* Cubre toda la pantalla 
+} */
+
+html { 
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.d-flex {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Hace que la página tenga al menos el alto completo */
+}
+
+.flex-grow-1 {
+    background-color: #f3f1ed;
+    flex: 1; /* Ocupa todo el espacio disponible */
+}
+
+footer {
+    width: 100%;
+}
+

@@ -1,1 +1,21 @@
-<router-outlet />
+<!-- <div class="container-fluid mt-4">
+  <app-navbar></app-navbar> <!-- Navbar para todas las páginas -->
+  <!-- <div class="page-background">
+    <router-outlet></router-outlet> <!-- Aquí se mostrarán los demás componentes -->
+  <!-- </div> -->
+  <!-- <footer class="text-center bg-dark text-white p-3">
+    <p>¿Dudas? Contáctanos en <a href="mailto:[email de contacto]" class="text-white">[email de contacto]</a></p>
+  </footer>
+</div> -->
+
+<div class="d-flex flex-column min-vh-100">
+  <app-navbar></app-navbar> <!-- Navbar para todas las páginas -->
+  
+  <div class="flex-grow-1">
+      <router-outlet></router-outlet> <!-- Aquí se mostrarán los demás componentes -->
+  </div>
+
+  <footer class="text-center bg-dark text-white p-3"><!-- Footer para todas las páginas -->
+      <p>¿Dudas? Contáctanos en <a href="mailto:[email de contacto]" class="text-white">[email de contacto]</a></p>
+  </footer>
+</div>

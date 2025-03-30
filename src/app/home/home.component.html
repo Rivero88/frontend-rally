@@ -1,4 +1,48 @@
-<div class="container">
-    <button routerLink="/login">Login</button>
-    <br>
+<title>Rally Fotográfico</title>
+<div class="container-fluid py-5">
+    <header class="text-center mb-5 text-white p-4 rounded" style="background-color: #FF9575;">
+        <h1 class="fw-bold" style="color: #1A4276;">📸 Rally Fotográfico 📸</h1>
+        <p class="lead" style="color: #1A4276;">¡Participa y comparte tu talento!🎉</p>
+    </header>
+
+    <section class="mb-5 text-center">
+        <h2 class="text-center" style="color: #1A4276;">📌 Bases de Participación</h2>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Concurso abierto a aficionados y profesionales.</li>
+            <li class="list-group-item">Máximo <strong>1</strong> foto por participante.</li>
+            <li class="list-group-item">Temática: <strong>Vacaciones de ensueño</strong>.</li>
+            <li class="list-group-item">No se permiten ediciones ni creaciones de IA.</li>
+        </ul>
+    </section>
+
+    <section class="text-center">
+        <h2 class="text-center" style="color: #1A4276;">📅 Fechas</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center custom-table-bg">
+                <tbody>
+                    <tr><th>Inicio de inscripciones</th><td>14 de Marzo de 2025</td></tr>
+                    <tr><th>Cierre de inscripciones</th><td>31 de Marzo de 2025</td></tr>
+                    <tr><th>Inicio de votaciones</th><td>1 de Abril de 2025</td></tr>
+                    <tr><th>Fin de votaciones</th><td>31 de Mayo de 2025</td></tr>
+                    <tr><th>Anuncio de ganadores</th><td>10 de Junio de 2025</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="mb-5 text-center">
+        <h2 class="text-center" style="color: #1A4276;">📥 Subida de Fotografías</h2>
+        <p>Para participar, debes registrarte en el siguiente enlace:</p>
+        <button class="btn btn-custom btn-lg" routerLink="/registro">Registro</button>
+        <br>
+        <br>
+        <p>Podrás subir tu foto desde tú perfil.</p>
+        <button class="btn btn-custom btn-lg" routerLink="/">Subir</button>
+    </section>
+
+    <section class="mb-5 text-center">
+        <h2 class="text-center" style="color: #1A4276;">⭐ Votaciones</h2>
+        <p>Las fotos deberán ser aprobadas por nuestro administrador y después serán publicadas para ser votadas por el público.</p>
+        <button class="btn btn-custom btn-lg" routerLink="/">Votar</button>
+    </section>
 </div>

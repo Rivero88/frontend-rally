@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -21,7 +22,7 @@ export class LoginComponent {
     this.authService.login(this.username, this.password).subscribe((token: any) => {
       localStorage.setItem('token', token);
       this.tokenR = token.token;
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     });
   }
 }
