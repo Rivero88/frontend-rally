@@ -1,0 +1,10 @@
+.btn-custom {
+    background-color: #FF9575 !important; /* Color de fondo al pasar el mouse */
+    border-color: #FF9575 !important; /* Color del borde */
+    color: #1A4276 !important; /* Color del texto */
+}
+
+.btn-custom:hover {
+    background-color: #1A4276 !important; /* Color de fondo al pasar el mouse */
+    color: white !important;
+}

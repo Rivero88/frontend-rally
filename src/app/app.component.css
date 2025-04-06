@@ -16,10 +16,31 @@ html {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Hace que la página tenga al menos el alto completo */
+    background-image: url('../assets/fondo.jpg'); /* imagen para el fondo */
+    background-size: cover; /* la imagen cubre todo el área de la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-attachment: fixed; /* imagen fija al hacer scroll */
 }
 
+.d-flex > * {
+    z-index: 2; /* El contenido dentro de .d-flex estará encima del overlay */
+}
+
+.d-flex::before {
+    content: ''; /* Necesario para crear el pseudo-elemento */
+    position: fixed; /* Coloca este pseudo-elemento encima del contenido */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5); /* Puedes ajustar este color o dejarlo transparente */
+    filter: blur(8px); /* Aquí se aplica el desenfoque */
+    z-index: 1; /* Aseguramos que esté encima de la imagen pero debajo del contenido */
+}
+
+
 .flex-grow-1 {
-    background-color: #f3f1ed;
+    /* background-color: #f3f1ed; */
     flex: 1; /* Ocupa todo el espacio disponible */
 }
 

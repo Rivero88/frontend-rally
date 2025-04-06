@@ -1,0 +1,140 @@
+<br />
+<br />
+<form [formGroup]="form" class="container p-4 bg-light rounded shadow-sm" style="max-width: 600px;">
+    <h3 class="text-center mb-4">Registro como participante</h3>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" id="nombre" required formControlName="nombre" class="form-control"
+                placeholder="Introduce nombre" />
+            @if(form.controls["nombre"].invalid && (form.controls["nombre"].dirty || form.controls["nombre"].touched)){
+                @if(form.controls["nombre"].errors?.["required"]){
+                    <div class="text-danger">
+                        El nombre es obligatorio.
+                    </div>
+                }
+                @if(form.controls["nombre"].errors?.["minlength"]){
+                    <div class="text-danger">
+                        El nombre debe tener al menos 3 caracteres.
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md-6">
+            <label for="apellidos" class="form-label">Apellidos</label>
+            <input type="text" id="apellidos" required formControlName="apellidos" class="form-control"
+                placeholder="Introduce apellidos" />
+            @if(form.controls["apellidos"].invalid && (form.controls["apellidos"].dirty || form.controls["apellidos"].touched)){
+                @if(form.controls["apellidos"].errors?.["required"]){
+                    <div class="text-danger">
+                        Los apellidos son obligatorios.
+                    </div>
+                }
+                @if(form.controls["apellidos"].errors?.["minlength"]){
+                    <div class="text-danger">
+                        Los apellidos debe tener al menos 6 caracteres.
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <label for="alias" class="form-label">Alias</label>
+            <input type="text" id="alias" required formControlName="alias" class="form-control"
+                placeholder="Introduce alias" />
+            @if(form.controls["alias"].invalid && (form.controls["alias"].dirty || form.controls["alias"].touched)){
+                @if(form.controls["alias"].errors?.["required"]){
+                    <div class="text-danger">
+                        El alias es obligatorio.
+                    </div>
+                }
+                @if(form.controls["alias"].errors?.["minlength"]){
+                    <div class="text-danger">
+                        El alias debe tener al menos 2 caracteres.
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md-6">
+            <label for="fnacimiento" class="form-label">Fecha nacimiento</label>
+            <input type="date" id="fnacimiento" required formControlName="fnacimiento" class="form-control" />
+            @if(form.controls["fnacimiento"].invalid && (form.controls["fnacimiento"].dirty || form.controls["fnacimiento"].touched)){
+                @if(form.controls["fnacimiento"].errors?.["required"]){
+                    <div class="text-danger">
+                        La fecha de naciemiento es obligatoria.
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="tel" id="telefono" required formControlName="telefono" class="form-control" placeholder="Introduce teléfono"/>
+            @if(form.controls["telefono"].invalid && (form.controls["telefono"].dirty || form.controls["telefono"].touched)){
+                @if(form.controls["telefono"].errors?.["required"]){
+                    <div class="text-danger">
+                        El teléfono es obligatorio.
+                    </div>
+                }
+                @if(form.controls["telefono"].errors?.["minlength"]){
+                    <div class="text-danger">
+                        El teléfono debe tener al menos 9 caracteres.
+                    </div>
+                }
+                @if(form.controls["telefono"].errors?.["maxlength"]){
+                    <div class="text-danger">
+                        El teléfono debe tener máximo 9 caracteres.
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" required formControlName="email" class="form-control" placeholder="Introduce email" />
+            @if(form.controls["email"].invalid && (form.controls["email"].dirty || form.controls["email"].touched)){
+                @if(form.controls["email"].errors?.["required"]){
+                    <div class="text-danger">
+                        El email es obligatorio.
+                    </div>
+                }
+                @if(form.controls["email"].errors?.["email"]){
+                    <div class="text-danger">
+                        Formato de email incorrecto.
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" id="password" required formControlName="password" class="form-control" placeholder="Introduce contraseña" />
+        @if(form.controls["password"].invalid && (form.controls["password"].dirty || form.controls["password"].touched)){
+            @if(form.controls["password"].errors?.["required"]){
+                <div class="text-danger">
+                    La contraseña es obligatoria.
+                </div>
+            }
+            @if(form.controls["password"].errors?.["minlength"]){
+                <div class="text-danger">
+                    La contraseña debe tener al menos 6 caracteres.
+                </div>
+            }
+            @if(form.controls["password"].errors?.["pattern"]){
+                <div class="text-danger">
+                    La contraseña debe contener al menos un número, una letra y un carácter especial.
+                </div>
+            }
+        }
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-custom">Registrarse</button>
+        <button routerLink="/" class="btn btn-custom">Volver</button>
+    </div>
+</form>
