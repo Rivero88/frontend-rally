@@ -2,15 +2,17 @@ h1{
     font-weight: bold; /* Cambia el peso de la fuente de los h1 */
 }
 .navbar {
-    background-color: #FF9575 !important; /* Cambia el fondo del navbar */
+    /*background-color: #FF9575 !important;  Cambia el fondo del navbar */
+    background-color: #D47F62 !important; /* Cambia el fondo del navbar */
 }
 
 .btn-custom {
-    border-color: #1A4276 !important; /* Color del borde */
-    color: #1A4276 !important; /* Color del texto */
+    border-color: #254D42 !important; /* Color del borde */
+    color: #254D42 !important; /* Color del texto */
 }
 
 .btn-custom:hover {
-    background-color: #1A4276 !important; /* Color de fondo al pasar el mouse */
+    background-color: #254D42 !important; /* Color de fondo al pasar el mouse */
+    border-color: #254D42 !important; /* Color del borde */
     color: white !important;
 }

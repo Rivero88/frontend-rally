@@ -1,1 +1,27 @@
-<p>galeria works!</p>
+<header class="text-center mb-5 text-white p-4 rounded container" style="background-color: #F3F1ED;">
+    <h1 class="fw-bold" style="color: #254D42;">Galería</h1>
+    <p class="lead" style="color: #254D42;">Explora las mejores fotografías por temática</p>
+</header>
+<div class="container">
+    <div class="row justify-content-center g-4">
+        <div class="row g-4">
+            @for (foto of fotosFiltradas; track foto.id) {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100 shadow-sm" style="background-color: #F3F1ED;">
+                <img [src]="foto.url" class="card-img-top" [alt]="foto.titulo">
+                <div class="card-body">
+                    <h5 class="card-title">{{ foto.titulo }}</h5>
+                    <p class="card-text">
+                    <strong>Autor:</strong> {{ foto.autor }} <br>
+                    <strong>Temática:</strong> {{ foto.tematica }}
+                    </p>
+                    <button class="btn btn-custom btn-sm">Ver grande</button>
+                    <button class="btn btn-success btn-sm ms-2">👍 Votar</button>
+                </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+  

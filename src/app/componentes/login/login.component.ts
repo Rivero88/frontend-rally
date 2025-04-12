@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../auth/auth.service';
 import { RouterLink } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule,RouterLink],
+  imports: [FormsModule,RouterLink, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -15,8 +16,14 @@ export class LoginComponent {
   password = '';
   title = 'frontend-rally';
   tokenR = '';
+  public form: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
+    this.form = new FormBuilder().group({
+      username: this.fb.control('', [Validators.required]),
+      password: this.fb.control('', [Validators.required]),
+    });
+  }
 
   login() {
     this.authService.login(this.username, this.password).subscribe((token: any) => {
