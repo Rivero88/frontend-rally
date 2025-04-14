@@ -1,9 +1,18 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { provideHttpClient, withInterceptors } from '@angular/common/http'; //para configurar HttpClient con interceptores
+import { jwtInterceptor } from './app/interceptors/jwt.interceptor';//importación del interceptor JWT
+import { errorInterceptor } from './app/interceptors/error.interceptor';//importación del interceptor de errores
+import { routes } from './app/app.routes'; 
+import { provideRouter } from '@angular/router';
 
 bootstrapApplication(AppComponent, {
   ...appConfig,
+  //Registro del interceptor JWT en el módulo principal de la aplicación
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([jwtInterceptor, errorInterceptor]))//Añade el token a las peticiones, maneja los errroes de respuesta
+  ]
 })
   .catch((err) => console.error(err));

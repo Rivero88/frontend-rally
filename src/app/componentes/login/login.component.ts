@@ -26,10 +26,18 @@ export class LoginComponent {
   }
 
   login() {
-    this.authService.login(this.username, this.password).subscribe((token: any) => {
-      localStorage.setItem('token', token);
-      this.tokenR = token.token;
-      this.router.navigate(['/']);
+    const { username, password } = this.form.value;
+
+    this.authService.login(username, password).subscribe({
+      next:(response: any) => {
+        const token = response.token;
+        localStorage.setItem('token', token);
+        this.tokenR = token.token;
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        alert('Credenciales incorrectas.');
+      }
     });
   }
 }
