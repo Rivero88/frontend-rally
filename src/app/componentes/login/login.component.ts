@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Auth } from '../../modelos/auth';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class LoginComponent {
   username = '';
   password = '';
-  title = 'frontend-rally';
-  tokenR = '';
   public form: FormGroup;
 
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
@@ -25,14 +24,15 @@ export class LoginComponent {
     });
   }
 
+  // Método para inicio de sesión
   login() {
     const { username, password } = this.form.value;
-
     this.authService.login(username, password).subscribe({
-      next:(response: any) => {
-        const token = response.token;
-        localStorage.setItem('token', token);
-        this.tokenR = token.token;
+      next:(respuesta: Auth) => {
+        const token = respuesta.token;
+        const rol = respuesta.rol;
+        localStorage.setItem('token', token); // Se guarda el token en el localStorage
+        localStorage.setItem('rol', rol); // Se guarda el rol en el localStorage
         this.router.navigate(['/']);
       },
       error: (error) => {

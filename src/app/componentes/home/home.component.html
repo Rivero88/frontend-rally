@@ -57,27 +57,36 @@
     
     <section class="mb-5 text-center">
         <div class="container" style="background-color: #F3F1ED;">
-            <h2 class="text-center" style="color: #254D42;">📥 Subida de Fotografías</h2>
-            <p>Para participar, debes registrarte en el siguiente enlace:</p>
-            <button class="btn btn-custom btn-lg" routerLink="/registro">Registro</button>
-            <br>
-            <br>
-            <p>Podrás subir tu foto desde tu perfil.</p>
-            <button class="btn btn-custom btn-lg" routerLink="/">Subir</button>
-            <br>
+            @if(isAuthenticated && isAdmin){ 
+                <br>
+                <h2 class="text-center" style="color: #254D42;">📥 Validación de Fotografías</h2>
+                <button class="btn btn-custom btn-lg" routerLink="">Validar fotografías</button>
+                <br>
+            }@else if(isAuthenticated){
+                <h2 class="text-center" style="color: #254D42;">📥 Subida de Fotografías</h2>
+                <button class="btn btn-custom btn-lg" routerLink="">Subir fotografías</button>
+                <br>
+            }@else {
+                <h2 class="text-center" style="color: #254D42;">📥 Subida de Fotografías</h2>
+                <p>Para participar, debes registrarte en el siguiente enlace:</p>
+                <button class="btn btn-custom btn-lg" routerLink="/registro">Registro</button>
+                <br>
+                <br>
+                <p>Podrás subir tu foto desde tu perfil.</p>
+            }
             <br>
         </div>
     </section>
-    
 
     <section class="mb-5 text-center">
         <div class="container" style="background-color: #F3F1ED;">
+            @if(!isAuthenticated){ 
             <h2 class="text-center" style="color: #254D42;">⭐ Votaciones</h2>
             <p>Las fotos deberán ser aprobadas por nuestro administrador y después serán publicadas para ser votadas por el público.</p>
             <button class="btn btn-custom btn-lg" routerLink="/">Votar</button>
             <br>
             <br>
+            }
         </div>
-        
     </section>
 </div>

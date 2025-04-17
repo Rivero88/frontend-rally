@@ -1,7 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http'; // Se importa el interceptor en forma de función
 
-//Se crea el interceptor como un función que recibe la petición y el siguiente interceptor
-// y se le asigna el nombre jwtInterceptor
+//Se crea el interceptor como un función que recibe la petición y el siguiente interceptor y se le asigna el nombre jwtInterceptor
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   // Se obtiene el token JWT desde el localStorage
   const token = localStorage.getItem('token');

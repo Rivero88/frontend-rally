@@ -2,12 +2,29 @@
     <div class="container-fluid">
         <img src="assets/logo4.png" alt="Logo" width="75" height="75">
         <h1 style= "color:#254D42">Cazadores De Momentos</h1>
-        <button class="btn btn-custom" routerLink="/login">Login</button>
+        @if(!isAuthenticated){ 
+            <button class="btn btn-custom" routerLink="/login">Login</button>
+        }@else{ 
+            <button class="btn btn-custom" (click)="logout()">Logout</button>
+        }
     </div>
     <div class="container-fluid d-flex justify-content-center gap-3">
-        <button class="btn btn-custom" routerLink="/">Inicio</button>
-        <button class="btn btn-custom" routerLink="/galeria">Galería fotos</button>
-        <button class="btn btn-custom" routerLink="/registro">Registro participantes</button>
-        <button class="btn btn-custom" routerLink="/contacto">Contacto</button>
+        @if(isAuthenticated && isAdmin){
+            <button class="btn btn-custom" routerLink="/">Ver/Modificar parámetros</button>
+            <button class="btn btn-custom" routerLink="">Gestión usuarios</button>
+            <button class="btn btn-custom" routerLink="">Validar fotografías</button>
+            <button class="btn btn-custom" routerLink="">Estadísticas y resultados</button>
+        }@else if(isAuthenticated){
+            <button class="btn btn-custom" routerLink="/">Inicio</button>
+            <button class="btn btn-custom" routerLink="/">Mi Perfil</button>
+            <button class="btn btn-custom" routerLink="/">Mi Galería</button>
+            <button class="btn btn-custom" routerLink="/contacto">Contacto</button>
+        }@else {
+            <button class="btn btn-custom" routerLink="/">Inicio</button>
+            <button class="btn btn-custom" routerLink="/registro">Registro participantes</button>
+            <button class="btn btn-custom" routerLink="/galeria">Galería fotos</button>
+            <button class="btn btn-custom" routerLink="">Rankings</button>
+            <button class="btn btn-custom" routerLink="/contacto">Contacto</button>   
+        }
     </div>
 </nav>

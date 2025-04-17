@@ -6,7 +6,7 @@ import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { GaleriaComponent } from './componentes/galeria/galeria.component';
 
 export const routes: Routes = [ 
-    { path: '', component: HomeComponent},
+    { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent }, 
     { path: 'registro', component: RegistroComponent },
     { path: 'contacto', component: ContactoComponent },
