@@ -1,4 +1,4 @@
-import { Rol } from './rol';
+import { Rol } from "./Rol";
 
 export interface Auth {
     token: string,

@@ -4,6 +4,8 @@ import { HomeComponent } from './componentes/home/home.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { GaleriaComponent } from './componentes/galeria/galeria.component';
+import { ParametrosModComponent } from './componentes/parametros-mod/parametros-mod.component';
+import { UsuariosListarComponent } from './componentes/usuarios-listar/usuarios-listar.component';
 
 export const routes: Routes = [ 
     { path: '', component: HomeComponent },
@@ -11,4 +13,6 @@ export const routes: Routes = [
     { path: 'registro', component: RegistroComponent },
     { path: 'contacto', component: ContactoComponent },
     { path: 'galeria', component: GaleriaComponent },
+    { path: 'parametros-mod', component: ParametrosModComponent },
+    { path: 'listar-usuarios', component: UsuariosListarComponent}
 ];

@@ -17,12 +17,12 @@ export class AuthService {
 
   // Devuelve true si hay token
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    return  typeof window !== 'undefined' && !!localStorage.getItem('token');
   }
 
   // Devuelve true si el rol es admin y false si es participante
   isAdmin(): boolean {
     const rol = localStorage.getItem('rol');
-    return rol === 'admin'; 
+    return  typeof window !== 'undefined' && rol === 'admin'; 
   }
 }

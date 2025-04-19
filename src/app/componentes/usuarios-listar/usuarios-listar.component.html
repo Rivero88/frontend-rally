@@ -1,0 +1,35 @@
+<section class="mb-5 text-center">
+    <div class="container" style="background-color: #F3F1ED;">
+        <h1 class="fw-bold" style="color: #254D42;">Usuarios</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center custom-table-bg">
+                @if (usuarios.length > 0) {
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>ALIAS</th>
+                            <th>NOMBRE</th>
+                            <th>APELLIDOS</th>
+                            <th>FECHA NACIMIENTO</th>
+                            <th>NUMERO TELEFONO</th>
+                            <th>EMAIL</th>
+                            <th>ROL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuarios of usuarios">
+                            <td>{{ usuarios.id }}</td>
+                            <td>{{ usuarios.alias }}</td>
+                            <td>{{ usuarios.nombre }}</td>
+                            <td>{{ usuarios.apellidos }}</td>
+                            <td>{{ usuarios.fNacimiento }}</td>
+                            <td>{{ usuarios.numTelefono }}</td>
+                            <td>{{ usuarios.email }}</td>
+                            <td>{{ usuarios.rol }}</td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    </div>
+</section>

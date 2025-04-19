@@ -1,0 +1,129 @@
+<br/>
+<form [formGroup]="form" class="container p-4 rounded shadow-sm" style="max-width: 1000px; background-color: #F3F1ED;" (ngSubmit)="editar()">
+    <h3 class="text-center mb-4" style="color: #254D42;">Modificar parámetros</h3>
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <label for="numMaxFotografias" class="form-label">Número máximo fotografias</label>
+            <input type="number" id="numMaxFotografias" required formControlName="numMaxFotografias" class="form-control"
+                placeholder="Introduce número" />
+            @if(form.controls["numMaxFotografias"].invalid && (form.controls["numMaxFotografias"].dirty || form.controls["numMaxFotografias"].touched)){
+                @if(form.controls["numMaxFotografias"].errors?.["required"]){
+                    <div class="text-danger">
+                        El número máximo de fotografías es obligatorio.
+                    </div>
+                }
+                @if(form.controls["numMaxFotografias"].errors?.["min"]){
+                    <div class="text-danger">
+                        El número mínimo es 1.
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md-6">
+            <label for="tema" class="form-label">Temática</label>
+            <input type="text" id="tema" required formControlName="tema" class="form-control"
+                placeholder="Introduce un tema" />
+            @if(form.controls["tema"].invalid && (form.controls["tema"].dirty || form.controls["tema"].touched)){
+                @if(form.controls["tema"].errors?.["required"]){
+                    <div class="text-danger">
+                        La temática de las fotografias es obligatoria.
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <label for="fInicioInscripcion" class="form-label">Fecha de inicio de inscripciones</label>
+            <input type="date" id="fInicioInscripcion" required formControlName="fInicioInscripcion" class="form-control" />
+            @if(form.controls["fInicioInscripcion"].invalid && (form.controls["fInicioInscripcion"].dirty || form.controls["fInicioInscripcion"].touched)){
+                @if(form.controls["fInicioInscripcion"].errors?.["required"]){
+                    <div class="text-danger">
+                        La fecha de inicio de las inscripciones es obligatoria.
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md-6">
+            <label for="fFinInscripcion" class="form-label">Fecha de fin de inscripciones</label>
+            <input type="date" id="fFinInscripcion" required formControlName="fFinInscripcion" class="form-control" />
+            @if(form.controls["fFinInscripcion"].invalid && (form.controls["fFinInscripcion"].dirty || form.controls["fFinInscripcion"].touched)){
+                @if(form.controls["fFinInscripcion"].errors?.["required"]){
+                    <div class="text-danger">
+                        La fecha de fin de las inscripciones es obligatoria.
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <label for="fInicioVotacion" class="form-label">Fecha de inicio de votaciones</label>
+            <input type="date" id="fInicioVotacion" required formControlName="fInicioVotacion" class="form-control" />
+            @if(form.controls["fInicioVotacion"].invalid && (form.controls["fInicioVotacion"].dirty || form.controls["fInicioVotacion"].touched)){
+                @if(form.controls["fInicioVotacion"].errors?.["required"]){
+                    <div class="text-danger">
+                        La fecha de inicio de las votaciones es obligatoria.
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md-6">
+            <label for="fFinVotacion" class="form-label">Fecha de fin de votaciones</label>
+            <input type="date" id="fFinVotacion" required formControlName="fFinVotacion" class="form-control" />
+            @if(form.controls["fFinVotacion"].invalid && (form.controls["fFinVotacion"].dirty || form.controls["fFinVotacion"].touched)){
+                @if(form.controls["fFinVotacion"].errors?.["required"]){
+                    <div class="text-danger">
+                        La fecha de fin de las votaciones es obligatoria.
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <label for="fGanador" class="form-label">Fecha publicación ganador</label>
+            <input type="date" id="fGanador" required formControlName="fGanador" class="form-control" />
+            @if(form.controls["fGanador"].invalid && (form.controls["fGanador"].dirty || form.controls["fGanador"].touched)){
+                @if(form.controls["fGanador"].errors?.["required"]){
+                    <div class="text-danger">
+                        La fecha de publicación de ganador es obligatoria.
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <label for="categorias" class="form-label">Categorías</label>
+        <div formArrayName="categorias" class="row">
+          <div class="col-md-6 mb-3" *ngFor="let cat of categorias.controls; let i = index" [formGroupName]="i">
+            <div class="p-3 border rounded bg-white shadow-sm h-100">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control mb-2" formControlName="nombre" required />
+                @if (cat.get("nombre")?.invalid && (cat.get("nombre")?.dirty || cat.get("nombre")?.touched)) {
+                    @if (cat.get("nombre")?.errors?.["required"]) {
+                    <div class="text-danger">
+                        El nombre de la categoría es obligatorio.
+                    </div>
+                    }
+                }
+              <label for="descripcion"class="form-label">Descripción</label>
+              <textarea class="form-control" rows="3" formControlName="descripcion" required></textarea>
+                @if (cat.get("descripcion")?.invalid && (cat.get("descripcion")?.dirty || cat.get("descripcion")?.touched)) {
+                    @if (cat.get("descripcion")?.errors?.["required"]) {
+                    <div class="text-danger">
+                        La descripción de la categoría es obligatoria.
+                    </div>
+                    }
+                }
+            </div>
+          </div>
+        </div>
+    </div> 
+    
+    <div class="text-center mt-4">
+        <button class="btn btn-custom btn-lg" type="submit" role="button" [disabled]="!form.valid">Guardar</button>
+        <button class="btn btn-custom btn-lg ms-3" role="button" (click)="cancelar()">Cancelar</button>
+    </div>
+</form>

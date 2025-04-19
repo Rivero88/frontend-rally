@@ -1,4 +1,4 @@
-<div class="container-fluid py-5">
+<div class="container-fluid py-5" *ngIf="parametros">
     <header class="text-center mb-5 text-white p-4 rounded container" style="background-color: #F3F1ED;">
         <h1 class="fw-bold" style="color: #254D42;">📸 Rally Fotográfico 📸</h1>
         <p class="lead" style="color: #254D42;">¡Participa y comparte tu talento!🎉</p>
@@ -12,8 +12,8 @@
             <h2 class="text-center" style="color: #254D42;">📌 Bases de Participación</h2>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Concurso abierto a aficionados y profesionales.</li>
-                <li class="list-group-item">Máximo <strong>1</strong> foto por categoría.</li>
-                <li class="list-group-item">Temática: <strong>Vacaciones de ensueño</strong>.</li>
+                <li class="list-group-item">Máximo <strong>{{ parametros.numMaxFotografias }}</strong> fotografía por categoría.</li>
+                <li class="list-group-item">Temática: <strong>{{ parametros.tema }}</strong>.</li>
                 <li class="list-group-item">Las fotos deben ser originales. No se permiten ediciones ni creaciones de IA. </li>
             </ul>
         </div>
@@ -25,17 +25,16 @@
             <div class="table-responsive">
                 <table class="table table-bordered text-center custom-table-bg">
                     <tbody>
-                        <tr><th>Inicio de inscripciones</th><td>14 de Marzo de 2025</td></tr>
-                        <tr><th>Cierre de inscripciones</th><td>31 de Marzo de 2025</td></tr>
-                        <tr><th>Inicio de votaciones</th><td>1 de Abril de 2025</td></tr>
-                        <tr><th>Fin de votaciones</th><td>31 de Mayo de 2025</td></tr>
-                        <tr><th>Anuncio de ganadores</th><td>10 de Junio de 2025</td></tr>
+                        <tr><th>Inicio de inscripciones</th><td>{{ parametros.fInicioInscripcion | date: 'dd \'de\' MMMM \'de\' yyyy' }}</td></tr>
+                        <tr><th>Cierre de inscripciones</th><td>{{ parametros.fFinInscripcion | date: 'dd \'de\' MMMM \'de\' yyyy' }}</td></tr>
+                        <tr><th>Inicio de votaciones</th><td>{{ parametros.fInicioVotacion | date: 'dd \'de\' MMMM \'de\' yyyy' }}</td></tr>
+                        <tr><th>Fin de votaciones</th><td>{{ parametros.fFinVotacion | date: 'dd \'de\' MMMM \'de\' yyyy' }}</td></tr>
+                        <tr><th>Anuncio de ganadores</th><td>{{ parametros.fGanador | date: 'dd \'de\' MMMM \'de\' yyyy' }}</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
-    
 
     <section class="mb-5 text-center">
         <div class="container" style="background-color: #F3F1ED;">
@@ -43,24 +42,21 @@
             <div class="table-responsive">
                 <table class="table table-bordered text-center custom-table-bg">
                     <tbody>
-                        <tr><th>Paisaje</th><td>Fotos de playas, montañas, paisajes exuberantes, atardeceres, etc.</td></tr>
-                        <tr><th>Gastronomía</th><td>Los platos más representativos o una experiencia gastronómica única del lugar.</td></tr>
-                        <tr><th>Viajeros en acción</th><td>Imágenes que muestran la interacción de las personas con el entorno, por ejemplo, haciendo turismo, explorando, disfrutando de las actividades.</td></tr>
-                        <tr><th>Viviendo la cultura</th><td>Retratos de las tradiciones locales, actividades culturales, festivales, arte, arquitectura.</td></tr>
-                        <tr><th>Detalles</th><td>Fotos de pequeños detalles que representan unas vacaciones perfectas, como las huellas en la arena, la textura de una bebida, los objetos típicos del lugar, etc.</td></tr>
+                        <tr *ngFor="let categoria of parametros.categorias">
+                            <th>{{ categoria.nombre }}</th>
+                            <td>{{ categoria.descripcion }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
-
     
     <section class="mb-5 text-center">
         <div class="container" style="background-color: #F3F1ED;">
             @if(isAuthenticated && isAdmin){ 
-                <br>
-                <h2 class="text-center" style="color: #254D42;">📥 Validación de Fotografías</h2>
-                <button class="btn btn-custom btn-lg" routerLink="">Validar fotografías</button>
+                <h2 class="text-center" style="color: #254D42;">✔️ Validación de Fotografías</h2>
+                <button class="btn btn-custom btn-lg" routerLink="/galeria">Validar fotografías</button>
                 <br>
             }@else if(isAuthenticated){
                 <h2 class="text-center" style="color: #254D42;">📥 Subida de Fotografías</h2>
@@ -73,6 +69,8 @@
                 <br>
                 <br>
                 <p>Podrás subir tu foto desde tu perfil.</p>
+                <button class="btn btn-custom btn-lg" routerLink="/login">Login</button>
+                <br>
             }
             <br>
         </div>
@@ -83,10 +81,21 @@
             @if(!isAuthenticated){ 
             <h2 class="text-center" style="color: #254D42;">⭐ Votaciones</h2>
             <p>Las fotos deberán ser aprobadas por nuestro administrador y después serán publicadas para ser votadas por el público.</p>
-            <button class="btn btn-custom btn-lg" routerLink="/">Votar</button>
+            <button class="btn btn-custom btn-lg" routerLink="/galeria">Votar</button>
             <br>
             <br>
             }
         </div>
     </section>
+
+    @if(isAuthenticated && isAdmin){
+        <section class="mb-5 text-center">
+            <div class="container" style="background-color: #F3F1ED;">
+                <h2 class="text-center" style="color: #254D42;">✏️Modificar parámetros</h2>
+                <button class="btn btn-custom btn-lg" (click)="editarParametros()" type="submit">Editar</button>
+                <br>
+                <br>
+            </div>
+        </section>
+    }
 </div>

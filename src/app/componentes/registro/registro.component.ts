@@ -26,8 +26,6 @@ export class RegistroComponent {
     });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {  }
 
 }
