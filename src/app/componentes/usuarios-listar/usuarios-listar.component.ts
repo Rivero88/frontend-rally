@@ -14,11 +14,9 @@ export class UsuariosListarComponent {
 
   usuarios: Usuario[] = [];
 
-  constructor(private usuarioService: UsuarioService, private ruta: Router) {
-  }
+  constructor(private usuarioService: UsuarioService, private ruta: Router) {  }
 
   ngOnInit() {
-
     this.usuarioService.listarUsuarios().subscribe({
       next: (resultado: any) => {
         this.usuarios = resultado;
@@ -27,8 +25,30 @@ export class UsuariosListarComponent {
         console.error('Error al cargar obtener los usuarios:', err);
       },
     });
-
   }
 
+  // Metodo que te lleva a la vista de modificar usuario
+  editarUsuario(idUsuario: number){
+    this.ruta.navigate(['/mod-usuarios', idUsuario]);
+  }
+
+  // Metodo para eliminar un usuario
+  eliminarUsuario(idUsuario: number){
+    if(confirm("¿Está seguro de que desea eliminar el usuario con ID " + idUsuario + " ?")){ 
+      this.usuarioService.eliminarUsuario(idUsuario).subscribe({
+        next: () => {
+          this.usuarios = this.usuarios.filter(usuario => usuario.id !== idUsuario);
+        },
+        error: (error: any) => {
+          console.error('Error al eliminar el usuario:', error);
+        },
+      })
+    }
+  }
+
+  // Metodo que te lleva a la vista de modificar contraseña
+  editarContrasenna(idUsuario: number){
+    this.ruta.navigate(['/mod-contrasenna', idUsuario]);
+  }
 
 }

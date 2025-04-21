@@ -50,8 +50,8 @@ export class HomeComponent {
       next: (parametro: any) => {
         this.parametros = parametro;
       },
-      error: (err: any) => {
-        console.error('Error al cargar los parámetros del rally:', err);
+      error: (error: any) => {
+        console.error('Error al cargar los parámetros del rally:', error);
       },
     });
   }

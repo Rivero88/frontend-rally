@@ -10,10 +10,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class RegistroComponent {
 
-  public form: FormGroup;
+  public formUsuarioNuevo: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
+    this.formUsuarioNuevo = this.fb.group({
       nombre: this.fb.control('', [Validators.required, Validators.minLength(3)]),
       apellidos: this.fb.control('', [Validators.required, Validators.minLength(6)]),
       alias:this.fb.control('', [Validators.required, Validators.minLength(3)]),

@@ -13,10 +13,10 @@ import { Router } from '@angular/router';
 })
 export class ParametrosModComponent {
   
-  public form: FormGroup;
+  public formParametrosMod: FormGroup;
 
   constructor(private fb: FormBuilder, private parametroService: ParametroService, private ruta: Router) {
-    this.form = this.fb.group({
+    this.formParametrosMod = this.fb.group({
       id: this.fb.control('', [Validators.required]),
       numMaxFotografias: this.fb.control('', [Validators.required, Validators.min(1)]),
       tema: this.fb.control('', [Validators.required]),
@@ -32,21 +32,20 @@ export class ParametrosModComponent {
   ngOnInit(){
     // Petición al servicio parametro para obtener los datos del rally por el id
     this.parametroService.listarParametros().subscribe({
-      next: (parametro: Parametro) => {
-        //console.log(parametro);
-        this.form.patchValue({
-          id: parametro.id,
-          numMaxFotografias: parametro.numMaxFotografias,
-          tema: parametro.tema,
-          fInicioInscripcion: this.formatDate(parametro.fInicioInscripcion),
-          fFinInscripcion: this.formatDate(parametro.fFinInscripcion),
-          fInicioVotacion: this.formatDate(parametro.fInicioVotacion),
-          fFinVotacion: this.formatDate(parametro.fFinVotacion),
-          fGanador: this.formatDate(parametro.fGanador),
+      next: (resultado: Parametro) => {
+        this.formParametrosMod.patchValue({
+          id: resultado.id,
+          numMaxFotografias: resultado.numMaxFotografias,
+          tema: resultado.tema,
+          fInicioInscripcion: this.formatDate(resultado.fInicioInscripcion),
+          fFinInscripcion: this.formatDate(resultado.fFinInscripcion),
+          fInicioVotacion: this.formatDate(resultado.fInicioVotacion),
+          fFinVotacion: this.formatDate(resultado.fFinVotacion),
+          fGanador: this.formatDate(resultado.fGanador),
         });
-        // Cargamos categorías al FormArray
-        let categoriasParaEditar = this.form.get('categorias') as FormArray;
-        parametro.categorias.forEach(cat => {
+        // Carga las categorías al FormArray
+        let categoriasParaEditar = this.formParametrosMod.get('categorias') as FormArray;
+        resultado.categorias.forEach(cat => {
           categoriasParaEditar.push(this.fb.group({
             id: [cat.id],
             nombre: [cat.nombre, Validators.required],
@@ -54,14 +53,14 @@ export class ParametrosModComponent {
           }));
         });
       },
-      error: (err: any) => {
-        console.error('Error al cargar los parámetros del rally:', err);
+      error: (error: any) => {
+        console.error('Error al cargar los parámetros del rally:', error);
       },
     });
   }
 
   get categorias(): FormArray {
-    return this.form.get('categorias') as FormArray;
+    return this.formParametrosMod.get('categorias') as FormArray;
   }
 
   private formatDate(date: string | Date): string {
@@ -69,18 +68,19 @@ export class ParametrosModComponent {
     return d.toISOString().split('T')[0]; // yyyy-MM-dd
   }
 
+  // Metodo para realizar la edición de los parámetros
   editar(){
-    this.parametroService.editarParametros(this.form.value).subscribe({
-      next: (parametro: Parametro) => {
-        console.log('Parámetros editados:', parametro);
+    this.parametroService.editarParametros(this.formParametrosMod.value).subscribe({
+      next: () => {
         this.ruta.navigate(['/']);
       }
-      , error: (err: any) => {
-        console.error('Error al editar los parámetros:', err);
+      , error: (error: any) => {
+        console.error('Error al editar los parámetros:', error);
       }
     });
   }
 
+  // Metdodo para volver a home cuando le demos al boton cancelar
   cancelar(){
     this.ruta.navigate(['/']);
   }

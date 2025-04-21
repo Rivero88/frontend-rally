@@ -1,0 +1,148 @@
+<div class="container-fluid py-5">
+    <form [formGroup]="formUsuarioMod" class="container p-4 rounded shadow-sm" style="max-width: 600px; background-color: #F3F1ED;" (ngSubmit)="editar()">
+        <h3 class="text-center mb-4" style="color: #254D42;">Modificar usuario</h3>
+        @if(isAdmin){
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label for="id" class="form-label">Id</label>
+                    <input type="text" id="id" formControlName="id" class="form-control" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select id="rol" formControlName="rol" class="form-select">
+                        <option value="admin">Administrador</option>
+                        <option value="participante">Participante</option>
+                    </select>
+                </div>
+            </div>
+        }@else {
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label for="id" class="form-label">Id</label>
+                    <input type="text" id="id" formControlName="id" class="form-control" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label for="rol" class="form-label">Rol</label>
+                    <input type="text" id="rol" formControlName="rol" class="form-control" readonly />
+                </div>
+            </div>
+        }
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" required formControlName="nombre" class="form-control"
+                    placeholder="Introduce nombre" />
+                @if(formUsuarioMod.controls["nombre"].invalid && (formUsuarioMod.controls["nombre"].dirty || formUsuarioMod.controls["nombre"].touched)){
+                    @if(formUsuarioMod.controls["nombre"].errors?.["required"]){
+                        <div class="text-danger">
+                            El nombre es obligatorio.
+                        </div>
+                    }
+                    @if(formUsuarioMod.controls["nombre"].errors?.["minlength"]){
+                        <div class="text-danger">
+                            El nombre debe tener al menos 3 caracteres.
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-6">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" id="apellidos" required formControlName="apellidos" class="form-control"
+                    placeholder="Introduce apellidos" />
+                @if(formUsuarioMod.controls["apellidos"].invalid && (formUsuarioMod.controls["apellidos"].dirty || formUsuarioMod.controls["apellidos"].touched)){
+                    @if(formUsuarioMod.controls["apellidos"].errors?.["required"]){
+                        <div class="text-danger">
+                            Los apellidos son obligatorios.
+                        </div>
+                    }
+                    @if(formUsuarioMod.controls["apellidos"].errors?.["minlength"]){
+                        <div class="text-danger">
+                            Los apellidos debe tener al menos 6 caracteres.
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label for="alias" class="form-label">Alias</label>
+                <input type="text" id="alias" required formControlName="alias" class="form-control"
+                    placeholder="Introduce alias" />
+                @if(formUsuarioMod.controls["alias"].invalid && (formUsuarioMod.controls["alias"].dirty || formUsuarioMod.controls["alias"].touched)){
+                    @if(formUsuarioMod.controls["alias"].errors?.["required"]){
+                        <div class="text-danger">
+                            El alias es obligatorio.
+                        </div>
+                    }
+                    @if(formUsuarioMod.controls["alias"].errors?.["minlength"]){
+                        <div class="text-danger">
+                            El alias debe tener al menos 2 caracteres.
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-6">
+                <label for="fNacimiento" class="form-label">Fecha nacimiento</label>
+                <input type="date" id="fNacimiento" required formControlName="fNacimiento" class="form-control" />
+                @if(formUsuarioMod.controls["fNacimiento"].invalid && (formUsuarioMod.controls["fNacimiento"].dirty || formUsuarioMod.controls["fNacimiento"].touched)){
+                    @if(formUsuarioMod.controls["fNacimiento"].errors?.["required"]){
+                        <div class="text-danger">
+                            La fecha de nacimiento es obligatoria.
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label for="numTelefono" class="form-label">Teléfono</label>
+                <input type="tel" id="numTelefono" required formControlName="numTelefono" class="form-control" placeholder="Introduce teléfono"/>
+                @if(formUsuarioMod.controls["numTelefono"].invalid && (formUsuarioMod.controls["numTelefono"].dirty || formUsuarioMod.controls["numTelefono"].touched)){
+                    @if(formUsuarioMod.controls["numTelefono"].errors?.["required"]){
+                        <div class="text-danger">
+                            El teléfono es obligatorio.
+                        </div>
+                    }
+                    @if(formUsuarioMod.controls["numTelefono"].errors?.["minlength"]){
+                        <div class="text-danger">
+                            El teléfono debe tener al menos 9 caracteres.
+                        </div>
+                    }
+                    @if(formUsuarioMod.controls["numTelefono"].errors?.["maxlength"]){
+                        <div class="text-danger">
+                            El teléfono debe tener máximo 9 caracteres.
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" required formControlName="email" class="form-control" placeholder="Introduce email" />
+                @if(formUsuarioMod.controls["email"].invalid && (formUsuarioMod.controls["email"].dirty || formUsuarioMod.controls["email"].touched)){
+                    @if(formUsuarioMod.controls["email"].errors?.["required"]){
+                        <div class="text-danger">
+                            El email es obligatorio.
+                        </div>
+                    }
+                    @if(formUsuarioMod.controls["email"].errors?.["email"]){
+                        <div class="text-danger">
+                            Formato de email incorrecto.
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    
+        <div class="row g-3 mb-4" hidden>
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" id="password" formControlName="password" class="form-control"/>
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-custom btn-lg" type="submit" [disabled]="!formUsuarioMod.valid">Modificar</button>
+            <button class="btn btn-custom btn-lg ms-3" type="button" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

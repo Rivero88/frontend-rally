@@ -1,0 +1,54 @@
+<div class="container-fluid py-5">
+    <form [formGroup]="formContrasennaMod" class="container p-4 rounded shadow-sm" style="max-width: 600px; background-color: #F3F1ED;" (ngSubmit)="editar()">
+        <h3 class="text-center mb-4" style="color: #254D42;">Modificar contraseña</h3>
+        <div class="row-md-6">
+            <label for="password" class="form-label">Nueva contraseña</label>
+            <input type="password" id="password" required formControlName="password" class="form-control" placeholder="Introduce contraseña" />
+            @if(formContrasennaMod.controls["password"].invalid && (formContrasennaMod.controls["password"].dirty || formContrasennaMod.controls["password"].touched)){
+                @if(formContrasennaMod.controls["password"].errors?.["required"]){
+                    <div class="text-danger">
+                        La contraseña es obligatoria.
+                    </div>
+                }
+                @if(formContrasennaMod.controls["password"].errors?.["minlength"]){
+                    <div class="text-danger">
+                        La contraseña debe tener al menos 6 caracteres.
+                    </div>
+                }
+                @if(formContrasennaMod.controls["password"].errors?.["pattern"]){
+                    <div class="text-danger">
+                        La contraseña debe contener al menos un número, una letra y un carácter especial.
+                    </div>
+                }
+            }
+        </div>
+
+        <br>
+
+        <div class="row-md-6">
+            <label for="passwordRep" class="form-label">Repetir contraseña</label>
+            <input type="password" id="passwordRep" required formControlName="passwordRep" class="form-control" placeholder="Repite la contraseña" />
+            @if(formContrasennaMod.controls["passwordRep"].invalid && (formContrasennaMod.controls["passwordRep"].dirty || formContrasennaMod.controls["passwordRep"].touched)){
+                @if(formContrasennaMod.controls["passwordRep"].errors?.["required"]){
+                    <div class="text-danger">
+                        La contraseña es obligatoria.
+                    </div>
+                }
+                @if(formContrasennaMod.controls["passwordRep"].errors?.["minlength"]){
+                    <div class="text-danger">
+                        La contraseña debe tener al menos 6 caracteres.
+                    </div>
+                }
+                @if(formContrasennaMod.controls["passwordRep"].errors?.["pattern"]){
+                    <div class="text-danger">
+                        La contraseña debe contener al menos un número, una letra y un carácter especial.
+                    </div>
+                }
+            }
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-custom btn-lg" type="submit">Modificar</button>
+            <button class="btn btn-custom btn-lg ms-3" type="button" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

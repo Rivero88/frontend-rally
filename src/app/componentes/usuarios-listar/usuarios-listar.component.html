@@ -1,35 +1,43 @@
-<section class="mb-5 text-center">
-    <div class="container" style="background-color: #F3F1ED;">
-        <h1 class="fw-bold" style="color: #254D42;">Usuarios</h1>
-        <div class="table-responsive">
-            <table class="table table-bordered text-center custom-table-bg">
-                @if (usuarios.length > 0) {
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>ALIAS</th>
-                            <th>NOMBRE</th>
-                            <th>APELLIDOS</th>
-                            <th>FECHA NACIMIENTO</th>
-                            <th>NUMERO TELEFONO</th>
-                            <th>EMAIL</th>
-                            <th>ROL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let usuarios of usuarios">
-                            <td>{{ usuarios.id }}</td>
-                            <td>{{ usuarios.alias }}</td>
-                            <td>{{ usuarios.nombre }}</td>
-                            <td>{{ usuarios.apellidos }}</td>
-                            <td>{{ usuarios.fNacimiento }}</td>
-                            <td>{{ usuarios.numTelefono }}</td>
-                            <td>{{ usuarios.email }}</td>
-                            <td>{{ usuarios.rol }}</td>
-                        </tr>
-                    </tbody>
-                }
-            </table>
+<div class="container-fluid py-5">
+    <section class="text-center">
+        <div class="container" style="background-color: #F3F1ED; max-width: 1400px;">
+            <h1 class="fw-bold" style="color: #254D42;">Usuarios</h1>
+            <div class="table-responsive">
+                <table class="table table-bordered text-center custom-table-bg">
+                    @if (usuarios.length > 0) {
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>ALIAS</th>
+                                <th>NOMBRE</th>
+                                <th>APELLIDOS</th>
+                                <th>FECHA NACIMIENTO</th>
+                                <th>NUMERO TELEFONO</th>
+                                <th>EMAIL</th>
+                                <th>ROL</th>
+                                <th>ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let usuario of usuarios">
+                                <td>{{ usuario.id }}</td>
+                                <td>{{ usuario.alias }}</td>
+                                <td>{{ usuario.nombre }}</td>
+                                <td>{{ usuario.apellidos }}</td>
+                                <td>{{ usuario.fNacimiento | date:'dd/MM/yyyy'}}</td>
+                                <td>{{ usuario.numTelefono }}</td>
+                                <td>{{ usuario.email }}</td>
+                                <td>{{ usuario.rol }}</td>
+                                <td>
+                                    <button class="btn btn-custom btn-lg" type="button" (click)="editarUsuario(usuario.id)" title="Editar"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-custom btn-lg ms-3" type="button" (click)="eliminarUsuario(usuario.id)" title="Eliminar"><i class="bi bi-trash"></i></button>
+                                    <button class="btn btn-custom btn-lg ms-3" type="button" (click)="editarContrasenna(usuario.id)" title="Editar Contraseña"><i class="bi bi-shield-lock"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

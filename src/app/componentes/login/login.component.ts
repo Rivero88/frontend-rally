@@ -31,8 +31,10 @@ export class LoginComponent {
       next:(respuesta: Auth) => {
         const token = respuesta.token;
         const rol = respuesta.rol;
+        const id = respuesta.idUsuario;
         localStorage.setItem('token', token); // Se guarda el token en el localStorage
         localStorage.setItem('rol', rol); // Se guarda el rol en el localStorage
+        localStorage.setItem('idUsuario', id.toString()); // Se guarda el idUsuario en el localStorage
         this.router.navigate(['/']);
       },
       error: (error) => {

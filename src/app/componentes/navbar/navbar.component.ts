@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 
@@ -12,7 +12,12 @@ import { AuthService } from '../../../auth/auth.service';
 })
 export class NavbarComponent {
 
+  idUsuario: number = 0;
+
   constructor(private authService: AuthService, private router: Router) { }
+
+  ngOnInit() {
+  }
 
   // Para verificar si hay un token de inicio de sesión
   get isAuthenticated(): boolean {
