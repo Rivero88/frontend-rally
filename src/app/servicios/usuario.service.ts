@@ -26,15 +26,22 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.apiUrl}/${idUsuario}`);
   }
 
+  // Edita un usuario
   editarUsuario(usuario: Usuario){
     return this.http.put<Usuario>(`${this.apiUrl}`, usuario);
   }
 
+  // Modifica contraeña por su id
   modificarContrasenna(idUsuario: number, contrasennaNueva: string){
     let params = new HttpParams()
       .set('idUsuario', idUsuario)
       .set('contrasennaNueva', contrasennaNueva);
-    return this.http.put(`${this.apiUrl}
-      /modificarContrasenna`, null, { params });
+    return this.http.put(`${this.apiUrl}/modificarContrasenna`, null, { params });
   }
+
+  // Crea un nuevo usuario
+  nuevoUsuario(usuario: Usuario) {
+    return this.http.post<Usuario>(`${this.apiUrl}/registrar`, usuario);
+  }
+
 }

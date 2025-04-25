@@ -1,8 +1,7 @@
 <br />
 <br />
-<form [formGroup]="formUsuarioNuevo" class="container p-4 rounded shadow-sm" style="max-width: 1200px; background-color: #F3F1ED;">
-    <h3 class="text-center mb-4" style="color: #254D42;">Registro como participante</h3>
-
+<form [formGroup]="formUsuarioNuevo" class="container p-4 rounded shadow-sm" style="max-width: 1200px; background-color: #F3F1ED;" (ngSubmit)="nuevoUsuario()">
+    <h3 class="text-center mb-4" style="color: #254D42;">Registro de participantes</h3>
     <div class="row g-3 mb-4">
         <div class="col-md-6">
             <label for="nombre" class="form-label">Nombre</label>
@@ -59,10 +58,10 @@
             }
         </div>
         <div class="col-md-6">
-            <label for="fnacimiento" class="form-label">Fecha nacimiento</label>
-            <input type="date" id="fnacimiento" required formControlName="fnacimiento" class="form-control" />
-            @if(formUsuarioNuevo.controls["fnacimiento"].invalid && (formUsuarioNuevo.controls["fnacimiento"].dirty || formUsuarioNuevo.controls["fnacimiento"].touched)){
-                @if(formUsuarioNuevo.controls["fnacimiento"].errors?.["required"]){
+            <label for="fNacimiento" class="form-label">Fecha nacimiento</label>
+            <input type="date" id="fNacimiento" required formControlName="fNacimiento" class="form-control" />
+            @if(formUsuarioNuevo.controls["fNacimiento"].invalid && (formUsuarioNuevo.controls["fNacimiento"].dirty || formUsuarioNuevo.controls["fNacimiento"].touched)){
+                @if(formUsuarioNuevo.controls["fNacimiento"].errors?.["required"]){
                     <div class="text-danger">
                         La fecha de nacimiento es obligatoria.
                     </div>
@@ -73,20 +72,20 @@
 
     <div class="row g-3 mb-4">
         <div class="col-md-6">
-            <label for="telefono" class="form-label">Teléfono</label>
-            <input type="tel" id="telefono" required formControlName="telefono" class="form-control" placeholder="Introduce teléfono"/>
-            @if(formUsuarioNuevo.controls["telefono"].invalid && (formUsuarioNuevo.controls["telefono"].dirty || formUsuarioNuevo.controls["telefono"].touched)){
-                @if(formUsuarioNuevo.controls["telefono"].errors?.["required"]){
+            <label for="numTelefono" class="form-label">Teléfono</label>
+            <input type="tel" id="numTelefono" required formControlName="numTelefono" class="form-control" placeholder="Introduce teléfono"/>
+            @if(formUsuarioNuevo.controls["numTelefono"].invalid && (formUsuarioNuevo.controls["numTelefono"].dirty || formUsuarioNuevo.controls["numTelefono"].touched)){
+                @if(formUsuarioNuevo.controls["numTelefono"].errors?.["required"]){
                     <div class="text-danger">
                         El teléfono es obligatorio.
                     </div>
                 }
-                @if(formUsuarioNuevo.controls["telefono"].errors?.["minlength"]){
+                @if(formUsuarioNuevo.controls["numTelefono"].errors?.["minlength"]){
                     <div class="text-danger">
                         El teléfono debe tener al menos 9 caracteres.
                     </div>
                 }
-                @if(formUsuarioNuevo.controls["telefono"].errors?.["maxlength"]){
+                @if(formUsuarioNuevo.controls["numTelefono"].errors?.["maxlength"]){
                     <div class="text-danger">
                         El teléfono debe tener máximo 9 caracteres.
                     </div>
@@ -136,7 +135,15 @@
     </div>
 
     <div class="text-center mt-4">
-        <button type="submit" class="btn btn-custom btn-lg">Registrarse</button>
+        <button type="submit" class="btn btn-custom btn-lg" [disabled]="!formUsuarioNuevo.valid">Registrarse</button>
         <button type="button" routerLink="/" class="btn btn-custom btn-lg ms-3">Volver</button>
+    </div>
+    <div class="text-center mt-4">
+        <div *ngIf="mensajeError" class="alert alert-danger text-center">
+            {{ mensajeError }}
+        </div>
+        <div *ngIf="registroCorrecto" class="alert alert-success text-center">
+            Usuario se ha registrado correctamente.
+        </div>
     </div>
 </form>

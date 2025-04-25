@@ -4,6 +4,7 @@ import { ParametroService } from '../../servicios/parametro.service';
 import { Parametro } from '../../modelos/parametro';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { formatoFecha } from '../../../util';
 
 @Component({
   selector: 'app-parametros-mod',
@@ -37,11 +38,11 @@ export class ParametrosModComponent {
           id: resultado.id,
           numMaxFotografias: resultado.numMaxFotografias,
           tema: resultado.tema,
-          fInicioInscripcion: this.formatDate(resultado.fInicioInscripcion),
-          fFinInscripcion: this.formatDate(resultado.fFinInscripcion),
-          fInicioVotacion: this.formatDate(resultado.fInicioVotacion),
-          fFinVotacion: this.formatDate(resultado.fFinVotacion),
-          fGanador: this.formatDate(resultado.fGanador),
+          fInicioInscripcion: formatoFecha(resultado.fInicioInscripcion),
+          fFinInscripcion: formatoFecha(resultado.fFinInscripcion),
+          fInicioVotacion: formatoFecha(resultado.fInicioVotacion),
+          fFinVotacion: formatoFecha(resultado.fFinVotacion),
+          fGanador: formatoFecha(resultado.fGanador),
         });
         // Carga las categorías al FormArray
         let categoriasParaEditar = this.formParametrosMod.get('categorias') as FormArray;
@@ -61,11 +62,6 @@ export class ParametrosModComponent {
 
   get categorias(): FormArray {
     return this.formParametrosMod.get('categorias') as FormArray;
-  }
-
-  private formatDate(date: string | Date): string {
-    const d = new Date(date);
-    return d.toISOString().split('T')[0]; // yyyy-MM-dd
   }
 
   // Metodo para realizar la edición de los parámetros
