@@ -1,7 +1,7 @@
 import { Rol } from "./Rol";
 
 export interface Auth {
-    token: string,
-    rol: Rol// admin o participante
-    idUsuario: number
+    token: string;
+    rol: Rol;// admin o participante
+    idUsuario: number;
 }

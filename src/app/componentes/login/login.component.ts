@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Auth } from '../../modelos/Auth';
+import { Auth } from '../../modelos/auth';
 
 @Component({
   selector: 'app-login',

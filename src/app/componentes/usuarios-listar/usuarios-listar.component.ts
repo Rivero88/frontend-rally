@@ -21,8 +21,8 @@ export class UsuariosListarComponent {
       next: (resultado: any) => {
         this.usuarios = resultado;
       },
-      error: (err: any) => {
-        console.error('Error al cargar obtener los usuarios:', err);
+      error: (error: any) => {
+        console.error('Error al obtener los usuarios:', error);
       },
     });
   }

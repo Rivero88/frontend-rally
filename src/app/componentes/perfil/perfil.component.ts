@@ -18,15 +18,15 @@ export class PerfilComponent {
   constructor(private usuarioService: UsuarioService, private ruta: Router) {}
 
   ngOnInit(): void {
-    let idUsuario = Number(localStorage.getItem('idUsuario'));
+    let idUsuario = Number(localStorage.getItem("idUsuario"));
     // Verifica si el idUsuario existe en el localStorage
     if (idUsuario) {
       this.usuarioService.seleccionarUsuario(idUsuario).subscribe({
         next: (resultado) => {
           this.usuario = resultado;
         },
-        error: (err) => {
-          console.error("Error al obtener el perfil:", err);
+        error: (error) => {
+          console.error("Error al obtener el perfil:", error);
         }
       });
     }

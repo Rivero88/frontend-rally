@@ -42,7 +42,6 @@ export class RegistroComponent {
     }
     this.usuarioService.nuevoUsuario(this.formUsuarioNuevo.value).subscribe({
       next: (resultado: Usuario) => {
-        console.log('Usuario creado:', resultado)
         this.mensajeError = null;
         this.registroCorrecto = true;
         setTimeout(() => {
@@ -50,7 +49,6 @@ export class RegistroComponent {
         }, 3000); // Navega después de 3 segundos
       },
       error: (error: any) => {
-        console.error('Error completo:', error);
         if (error.error && error.error.message) {
           this.mensajeError = error.error.message;
         } else {
