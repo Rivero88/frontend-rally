@@ -1,11 +1,11 @@
 <div class="container-fluid py-5">
     <div *ngIf="usuario">
         <section class="text-center">
-            <div class="container" style="background-color: #F3F1ED; max-width: 1200px;">
+            <div class="container" style="background-color: #F3F1ED; max-width: 1800px;">
                     <h1 class="fw-bold mb-4" style="color: #254D42;">Perfil</h1>
                     <h1 class="fw-bold mb-4" style="color: #254D42;">{{ usuario.nombre }} {{ usuario.apellidos }}</h1>
                     <div class="d-flex justify-content-center">
-                        <table class="table table-bordered text-center custom-table-bg">
+                        <table class="table table-bordered text-center custom-table-bg" style="max-width: 1600px;">
                             <thead>
                                 <tr>
                                     <th>ALIAS</th>
@@ -29,10 +29,10 @@
                                     <td>{{ usuario.email }}</td>
                                     <td>{{ usuario.rol }}</td>
                                     <td *ngIf="usuario.rol !== 'admin'">
-                                        <button class="btn btn-custom btn-lg" type="button" (click)="editarUsuario(usuario.id)" title="Editar"><i class="bi bi-pencil"></i></button>
+                                        <button class="btn btn-custom btn-lg" type="button" (click)="editarUsuario(usuario.id)" title="Editar"><i class="bi bi-pencil-fill"></i></button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-custom btn-lg" type="button" (click)="editarContrasenna(usuario.id)" title="Editar Contraseña"><i class="bi bi-shield-lock"></i></button>
+                                        <button class="btn btn-custom btn-lg" type="button" (click)="editarContrasenna(usuario.id)" title="Editar Contraseña"><i class="bi bi-shield-lock-fill"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -41,10 +41,17 @@
                 </div>
         </section>
         <section class="text-center">
-            <div class="container" style="background-color: #F3F1ED; max-width: 1200px;">
+            <div class="container" style="background-color: #F3F1ED; max-width: 1800px;">
                 <div *ngIf="usuario.rol === 'participante'">
                     <h1 class="fw-bold mb-4" style="color: #254D42;">Imágenes</h1>
-                </div>  
+                    <div *ngIf="imagenesUsuario && imagenesUsuario.length > 0" class="d-flex justify-content-center">
+                        <table>
+                          <tr>
+                            <app-imagenes-listar [idUsuario]="usuario.id"></app-imagenes-listar>
+                          </tr>
+                        </table>
+                      </div>
+                </div> 
             </div>
         </section>
     </div>

@@ -10,6 +10,7 @@ import { UsuariosModComponent } from './componentes/usuarios-mod/usuarios-mod.co
 import { ContrasennaModComponent } from './componentes/contrasenna-mod/contrasenna-mod.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { ImagenesListarComponent } from './componentes/imagenes-listar/imagenes-listar.component';
+import { ImagenesSubirComponent } from './componentes/imagenes-subir/imagenes-subir.component';
 
 export const routes: Routes = [ 
     { path: '', component: HomeComponent },
@@ -22,5 +23,6 @@ export const routes: Routes = [
     { path: 'listar-usuarios', component: UsuariosListarComponent},
     { path: 'mod-usuarios/:idUsuario', component: UsuariosModComponent},
     { path: 'mod-contrasenna/:idUsuario', component: ContrasennaModComponent},
-    { path: 'imagen', component: ImagenesListarComponent},
+    { path: 'imagen-cargar', component: ImagenesSubirComponent},
+    { path: 'imagen-listar/:idUsuario', component: ImagenesListarComponent},
 ];

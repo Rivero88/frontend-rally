@@ -1,70 +1,27 @@
 
 <div class="container-fluid py-5">
-    <form [formGroup]="formImagen" (ngSubmit)="onSubmit()" class="container p-4 rounded shadow-sm" style="max-width: 1000px; background-color: #F3F1ED;">
-
-        <!-- SELECT de Categorías -->
-        <div class="mb-3">
-          <label for="categoria" class="form-label">Selecciona una categoría</label>
-          <select id="categoria" class="form-select" formControlName="categoriaId" (change)="mostrarDescripcionCategoriaSeleccionada()">
-            <option value="" disabled selected>Selecciona una categoría</option>
-            <option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</option>
-          </select>
-            <div *ngIf="formImagen.controls['categoriaId'].invalid && (formImagen.controls['categoriaId'].dirty || formImagen.controls['categoriaId'].touched)">
-                <div class="text-danger">La categoría es obligatoria.</div>
-            </div>
-        </div>
-        <!-- Descripción de categoría seleccionada antes -->
-        <div class="mb-3" *ngIf="descripcionCategoriaSeleccionada">
-            <label class="form-label">Descripción de la categoría</label>
-            <textarea class="form-control" [value]="descripcionCategoriaSeleccionada" readonly rows="3"></textarea>
-        </div>
-      
-        <!-- INPUT de Imágenes -->
-        <div class="mb-3">
-          <label for="imagenes" class="form-label">Selecciona fotografía</label>
-          <input type="file" id="imagenes" multiple (change)="seleccionarImagen($event)" accept="image/*" class="form-control">
-        </div>
-        <div class="mb-3" *ngIf="imagenesSeleccionadas.length > 0">
-            <label for="nombre" class="form-label">Nombre de la fotografía</label>
-            <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre de la fotografía" required>
-        </div>
-        <div class="mb-3" *ngIf="imagenesSeleccionadas.length > 0">
-            <label for="descripcion" class="form-label">Descripción de la fotografía</label>
-            <textarea id="descripcion" class="form-control" rows="3" formControlName="descripcion"></textarea>
-        </div>
-        <button type="submit" class="btn btn-custom btn-lg">Guardar</button>
-        <div class="text-center mt-4">
-            <div *ngIf="mensajeError" class="alert alert-danger text-center">
-                {{ mensajeError }}
-            </div>
-            <div *ngIf="cargaCorrecta" class="alert alert-success text-center">
-                Fotografía cargada correctamente.
-            </div>
-        </div>
-      </form>
-      
-      <!-- Tabla de imágenes subidas -->
-      <table class="table mt-4" *ngIf="imagenesSeleccionadas.length > 0">
-        <thead>
-          <tr>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let img of imagenesSeleccionadas; let i = index">
-            <td><img [src]="img.url" alt="Imagen subida" width="100"></td>
-            <td>{{ img.nombre }}</td>
-            <td>{{ img.descripcion }}</td>
-            <td>{{ img.estadoValidacion || 'Pendiente' }}</td>
-            <td>
-              <button class="btn btn-warning btn-sm me-2" (click)="modificarImagen(i)">Modificar</button>
-              <button class="btn btn-danger btn-sm" (click)="eliminarImagen(i)">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>    
+  <table class="table table-bordered text-center custom-table-bg">
+    <thead>
+      <tr>
+        <th>CATEGORÍA</th>
+        <th>NOMBRE</th>
+        <th>DESCRIPCIÓN</th>
+        <th>ESTADO</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let imagen of imagenes">
+        <td>{{ imagen.categorias.nombre }}</td>
+        <td>{{ imagen.nombre }}</td>
+        <td>{{ imagen.descripcion }}</td>
+        <td>{{ imagen.estadoValidacion }}</td>
+        <td>
+          <button class="btn btn-custom btn-lg" type="button" (click)="verImagen(imagen.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
+          <button class="btn btn-custom btn-lg ms-3" type="button" (click)="modificarImagen(imagen.id)" title="Editar"><i class="bi bi-pencil-fill"></i></button>
+          <button class="btn btn-custom btn-lg ms-3" type="button" (click)="eliminarImagen(imagen.id, imagen.nombre)" title="Eliminar"><i class="bi bi-trash-fill"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -3,7 +3,6 @@ import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { CommonModule } from '@angular/common';
-import { formatoFecha } from '../../../util';
 import { Usuario } from '../../modelos/usuario';
 
 @Component({
