@@ -3,7 +3,7 @@
         <section class="text-center">
             <div class="container" style="background-color: #F3F1ED; max-width: 1800px;">
                     <h1 class="fw-bold mb-4" style="color: #254D42;">Perfil</h1>
-                    <h1 class="fw-bold mb-4" style="color: #254D42;">{{ usuario.nombre }} {{ usuario.apellidos }}</h1>
+                    <h2 style="color: #D47F62;">{{ usuario.nombre }} {{ usuario.apellidos }}</h2>
                     <div class="d-flex justify-content-center">
                         <table class="table table-bordered text-center custom-table-bg" style="max-width: 1600px;">
                             <thead>
@@ -15,7 +15,7 @@
                                     <th>NUMERO TELEFONO</th>
                                     <th>EMAIL</th>
                                     <th>ROL</th>
-                                    <th *ngIf="usuario.rol !== 'admin'">MODIFICAR PERFIL</th>
+                                    <th>MODIFICAR PERFIL</th>
                                     <th>MODIFICAR CONTRASEÑA</th>
                                 </tr>
                             </thead>
@@ -28,7 +28,7 @@
                                     <td>{{ usuario.numTelefono }}</td>
                                     <td>{{ usuario.email }}</td>
                                     <td>{{ usuario.rol }}</td>
-                                    <td *ngIf="usuario.rol !== 'admin'">
+                                    <td>
                                         <button class="btn btn-custom btn-lg" type="button" (click)="editarUsuario(usuario.id)" title="Editar"><i class="bi bi-pencil-fill"></i></button>
                                     </td>
                                     <td>
@@ -40,10 +40,11 @@
                     </div>
                 </div>
         </section>
+        <br>
         <section class="text-center">
             <div class="container" style="background-color: #F3F1ED; max-width: 1800px;">
                 <div *ngIf="usuario.rol === 'participante'">
-                    <h1 class="fw-bold mb-4" style="color: #254D42;">Imágenes</h1>
+                    <h1 class="fw-bold" style="color: #254D42;">Imágenes</h1>
                     <div *ngIf="imagenesUsuario && imagenesUsuario.length > 0" class="d-flex justify-content-center">
                         <table>
                           <tr>

@@ -9,4 +9,4 @@ export function formatoFecha(fecha: string | Date): string {
 export function obtenerUsuarioLogueado(){
     let id = Number(localStorage.getItem("idUsuario"));
     return id ? +id : 0;
-  }
+}

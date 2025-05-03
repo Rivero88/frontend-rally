@@ -11,7 +11,13 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) { }
 
+  // Obtiene todas las categorias
   listarCategorias() {
     return this.http.get<Categoria>(`${this.apiUrl}`);
+  }
+
+  // Obtiene las categorias ocupadas por un usuario
+  obtenerCategoriasConImagen(usuarioId: number){
+    return this.http.get<number[]>(`${this.apiUrl}/cargar/categorias_ocupadas/${usuarioId}`);
   }
 }

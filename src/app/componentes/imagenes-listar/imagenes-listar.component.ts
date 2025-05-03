@@ -1,13 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ImagenService } from '../../servicios/imagen.service';
 import { Router } from '@angular/router';
 import { Imagen } from '../../modelos/imagen';
 
 @Component({
   selector: 'app-imagenes-listar',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [CommonModule],
   templateUrl: './imagenes-listar.component.html',
   styleUrl: './imagenes-listar.component.css'
 })
@@ -15,8 +14,9 @@ export class ImagenesListarComponent implements OnInit {
 
   @Input() idUsuario!:number; 
   imagenes: Imagen[] = [];
+  imagenSeleccionadaUrl: string = '';  //Se guarda la URL de la imagen seleccionada
 
-  constructor(private fb: FormBuilder, private imagenService: ImagenService, private ruta: Router) {
+  constructor(private imagenService: ImagenService, private ruta: Router, @Inject(PLATFORM_ID) private platformId: Object) {
   }
 
   ngOnInit() {
@@ -31,14 +31,37 @@ export class ImagenesListarComponent implements OnInit {
     });
   }
 
-  verImagen(imagenId: number){
-
+  // Método para ver la imagen en grande
+  verImagen(imagenId: number) {
+    this.imagenService.obtenerImagen(imagenId).subscribe({
+      next: (arrayBuffer) => {
+        let blob = new Blob([arrayBuffer], { type: 'image/jpeg' }); // Ajusta el tipo si es PNG u otro
+        let objectURL = URL.createObjectURL(blob);
+        this.imagenSeleccionadaUrl = objectURL;
+  
+        if (isPlatformBrowser(this.platformId)) {
+          import('bootstrap').then(bootstrap => {
+            let modalElement = document.getElementById('verImagenModal');
+            if (modalElement) {
+              let modal = new bootstrap.Modal(modalElement, {
+                backdrop: false    // No se muestra el fondo difuso
+              });
+              modal.show();
+            }
+          });
+        }
+      },
+      error: (error) => {
+        console.error('Error al obtener la imagen como archivo:', error);
+      }
+    });
   }
 
   modificarImagen(imagenId: number){
 
   }
 
+  // Método para eliminar una imagen
   eliminarImagen(imagenId: number, imagenNombre: string){
     console.log("Eliminar imagen con id:", imagenId);
     console.log("Eliminar imagen de la categoria:", imagenNombre);

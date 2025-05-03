@@ -9,8 +9,9 @@ export interface Imagen {
     tamanno: number;
     votos: number;
     estadoValidacion: string;
+    fechaSubida: Date;
     url: string;
-    categorias: Categoria;
+    categoria: Categoria;
     usuario: Usuario;
-    file?: File; // Propiedad opcional para almacenar el archivo de imagen
+    file?: File; // Propiedad para almacenar el archivo de imagen
 }

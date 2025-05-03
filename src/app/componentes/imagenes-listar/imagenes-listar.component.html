@@ -1,20 +1,22 @@
 
 <div class="container-fluid py-5">
-  <table class="table table-bordered text-center custom-table-bg">
+  <table class="table table-bordered text-center custom-table-bg align-middle">
     <thead>
       <tr>
-        <th>CATEGORÍA</th>
-        <th>NOMBRE</th>
-        <th>DESCRIPCIÓN</th>
-        <th>ESTADO</th>
-        <th>ACCIONES</th>
+        <th style="white-space: nowrap;">CATEGORÍA</th>
+        <th style="white-space: nowrap;">NOMBRE</th>
+        <th style="width: 45%;">DESCRIPCIÓN</th>
+        <th style="white-space: nowrap;">FECHA CARGA</th>
+        <th style="white-space: nowrap;">ESTADO</th>
+        <th style="white-space: nowrap;">ACCIONES</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let imagen of imagenes">
-        <td>{{ imagen.categorias.nombre }}</td>
+        <td>{{ imagen.categoria.nombre }}</td>
         <td>{{ imagen.nombre }}</td>
         <td>{{ imagen.descripcion }}</td>
+        <td>{{ imagen.fechaSubida | date:'dd/MM/yyyy' }}</td>
         <td>{{ imagen.estadoValidacion }}</td>
         <td>
           <button class="btn btn-custom btn-lg" type="button" (click)="verImagen(imagen.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
@@ -24,4 +26,20 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Modal para ver la imagen en grande al dar al boton Ver fotografía-->
+<div class="modal fade" id="verImagenModal" tabindex="-1" aria-labelledby="verImagenModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="verImagenModalLabel">Visualización Imagen</h5>
+        <!-- Botón de cierre -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <img [src]="imagenSeleccionadaUrl" class="img-fluid" alt="Imagen" />
+      </div>
+    </div>
+  </div>
 </div>

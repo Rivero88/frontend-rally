@@ -39,6 +39,7 @@
                         El nombre para la fotografía es obligatorio.
                     </div>
                 }
+
             }
         </div>
         <div class="mb-3" *ngIf="imagenesSeleccionadas.length > 0">
@@ -51,6 +52,17 @@
                         La descripción de la fotografía es obligatoria.
                     </div>
                 }
+                @if(formImagen.controls["descripcion"].errors?.["minlength"]){
+                    <div class="text-danger">
+                        La descripción de la fotografía debe tener al menos 10 caracteres.
+                    </div>
+                }
+                @if(formImagen.controls["descripcion"].errors?.["maxlength"]){
+                    <div class="text-danger">
+                        La descripción de la fotografía no puede tener más de 200 caracteres.
+                    </div>
+                }
+
             }
         </div>
         <div class="text-center mt-4">

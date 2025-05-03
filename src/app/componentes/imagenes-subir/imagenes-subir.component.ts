@@ -29,7 +29,7 @@ export class ImagenesSubirComponent {
     this.formImagen = this.fb.group({
       categoriaId: ['', Validators.required],
       nombre: ['', Validators.required],
-      descripcion: ['', Validators.required]
+      descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]]
     });
   }
 
@@ -41,7 +41,7 @@ export class ImagenesSubirComponent {
       next: (resultado: any) => {
         this.categorias = resultado;
         //Obtener las categorias rellenas para el usuario logueado
-        this.imagenService.obtenerCategoriasConImagen(usuarioId).subscribe({
+        this.categoriaService.obtenerCategoriasConImagen(usuarioId).subscribe({
           next: (resultado: number[]) => {
             this.categoriasConFoto = resultado;
             this.verificarCategoriasDisponibles(); // Verifica si hay categorías disponibles
@@ -108,7 +108,7 @@ export class ImagenesSubirComponent {
           this.cargaCorrecta = true;
           setTimeout(() => {
             this.ruta.navigate(['/']);
-          }, 3000); // Navega después de 3 segundos
+          }, 1000); // Navega después de 3 segundos
         },
         error: (error: any) => {
           if (error.error && error.error.message) {
