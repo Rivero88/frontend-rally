@@ -34,6 +34,7 @@ export class RegistroComponent {
   ngOnInit() {  }
 
 
+  // Para nuevo usuario
   nuevoUsuario(){
     if (this.formUsuarioNuevo.invalid) {
       this.formUsuarioNuevo.markAllAsTouched();
@@ -45,7 +46,7 @@ export class RegistroComponent {
         this.registroCorrecto = true;
         setTimeout(() => {
           this.ruta.navigate(['/']);
-        }, 3000); // Navega después de 3 segundos
+        }, 1000); // Navega después de 1 segundo
       },
       error: (error: any) => {
         if (error.error && error.error.message) {

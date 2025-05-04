@@ -33,7 +33,6 @@ export class HomeComponent {
     this.obtenerParametros();
    }
 
-
   // Para verificar si hay un token de inicio de sesión
   get isAuthenticated(): boolean {
     return this.authService.isAuthenticated();

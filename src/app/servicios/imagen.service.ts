@@ -35,4 +35,12 @@ export class ImagenService {
   listarImagenesTotales() {
     return this.http.get<Imagen[]>(`${this.apiUrl}/listar`);
   }
+
+  cambiarEstadoValidado(imagenId: number) {
+    return this.http.put<Imagen>(`${this.apiUrl}/validar/${imagenId}`, null);
+  }
+
+  cambiarEstadoRechazado(imagenId: number) {
+    return this.http.put<Imagen>(`${this.apiUrl}/rechazar/${imagenId}`, null);
+  }
 }

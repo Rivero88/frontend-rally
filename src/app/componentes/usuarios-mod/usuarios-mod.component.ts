@@ -43,7 +43,7 @@ export class UsuariosModComponent {
     });
   }
 
-  // Metodo para editar el usuario
+  // Para editar el usuario
   editar(){
     this.usuarioService.editarUsuario(this.formUsuarioMod.value).subscribe({
       next: (resultado: any) => {
@@ -57,7 +57,7 @@ export class UsuariosModComponent {
 
   }
 
-  // Metodo para volver a la lista de usuarios si se le da al boton cancelar
+  // Para volver a la lista de usuarios si se le da al boton cancelar
   cancelar(){
     this.ruta.navigate(['/']);
   }

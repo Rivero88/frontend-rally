@@ -31,7 +31,7 @@ export class ImagenesListarComponent implements OnInit {
     });
   }
 
-  // Método para ver la imagen en grande
+  // Para ver la imagen en grande
   verImagen(imagenId: number) {
     this.imagenService.obtenerImagen(imagenId).subscribe({
       next: (arrayBuffer) => {
@@ -61,7 +61,7 @@ export class ImagenesListarComponent implements OnInit {
 
   }
 
-  // Método para eliminar una imagen
+  // Para eliminar una imagen
   eliminarImagen(imagenId: number, imagenNombre: string){
     console.log("Eliminar imagen con id:", imagenId);
     console.log("Eliminar imagen de la categoria:", imagenNombre);

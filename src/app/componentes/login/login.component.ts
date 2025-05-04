@@ -13,6 +13,7 @@ import { Auth } from '../../modelos/auth';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
   username = '';
   password = '';
   public form: FormGroup;
@@ -26,12 +27,12 @@ export class LoginComponent {
 
   // Método para inicio de sesión
   login() {
-    const { username, password } = this.form.value;
+    let { username, password } = this.form.value;
     this.authService.login(username, password).subscribe({
       next:(respuesta: Auth) => {
-        const token = respuesta.token;
-        const rol = respuesta.rol;
-        const id = respuesta.idUsuario;
+        let token = respuesta.token;
+        let rol = respuesta.rol;
+        let id = respuesta.idUsuario;
         localStorage.setItem('token', token); // Se guarda el token en el localStorage
         localStorage.setItem('rol', rol); // Se guarda el rol en el localStorage
         localStorage.setItem('idUsuario', id.toString()); // Se guarda el idUsuario en el localStorage

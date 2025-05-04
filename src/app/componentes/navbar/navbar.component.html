@@ -11,22 +11,23 @@
     <div class="container-fluid d-flex justify-content-center gap-3">
         @if(isAuthenticated && isAdmin){
             <button type="button" class="btn btn-custom" routerLink="/">Ver parámetros</button>
+            <button type="button" class="btn btn-custom" routerLink="/parametros-mod">Modificar parámetros</button>
             <button type="button" class="btn btn-custom" routerLink="/listar-usuarios">Gestión usuarios</button>
             <button type="button" class="btn btn-custom" routerLink="/perfil">Perfil</button>
-            <button type="button" class="btn btn-custom" routerLink="/galeria">Gestión fotografías</button>
+            <button type="button" class="btn btn-custom" routerLink="/imagen-validar">Gestión fotografías</button>
+            <button type="button" class="btn btn-custom" routerLink="/galeria">Galeria</button>
             <button type="button" class="btn btn-custom" routerLink="">Estadísticas y resultados</button>
         }@else if(isAuthenticated){
             <button type="button" class="btn btn-custom" routerLink="/">Inicio</button>
             <button type="button" class="btn btn-custom" routerLink="/perfil">Perfil</button>
-            <button type="button" class="btn btn-custom" routerLink="/imagen-cargar">Gestión fotografías</button>
+            <button type="button" class="btn btn-custom" routerLink="/imagen-cargar">Cargar fotografías</button>
             <button type="button" class="btn btn-custom" routerLink="/galeria">Galería</button>
-            <button type="button" class="btn btn-custom" routerLink="/contacto">Contacto</button>
+            <button type="button" class="btn btn-custom" routerLink="">Rankings</button>
         }@else {
             <button type="button" class="btn btn-custom" routerLink="/">Inicio</button>
             <button type="button" class="btn btn-custom" routerLink="/registro">Registro participantes</button>
             <button type="button" class="btn btn-custom" routerLink="/galeria">Galería fotos</button>
             <button type="button" class="btn btn-custom" routerLink="">Rankings</button>
-            <button type="button" class="btn btn-custom" routerLink="/contacto">Contacto</button>   
         }
     </div>
 </nav>

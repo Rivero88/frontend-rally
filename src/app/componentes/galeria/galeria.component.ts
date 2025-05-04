@@ -12,11 +12,13 @@ import { AuthService } from '../../../auth/auth.service';
   styleUrl: './galeria.component.css'
 })
 export class GaleriaComponent {
+
   imagenes: Imagen[] = [];
   imagenSeleccionadaUrl: string = '';
   estadoDescripcion: { [key: number]: boolean } = {};
 
   constructor(private imagenService: ImagenService, @Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService) {
+    // Para listar todas las imagenes de todos los usuarios
     this.imagenService.listarImagenesTotales().subscribe({
       next: (resultado:any) => {
         console.log("Resultado de la galería:", resultado);
@@ -28,7 +30,7 @@ export class GaleriaComponent {
     });
   }
 
-  // Método para ver la imagen en grande
+  // Para ver la imagen en grande
   verImagen(imagenId: number) {
     this.imagenService.obtenerImagen(imagenId).subscribe({
       next: (arrayBuffer) => {
@@ -54,13 +56,19 @@ export class GaleriaComponent {
     });
   }
 
-  // Para ver más o menos de la descipción de la imagen
+  // Para ver más o menos de la descripción de la imagen
   minimizarDescripcion(id: number) {
     this.estadoDescripcion[id] = !this.estadoDescripcion[id];
   }
 
-   // Para vertificar si el rol es admin o no
-   get isAdmin(): boolean {
-    return this.authService.isAdmin();
+  // Para vertificar si el rol es admin
+  isAdmin(): boolean {
+    const rol = localStorage.getItem('rol');
+    return  typeof window !== 'undefined' && rol === 'admin'; 
+  }
+
+  // Devuelve true si hay token
+  isAuthenticated(): boolean {
+    return  typeof window !== 'undefined' && !!localStorage.getItem('token');
   }
 }

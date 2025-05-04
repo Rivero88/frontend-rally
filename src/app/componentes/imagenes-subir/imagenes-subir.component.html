@@ -1,7 +1,7 @@
-
+<!-- Formaulario para cargar imagenes -->
 <div class="container-fluid py-5">
-    <form [formGroup]="formImagen" (ngSubmit)="onSubmit()" class="container p-4 rounded shadow-sm" style="max-width: 1000px; background-color: #F3F1ED;">
-
+    <form [formGroup]="formImagen" (ngSubmit)="guardarImagen()" class="container p-4 rounded shadow-sm" style="max-width: 1000px; background-color: #F3F1ED;">
+        <h1 class="fw-bold mb-4" style="color: #254D42; text-align: center;">Cargar fotografías</h1>
         <!-- SELECT de Categorías -->
         <div class="mb-3">
           <label for="categoria" class="form-label">Selecciona una categoría</label>
@@ -18,7 +18,7 @@
                 Ya has subido todas las fotografías.
             </div>
         </div>
-        <!-- Descripción de categoría seleccionada antes -->
+        <!-- Descripción de categoría seleccionada antes. Sólo aparece cuando se ha seleccionado una -->
         <div class="mb-3" *ngIf="descripcionCategoriaSeleccionada">
             <label class="form-label">Descripción de la categoría</label>
             <textarea class="form-control" [value]="descripcionCategoriaSeleccionada" readonly rows="3"></textarea>

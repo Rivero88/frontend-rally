@@ -1,42 +1,48 @@
+<!-- Muestra las imagenes con estado "Validada" -->
 <div class="container-fluid py-5">
     <header class="text-center mb-5 text-white p-4 rounded container" style="background-color: #F3F1ED;">
-        <h1 class="fw-bold" style="color: #254D42;">Galería</h1>
+        <h1 class="fw-bold text-center mb-4" style="color: #254D42;">Galería</h1>
         <p class="lead" style="color: #254D42;">Explora las mejores fotografías por temática</p>
     </header>
-    <div class="container">
-        <div class="row justify-content-center g-4">
-            <div class="row g-4">
+    <section class="text-center" >
+      <div class="container" >
+        <div class="row justify-content-center g-4" >
+            <div class="row g-4" >
                 @for (img of imagenes; track img.id) {
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="card h-100 shadow-sm" style="background-color: #F3F1ED;">
-                    <!-- <img [src]="img.url" class="card-img-top" [alt]="img.nombre"> -->
-                    <div class="card-body" style="text-align: center;">
-                        <h5 class="card-title">{{ img.nombre }}</h5>
-                        <p class="card-text">
-                        <strong>Autor:</strong> {{ img.usuario.nombre }}  {{ img.usuario.apellidos }}<br>
-                        <strong>Categoría:</strong> {{ img.categoria.nombre }}<br>
-                        <strong>Descripción:</strong>
-                        <span *ngIf="!estadoDescripcion[img.id]">
-                            {{ img.descripcion | slice:0:50 }}<span *ngIf="img.descripcion.length > 50">...</span>
-                          </span>
-                          <span *ngIf="estadoDescripcion[img.id]">{{ img.descripcion }}</span>
-                          <a href="#" (click)="minimizarDescripcion(img.id); $event.preventDefault()" style="text-decoration: none; color: #254D42;">
-                            {{ estadoDescripcion[img.id] ? 'Ver menos' : 'Ver más' }}
-                          </a>
-                        </p>
-                        <button class="btn btn-custom btn-sm" type="button" (click)="verImagen(img.id)">Ver grande</button>
-                        <button *ngIf="!isAdmin"class="btn btn-success btn-sm ms-2">👍 Votar</button>
+                  @if(img.estadoValidacion == "Validada"){
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                      <div class="card h-100 shadow-sm" style="background-color: #F3F1ED;">
+                        <!-- <img [src]="img.url" class="card-img-top" [alt]="img.nombre"> -->
+                        <div class="card-body" style="text-align: center;">
+                            <h5 class="card-title">{{ img.nombre }}</h5>
+                            <p class="card-text">
+                            <strong>Autor:</strong> {{ img.usuario.nombre }}  {{ img.usuario.apellidos }}<br>
+                            <strong>Categoría:</strong> {{ img.categoria.nombre }}<br>
+                            <strong>Descripción:</strong>
+                            <span *ngIf="!estadoDescripcion[img.id]">
+                                {{ img.descripcion | slice:0:50 }}<span *ngIf="img.descripcion.length > 50">...</span>
+                              </span>
+                              <span *ngIf="estadoDescripcion[img.id]">{{ img.descripcion }}</span>
+                              <a href="#" (click)="minimizarDescripcion(img.id); $event.preventDefault()" style="text-decoration: none; color: #254D42;">
+                                {{ estadoDescripcion[img.id] ? 'Ver menos' : 'Ver más' }}
+                              </a>
+                            </p>
+                            <button class="btn btn-custom btn-lg" type="button" (click)="verImagen(img.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
+                            <button class="btn btn-success btn-lg ms-2" title="Votar"><i class="bi bi-star-fill"></i></button>
+                        </div>
+                      </div>
                     </div>
-                    </div>
-                </div>
+                  }
                 }
             </div>
         </div>
-    </div>
+      </div>
+    </section>
 </div>
 
 <!-- Modal para ver la imagen en grande al dar al boton Ver fotografía-->
-<div class="modal fade" id="verImagenModal" tabindex="-1" aria-labelledby="verImagenModalLabel" aria-hidden="true">
+<section class="text-center">
+  <div class="modal fade" id="verImagenModal" tabindex="-1" aria-labelledby="verImagenModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -50,5 +56,6 @@
       </div>
     </div>
   </div>
+</section>
 
   

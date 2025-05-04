@@ -1,7 +1,8 @@
+<!-- Formaulario Registro usuarios nuevos -->
 <br />
 <br />
-<form [formGroup]="formUsuarioNuevo" class="container p-4 rounded shadow-sm" style="max-width: 1200px; background-color: #F3F1ED;" (ngSubmit)="nuevoUsuario()">
-    <h3 class="text-center mb-4" style="color: #254D42;">Registro de participantes</h3>
+<form [formGroup]="formUsuarioNuevo" class="container p-4 rounded shadow-sm" style="background-color: #F3F1ED;" (ngSubmit)="nuevoUsuario()">
+    <h1 class="fw-bold text-center mb-4" style="color: #254D42;">Registro de participantes</h1>
     <div class="row g-3 mb-4">
         <div class="col-md-6">
             <label for="nombre" class="form-label">Nombre</label>
@@ -134,10 +135,13 @@
         </div>
     </div>
 
+    <!-- Botones -->
     <div class="text-center mt-4">
         <button type="submit" class="btn btn-custom btn-lg" [disabled]="!formUsuarioNuevo.valid">Registrarse</button>
         <button type="button" routerLink="/" class="btn btn-custom btn-lg ms-3">Volver</button>
     </div>
+
+    <!-- Cuadro texto para mensaje satisfactorio o de error -->
     <div class="text-center mt-4">
         <div *ngIf="mensajeError" class="alert alert-danger text-center">
             {{ mensajeError }}

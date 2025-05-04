@@ -36,7 +36,7 @@ export class ImagenesSubirComponent {
   ngOnInit() {
     //Obtener el usuario logueado
     const usuarioId = obtenerUsuarioLogueado();
-    //Listar categoróas para el select
+    //Listar categorías para el select
     this.categoriaService.listarCategorias().subscribe({
       next: (resultado: any) => {
         this.categorias = resultado;
@@ -57,7 +57,7 @@ export class ImagenesSubirComponent {
     }); 
   }
 
-  // Método para mostrar la descripción de la categoría seleccionada
+  // Para mostrar la descripción de la categoría seleccionada
   mostrarDescripcionCategoriaSeleccionada(){
     let categoriaIdSeleccionada = this.formImagen.value.categoriaId;
     //Busca en el array de categorías  totos los id de categorias y compara con el id de la categoría seleccionada. El + delate del categoriasIdSeleccionada convierte el string a number
@@ -71,7 +71,7 @@ export class ImagenesSubirComponent {
     }
   }
 
-  // Método que se ejecuta al seleccionar una imagen
+  // Se ejecuta al seleccionar una imagen
   seleccionarImagen(evento: any){
     let archivos = evento.target.files;
     for (let archivo of archivos) {
@@ -91,7 +91,7 @@ export class ImagenesSubirComponent {
     this.todasCategoriasOcupadas = categoriasDisponibles.length === 0;
   }
 
-  onSubmit(){
+  guardarImagen(){
       let formData = new FormData();
       formData.append('nombre', this.formImagen.value.nombre);
       formData.append('descripcion', this.formImagen.value.descripcion);

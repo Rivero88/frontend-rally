@@ -1,5 +1,6 @@
+<!-- Formulario modificar usuario -->
 <div class="container-fluid py-5">
-    <form [formGroup]="formUsuarioMod" class="container p-4 rounded shadow-sm" style="max-width: 600px; background-color: #F3F1ED;" (ngSubmit)="editar()">
+    <form [formGroup]="formUsuarioMod" class="container p-4 rounded shadow-sm" style="max-width: 800px; background-color: #F3F1ED;" (ngSubmit)="editar()">
         <h3 class="text-center mb-4" style="color: #254D42;">Modificar usuario</h3>
         @if(isAdmin){
             <div class="row g-3 mb-4">
@@ -141,7 +142,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <button class="btn btn-custom btn-lg" type="submit" [disabled]="!formUsuarioMod.valid">Modificar</button>
+            <button class="btn btn-custom btn-lg" type="submit" [disabled]="!formUsuarioMod.valid || !formUsuarioMod.touched || !formUsuarioMod.dirty">Modificar</button>
             <button class="btn btn-custom btn-lg ms-3" type="button" (click)="cancelar()">Cancelar</button>
         </div>
     </form>

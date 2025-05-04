@@ -1,18 +1,18 @@
 <div class="container-fluid py-5" *ngIf="parametros">
-    <header class="text-center mb-5 text-white p-4 rounded container" style="background-color: #F3F1ED; max-width: 1200px;">
+    <header class="text-center mb-5 text-white p-4 rounded container" style="background-color: #F3F1ED;">
         <h1 class="fw-bold" style="color: #254D42;">📸 Rally Fotográfico 📸</h1>
-        <p class="lead" style="color: #254D42;">¡Participa y comparte tu talento!🎉</p>
+        <p class="lead" style="color: #254D42;">¡Participa y comparte tu talento!</p>
         <p class="lead" style="color: #254D42;"> Los participantes deben capturar momentos de lo que para ellos son una vacaciones perfectas.</p>
         <p class="lead" style="color: #254D42;"> Se pueden incluir tanto fotografías de paisajes, actividades, detalles cotidianos, etc. pero siempre en un contexto de vacaciones.</p>
         <p class="lead" style="color: #254D42;"> El objetivo es mostrar la belleza de las vacaciones a través de la fotografía, así que deja volar tu imaginación y creatividad.</p>
     </header>
 
     <section class="mb-5 text-center">
-        <div class="container" style="background-color: #F3F1ED; max-width: 1200px;">
+        <div class="container" style="background-color: #F3F1ED;">
             <h2 class="text-center" style="color: #254D42;">📌 Bases de Participación</h2>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Concurso abierto a aficionados y profesionales.</li>
-                <li class="list-group-item">Máximo <strong>{{ parametros.numMaxFotografias }}</strong> fotografía por categoría.</li>
+                <li class="list-group-item">Máximo <strong>{{ parametros.numMaxFotografias }}</strong> fotografías en total. Sólo se permite 1 fotografía por categoría.</li>
                 <li class="list-group-item">Temática: <strong>{{ parametros.tema }}</strong>.</li>
                 <li class="list-group-item">Las fotos deben ser originales. No se permiten ediciones ni creaciones de IA. </li>
             </ul>
@@ -20,7 +20,7 @@
     </section>
     
     <section class="mb-5 text-center">
-        <div class="container" style="background-color: #F3F1ED; max-width: 1200px;">
+        <div class="container" style="background-color: #F3F1ED;">
             <h2 class="text-center" style="color: #254D42;">📅 Fechas</h2>
             <div class="table-responsive">
                 <table class="table table-bordered text-center custom-table-bg">
@@ -37,7 +37,7 @@
     </section>
 
     <section class="mb-5 text-center">
-        <div class="container" style="background-color: #F3F1ED; max-width: 1200px;">
+        <div class="container" style="background-color: #F3F1ED;">
             <h2 class="text-center" style="color: #254D42;">📸 Categorías</h2>
             <div class="table-responsive">
                 <table class="table table-bordered text-center custom-table-bg">
@@ -49,18 +49,22 @@
                     </tbody>
                 </table>
             </div>
+            @if(isAuthenticated && isAdmin){
+                <button class="btn btn-custom btn-lg" (click)="editarParametros()" type="button">Añadir categoría</button>
+                <br> <br>
+            }
         </div>
     </section>
     
     <section class="mb-5 text-center">
-        <div class="container" style="background-color: #F3F1ED; max-width: 1200px;">
+        <div class="container" style="background-color: #F3F1ED;">
             @if(isAuthenticated && isAdmin){ 
                 <h2 class="text-center" style="color: #254D42;">✔️ Validación de Fotografías</h2>
-                <button type="button" class="btn btn-custom btn-lg" routerLink="/galeria">Validar fotografías</button>
+                <button type="button" class="btn btn-custom btn-lg" routerLink="/imagen-validar">Validar fotografías</button>
                 <br>
             }@else if(isAuthenticated){
                 <h2 class="text-center" style="color: #254D42;">📥 Fotografías</h2>
-                <button type="button" class="btn btn-custom btn-lg" routerLink="/imagen-cargar">Gestión de fotografías</button>
+                <button type="button" class="btn btn-custom btn-lg" routerLink="/imagen-cargar">Cargar fotografías</button>
                 <br>
             }@else {
                 <h2 class="text-center" style="color: #254D42;">📥 Subida de Fotografías</h2>
@@ -77,7 +81,7 @@
     </section>
 
     <section class="mb-5 text-center">
-        <div class="container" style="background-color: #F3F1ED; max-width: 1200px;">
+        <div class="container" style="background-color: #F3F1ED;">
             @if(!isAuthenticated){ 
             <h2 class="text-center" style="color: #254D42;">⭐ Votaciones</h2>
             <p>Las fotos deberán ser aprobadas por nuestro administrador y después serán publicadas para ser votadas por el público.</p>
@@ -90,7 +94,7 @@
 
     @if(isAuthenticated && isAdmin){
         <section class="mb-5 text-center">
-            <div class="container" style="background-color: #F3F1ED; max-width: 1200px;">
+            <div class="container" style="background-color: #F3F1ED;">
                 <h2 class="text-center" style="color: #254D42;">✏️Modificar parámetros</h2>
                 <button class="btn btn-custom btn-lg" (click)="editarParametros()" type="button">Editar</button>
                 <br>
