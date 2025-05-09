@@ -1,0 +1,49 @@
+<!-- Formulario modificar fotografía -->
+<div class="container-fluid py-5">
+    <form [formGroup]="formImagenMod" class="container p-4 rounded shadow-sm" style="background-color: #F3F1ED; width: 600px;" (ngSubmit)="editar()">
+        <h3 class="text-center mb-4" style="color: #254D42;">Modificar datos Fotografía</h3>
+        <div class="row g-3 mb-4">
+            <div class="col-12">
+                <label for="id" class="form-label">Id</label>
+                <input type="text" id="id" formControlName="id" class="form-control" readonly />
+            </div>
+            <div class="col-12">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" id="nombre" required formControlName="nombre" class="form-control"
+                    placeholder="Introduce nombre" />
+                @if(formImagenMod.controls["nombre"].invalid && (formImagenMod.controls["nombre"].dirty || formImagenMod.controls["nombre"].touched)){
+                    @if(formImagenMod.controls["nombre"].errors?.["required"]){
+                        <div class="text-danger">
+                            El nombre es obligatorio.
+                        </div>
+                    }
+                    @if(formImagenMod.controls["nombre"].errors?.["minlength"]){
+                        <div class="text-danger">
+                            El nombre debe tener al menos 3 caracteres.
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-12">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea class="form-control" rows="3" formControlName="descripcion" required></textarea>
+                @if(formImagenMod.controls["descripcion"].invalid && (formImagenMod.controls["descripcion"].dirty || formImagenMod.controls["descripcion"].touched)){
+                    @if(formImagenMod.controls["descripcion"].errors?.["required"]){
+                        <div class="text-danger">
+                            La descripción de la categoría es obligatoria.
+                        </div>
+                    }
+                    @if(formImagenMod.controls["descripcion"].errors?.["minlength"]){
+                        <div class="text-danger">
+                            La descripción debe tener al menos 10 caracteres.
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-custom btn-lg" type="submit" [disabled]="!formImagenMod.valid || !formImagenMod.touched || !formImagenMod.dirty">Modificar</button>
+            <button class="btn btn-custom btn-lg ms-3" type="button" (click)="cancelar()">Cancelar</button>
+        </div>
+    </form>
+</div>

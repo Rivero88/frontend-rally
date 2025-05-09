@@ -22,7 +22,6 @@ export class ImagenesListarComponent implements OnInit {
   ngOnInit() {
     this.imagenService.obtenerImagenesUsuario(this.idUsuario).subscribe({
       next: (resultado) => {
-        console.log("Imagenes del usuario para lista:", resultado);
         this.imagenes = resultado;
       },
       error: (error: any) => {
@@ -58,14 +57,12 @@ export class ImagenesListarComponent implements OnInit {
   }
 
   modificarImagen(imagenId: number){
-
+    this.ruta.navigate(['/imagen-mod', imagenId]);
   }
 
   // Para eliminar una imagen
-  eliminarImagen(imagenId: number, imagenNombre: string){
-    console.log("Eliminar imagen con id:", imagenId);
-    console.log("Eliminar imagen de la categoria:", imagenNombre);
-    if(confirm("¿Está seguro de que desea eliminar la imagen con nombre " + imagenNombre + " ?")){ 
+  eliminarImagen(imagenId: number, imagenNombre: string, imagenCategoria: string){
+    if(confirm("¿Está seguro de que desea eliminar la imagen de la categoria " + imagenCategoria + " con nombre " + imagenNombre + "?")){ 
       this.imagenService.eliminarImagen(imagenId).subscribe({
         next: () => {
           this.imagenes = this.imagenes.filter(img => img.id !== imagenId);

@@ -11,6 +11,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { ImagenesListarComponent } from './componentes/imagenes-listar/imagenes-listar.component';
 import { ImagenesSubirComponent } from './componentes/imagenes-subir/imagenes-subir.component';
 import { ImagenesValidarComponent } from './componentes/imagenes-validar/imagenes-validar.component';
+import { ImagenesModComponent } from './componentes/imagenes-mod/imagenes-mod.component';
 
 export const routes: Routes = [ 
     { path: '', component: HomeComponent },
@@ -25,4 +26,5 @@ export const routes: Routes = [
     { path: 'imagen-cargar', component: ImagenesSubirComponent},
     { path: 'imagen-listar/:idUsuario', component: ImagenesListarComponent},
     { path: 'imagen-validar', component: ImagenesValidarComponent},
+    { path: 'imagen-mod/:idImagen', component: ImagenesModComponent},
 ];

@@ -21,7 +21,7 @@ export class GaleriaComponent {
     // Para listar todas las imagenes de todos los usuarios
     this.imagenService.listarImagenesTotales().subscribe({
       next: (resultado:any) => {
-        console.log("Resultado de la galería:", resultado);
+
         this.imagenes = resultado;
       },
       error: (error: any) => {
@@ -54,6 +54,22 @@ export class GaleriaComponent {
         console.error('Error al obtener la imagen como archivo:', error);
       }
     });
+  }
+
+  // Para votar una imagen
+  votarImagen(imagenId: number){
+    this.imagenService.votarImagen(imagenId).subscribe({
+      next: (resultado) => {
+        const index = this.imagenes.findIndex(img => img.id === imagenId);
+        if (index !== -1) {
+          this.imagenes[index].votos = resultado.votos;
+        }
+      },
+      error: (error) => {
+        console.error("Error al votar por la imagen:", error);
+      }
+    });
+
   }
 
   // Para ver más o menos de la descripción de la imagen
