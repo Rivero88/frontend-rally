@@ -7,7 +7,7 @@ export interface Imagen {
     descripcion: string;
     formato: string;
     tamanno: number;
-    votos: number;
+    votosImagen: number;
     estadoValidacion: string;
     fechaSubida: Date;
     url: string;

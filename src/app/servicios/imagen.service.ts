@@ -26,7 +26,7 @@ export class ImagenService {
     return this.http.delete<Imagen>(`${this.apiUrl}/${imagenId}`);
   }
 
-  // Obtiene una imagen por su id para mostrarla en un modal
+  // Obtiene una imagen por su id para mostrarla en el modal
   obtenerImagen(imagenId: number){
     return this.http.get(`${this.apiUrl}/obtenerImagen/${imagenId}`, {responseType: 'arraybuffer'});
   }
@@ -56,9 +56,8 @@ export class ImagenService {
     return this.http.put<Imagen>(`${this.apiUrl}`, imagen);
   }
 
-  // Votar una imagen por su id
-  votarImagen(imagenId: number) {
-    return this.http.patch<Imagen>(`${this.apiUrl}/votar/${imagenId}`, null);
+  // Obtiene el ranking de imagenes segun los votos
+  rankingImagenes() {
+    return this.http.get<Imagen[]>(`${this.apiUrl}/ranking`);
   }
-  
 }

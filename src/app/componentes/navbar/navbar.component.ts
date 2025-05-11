@@ -32,6 +32,8 @@ export class NavbarComponent {
   // Método para cerrar sesión
   logout(): void {
     localStorage.removeItem('token'); // Eliminamos el token
+    localStorage.removeItem('rol'); // Eliminamos el rol
+    localStorage.removeItem('idUsuario'); // Eliminamos el rol
     this.router.navigate(['/']);
   }
 

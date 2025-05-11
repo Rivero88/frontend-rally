@@ -1,0 +1,31 @@
+<div class="container my-5" style="background-color: #F3F1ED;">
+    <section class="text-center">
+        <h1 class="fw-bold mb-4" style="color: #254D42;">Ranking de Imágenes</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Posición</th>
+                    <th>Nombre</th>
+                    <th>Autor</th>
+                    <th>Categoría</th>
+                    <th>Votos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let img of rankingImagenes; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ img.nombre }}</td>
+                    <td>{{ img.autor }}</td>
+                    <td>{{ img.categoria }}</td>
+                    <td>{{ img.votos }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section class="text-center">
+        <div class="mt-5">
+            <h1 class="fw-bold mb-4" style="color: #254D42;">Gráfico de Votos</h1>
+            <canvas #canvasRanking></canvas>
+        </div>
+    </section>
+</div>

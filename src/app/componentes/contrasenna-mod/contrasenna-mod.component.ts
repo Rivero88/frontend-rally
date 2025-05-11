@@ -31,7 +31,6 @@ export class ContrasennaModComponent {
         this.usuarioService.modificarContrasenna(this.idUsuario, this.formContrasennaMod.value.password).subscribe({
           next: () => {
             alert("Contraseña modificada correctamente"); // Mensaje de exito
-            this.ruta.navigate(['/']); // Vuelve a la lista de usuarios
           },
           error: () => {
             alert("Error al modificar la contraseña"); // Mensaje de error
@@ -47,7 +46,7 @@ export class ContrasennaModComponent {
 
   // Metodo para volver a la lista de usuarios si se le da al boton cancelar
   cancelar(){
-    this.ruta.navigate(['/']);
+    this.ruta.navigate(['/perfil']);
   }
 
 }

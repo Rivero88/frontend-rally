@@ -3,6 +3,7 @@ import { Imagen } from '../../modelos/imagen';
 import { ImagenService } from '../../servicios/imagen.service';
 import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
+import { VotoService } from '../../servicios/voto.service';
 import { AuthService } from '../../../auth/auth.service';
 
 @Component({
@@ -17,11 +18,10 @@ export class GaleriaComponent {
   imagenSeleccionadaUrl: string = '';
   estadoDescripcion: { [key: number]: boolean } = {};
 
-  constructor(private imagenService: ImagenService, @Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService) {
+  constructor(private imagenService: ImagenService, @Inject(PLATFORM_ID) private platformId: Object, private votoService: VotoService, private authService: AuthService) {
     // Para listar todas las imagenes de todos los usuarios
     this.imagenService.listarImagenesTotales().subscribe({
-      next: (resultado:any) => {
-
+      next: (resultado: any) => {
         this.imagenes = resultado;
       },
       error: (error: any) => {
@@ -37,7 +37,7 @@ export class GaleriaComponent {
         let blob = new Blob([arrayBuffer], { type: 'image/jpeg' }); // Ajusta el tipo si es PNG u otro
         let objectURL = URL.createObjectURL(blob);
         this.imagenSeleccionadaUrl = objectURL;
-  
+
         if (isPlatformBrowser(this.platformId)) {
           import('bootstrap').then(bootstrap => {
             let modalElement = document.getElementById('verImagenModal');
@@ -57,19 +57,34 @@ export class GaleriaComponent {
   }
 
   // Para votar una imagen
-  votarImagen(imagenId: number){
-    this.imagenService.votarImagen(imagenId).subscribe({
+  votarImagen(imagenId: number) {
+    let idUsuario = localStorage.getItem('idUsuario');
+    this.votoService.comprobarVotoUsuario(imagenId, idUsuario).subscribe({
       next: (resultado) => {
-        const index = this.imagenes.findIndex(img => img.id === imagenId);
-        if (index !== -1) {
-          this.imagenes[index].votos = resultado.votos;
+        if (resultado) {
+          alert("El usuario ya ha votado en esta imagen.");
+        } else {
+          this.votoService.votarImagen(imagenId, idUsuario).subscribe({
+            next: (resultadoVoto) => {
+              this.imagenService.seleccionarImagen(imagenId).subscribe({
+                next: (resultadoImg) => {
+                  let index = this.imagenes.findIndex(img => img.id === resultadoImg.id);
+                  if (index !== -1) {
+                    this.imagenes[index].votosImagen = resultadoImg.votosImagen;
+                  }
+                },
+                error: (error) => {
+                  console.error("Error al obtener la imagen votada:", error);
+                }
+              });
+            },
+            error: (error) => {
+              console.error("Error al votar por la imagen:", error);
+            }
+          });
         }
-      },
-      error: (error) => {
-        console.error("Error al votar por la imagen:", error);
       }
     });
-
   }
 
   // Para ver más o menos de la descripción de la imagen
@@ -77,14 +92,13 @@ export class GaleriaComponent {
     this.estadoDescripcion[id] = !this.estadoDescripcion[id];
   }
 
-  // Para vertificar si el rol es admin
+  // Para verificar si el rol es admin
   isAdmin(): boolean {
-    const rol = localStorage.getItem('rol');
-    return  typeof window !== 'undefined' && rol === 'admin'; 
+    return this.authService.isAdmin();
   }
 
   // Devuelve true si hay token
   isAuthenticated(): boolean {
-    return  typeof window !== 'undefined' && !!localStorage.getItem('token');
+    return this.authService.isAuthenticated();
   }
 }
