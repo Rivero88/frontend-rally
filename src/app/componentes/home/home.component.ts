@@ -33,14 +33,14 @@ export class HomeComponent {
     this.obtenerParametros();
    }
 
-  // Para verificar si hay un token de inicio de sesión
-  get isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
+  // Para verificar si el rol es admin
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 
-  // Para vertificar si el rol es admin o no
-  get isAdmin(): boolean {
-    return this.authService.isAdmin();
+  // Devuelve true si hay token
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
   // Para obtener los parámetros de la bbdd

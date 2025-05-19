@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Imagen } from '../modelos/imagen';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { Imagen } from '../modelos/imagen';
 export class ImagenService {
 
   private apiUrl = 'http://localhost:8080/imagenes';
+  //private apiUrl = `${environment.API_URL}/imagenes`;
 
   constructor(private http: HttpClient) { }
 

@@ -22,8 +22,8 @@ export class RegistroComponent {
       nombre: this.fb.control('', [Validators.required, Validators.minLength(3)]),
       apellidos: this.fb.control('', [Validators.required, Validators.minLength(6)]),
       alias:this.fb.control('', [Validators.required, Validators.minLength(3)]),
-      fNacimiento: this.fb.control('', [Validators.required]),
-      numTelefono: this.fb.control('', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]),
+      fNacimiento: this.fb.control(''),
+      numTelefono: this.fb.control('', [Validators.minLength(9), Validators.maxLength(9)]),
       email: this.fb.control('', [Validators.required, Validators.email]),
       // validacion para que la contraseña tenga al menos 6 caracteres, al menos una letra, un número y un caracter especial
       // (?=.*[a-zA-Z]) al menos una letra. (?=.*\d) al menos un número. `(?=.[!@#$%^&()_+-={};':"\ un caraceter especial

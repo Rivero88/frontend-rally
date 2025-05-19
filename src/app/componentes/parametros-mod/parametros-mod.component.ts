@@ -5,6 +5,7 @@ import { Parametro } from '../../modelos/parametro';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { formatoFecha } from '../../../util';
+import { CategoriaService } from '../../servicios/categoria.service';
 
 @Component({
   selector: 'app-parametros-mod',
@@ -15,8 +16,10 @@ import { formatoFecha } from '../../../util';
 export class ParametrosModComponent {
   
   public formParametrosMod: FormGroup;
+  mensajeError: string | null = null;
+  categoriaBorradaCorrectamente: boolean = false;
 
-  constructor(private fb: FormBuilder, private parametroService: ParametroService, private ruta: Router) {
+  constructor(private fb: FormBuilder, private parametroService: ParametroService, private categoriaService: CategoriaService, private ruta: Router) {
     this.formParametrosMod = this.fb.group({
       id: this.fb.control('', [Validators.required]),
       numMaxFotografias: this.fb.control('', [Validators.required, Validators.min(1)]),
@@ -74,6 +77,27 @@ export class ParametrosModComponent {
         console.error('Error al editar los parámetros:', error);
       }
     });
+  }
+
+  eliminarCategoria(categoriaId: number,  index: number){
+    if (confirm("¿Estás seguro de que deseas eliminar esta categoría?")) {
+    this.categoriaService.eliminarCategoria(categoriaId).subscribe({
+      next: () => {
+        this.mensajeError = null;
+        this.categoriaBorradaCorrectamente = true;
+        // Elimina del FormArray también
+        this.categorias.removeAt(index);
+        console.log(`Categoría con id ${categoriaId} eliminada`);
+      },
+      error: error => {
+        if (error.error && error.error.message) {
+          this.mensajeError = error.error.message;
+        } else {
+          this.mensajeError = 'Error inesperado al eliminar la categoría.';
+        }
+      }
+    });
+  }
   }
 
   // Metdodo para volver a home cuando le demos al boton cancelar

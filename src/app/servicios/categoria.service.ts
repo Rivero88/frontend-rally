@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Categoria } from '../modelos/categoria';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { Categoria } from '../modelos/categoria';
 export class CategoriaService {
 
   private apiUrl = 'http://localhost:8080/categorias';
+  //private apiUrl = `${environment.API_URL}/categorias`;
 
   constructor(private http: HttpClient) { }
 
@@ -19,5 +21,15 @@ export class CategoriaService {
   // Obtiene las categorias ocupadas por un usuario
   obtenerCategoriasConImagen(usuarioId: number){
     return this.http.get<number[]>(`${this.apiUrl}/cargar/categorias_ocupadas/${usuarioId}`);
+  }
+
+  // Para crear una nueva categoria
+  nuevaCategoria(categoria: Categoria){
+    return this.http.post<Categoria>(`${this.apiUrl}/nuevaCategoria`, categoria);
+  }
+
+  // Para eliminar una categoria
+  eliminarCategoria(categoriaId: number){
+    return this.http.delete<Categoria>(`${this.apiUrl}/eliminar/${categoriaId}`);
   }
 }

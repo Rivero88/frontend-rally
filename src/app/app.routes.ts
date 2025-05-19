@@ -13,6 +13,8 @@ import { ImagenesSubirComponent } from './componentes/imagenes-subir/imagenes-su
 import { ImagenesValidarComponent } from './componentes/imagenes-validar/imagenes-validar.component';
 import { ImagenesModComponent } from './componentes/imagenes-mod/imagenes-mod.component';
 import { RankingComponent } from './componentes/ranking/ranking.component';
+import { CategoriaComponent } from './componentes/categoria/categoria.component';
+import { RegistroSimpleComponent } from './componentes/registro-simple/registro-simple.component';
 
 export const routes: Routes = [ 
     { path: '', component: HomeComponent },
@@ -29,4 +31,8 @@ export const routes: Routes = [
     { path: 'imagen-validar', component: ImagenesValidarComponent},
     { path: 'imagen-mod/:idImagen', component: ImagenesModComponent},
     { path: 'ranking', component: RankingComponent},
+    { path: 'categoria', component: CategoriaComponent},
+    { path: 'registro-simple', component: RegistroSimpleComponent},
+        
+
 ];

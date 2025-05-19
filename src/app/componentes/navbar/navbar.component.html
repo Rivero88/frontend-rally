@@ -1,15 +1,16 @@
+<!-- Menú navbar para opciones de navegación en la página -->
 <nav class="navbar navbar-light bg-light rounded w-100">
     <div class="container-fluid">
         <img src="assets/logo4.png" alt="Logo" width="75" height="75">
         <h1 style= "color:#254D42">Cazadores De Momentos</h1>
-        @if(!isAuthenticated){ 
+        @if(!isAuthenticated()){ 
             <button type="button" class="btn btn-custom" routerLink="/login">Login</button>
         }@else{ 
             <button type="button" class="btn btn-custom" (click)="logout()">Logout</button>
         }
     </div>
     <div class="container-fluid d-flex justify-content-center gap-3">
-        @if(isAuthenticated && isAdmin){
+        @if(isAuthenticated() && isAdmin()){
             <button type="button" class="btn btn-custom" routerLink="/">Ver parámetros</button>
             <button type="button" class="btn btn-custom" routerLink="/parametros-mod">Modificar parámetros</button>
             <button type="button" class="btn btn-custom" routerLink="/listar-usuarios">Gestión usuarios</button>
@@ -17,7 +18,7 @@
             <button type="button" class="btn btn-custom" routerLink="/imagen-validar">Gestión fotografías</button>
             <button type="button" class="btn btn-custom" routerLink="/galeria">Galeria</button>
             <button type="button" class="btn btn-custom" routerLink="/ranking">Estadísticas y resultados</button>
-        }@else if(isAuthenticated){
+        }@else if(isAuthenticated()){
             <button type="button" class="btn btn-custom" routerLink="/">Inicio</button>
             <button type="button" class="btn btn-custom" routerLink="/perfil">Perfil</button>
             <button type="button" class="btn btn-custom" routerLink="/imagen-cargar">Cargar fotografías</button>

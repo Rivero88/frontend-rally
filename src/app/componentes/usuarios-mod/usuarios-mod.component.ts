@@ -62,8 +62,8 @@ export class UsuariosModComponent {
     this.ruta.navigate(['/']);
   }
 
-  // Para vertificar si el rol es admin o no
-  get isAdmin(): boolean {
+  // Para verificar si el rol es admin
+  isAdmin(): boolean {
     return this.authService.isAdmin();
   }
   

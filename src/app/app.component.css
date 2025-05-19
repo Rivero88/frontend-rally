@@ -1,10 +1,6 @@
 *{
-    font-family: 'Poppins', sans-serif !important; /* Cambia la fuente de todo el documento */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important; /* Cambia la fuente de todo */
 }
-/* .page-background {
-    background-color: #f3f1ed;
-    min-height: 100vh; /* Cubre toda la pantalla 
-} */
 
 html { 
     height: 100%;
@@ -40,7 +36,6 @@ html {
 
 
 .flex-grow-1 {
-    /* background-color: #f3f1ed; */
     flex: 1; /* Ocupa todo el espacio disponible */
 }
 

@@ -119,6 +119,7 @@
                         </div>
                         }
                     }
+                    <button type="button" class="btn btn-custom mt-2" (click)="eliminarCategoria(cat.get('id')?.value, i)">Eliminar categoría</button>
                 </div>
               </div>
             </div>
@@ -128,5 +129,14 @@
             <button class="btn btn-custom btn-lg" type="submit" [disabled]="!formParametrosMod.valid || formParametrosMod.pristine">Guardar</button>
             <button class="btn btn-custom btn-lg ms-3" type="button" (click)="cancelar()">Cancelar</button>
         </div>
+        <!-- Cuadro texto para mensaje satisfactorio o de error -->
+        <div class="text-center mt-4">
+            <div *ngIf="mensajeError" class="alert alert-danger text-center">
+                {{ mensajeError }}
+            </div>
+            <div *ngIf="categoriaBorradaCorrectamente " class="alert alert-success text-center">
+                Categoría eliminada correctamente.
+            </div>
+        </div>  
     </form>    
 </div>

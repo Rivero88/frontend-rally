@@ -2,7 +2,7 @@
 <div class="container-fluid py-5">
     <form [formGroup]="formUsuarioMod" class="container p-4 rounded shadow-sm" style="max-width: 800px; background-color: #F3F1ED;" (ngSubmit)="editar()">
         <h3 class="text-center mb-4" style="color: #254D42;">Modificar usuario</h3>
-        @if(isAdmin){
+        @if(isAdmin()){
             <div class="row g-3 mb-4">
                 <div class="col-md-6">
                     <label for="id" class="form-label">Id</label>

@@ -42,7 +42,7 @@
                 </div>
         </section>
         <br>
-        <!-- Imagenes de usuario -->
+        <!-- Imagenes de usuario participante -->
         <section class="text-center">
             <div class="container" style="background-color: #F3F1ED; max-width: 1800px;">
                 <div *ngIf="usuario.rol === 'participante'">
@@ -53,7 +53,16 @@
                             <app-imagenes-listar [idUsuario]="usuario.id"></app-imagenes-listar>
                           </tr>
                         </table>
-                      </div>
+                    </div>
+                </div> 
+            </div>
+        </section>
+        <!-- Validar imagenes usuario admin -->
+        <section class="text-center">
+            <div class="container" style="background-color: #F3F1ED; max-width: 1800px;">
+                <div *ngIf="usuario.rol === 'admin'">
+                    <h1 class="fw-bold" style="color: #254D42;">Gestión de Imágenes</h1>
+                    <app-imagenes-validar></app-imagenes-validar>
                 </div> 
             </div>
         </section>

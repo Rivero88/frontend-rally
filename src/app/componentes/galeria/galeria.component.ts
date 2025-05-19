@@ -5,6 +5,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { VotoService } from '../../servicios/voto.service';
 import { AuthService } from '../../../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-galeria',
@@ -18,7 +19,7 @@ export class GaleriaComponent {
   imagenSeleccionadaUrl: string = '';
   estadoDescripcion: { [key: number]: boolean } = {};
 
-  constructor(private imagenService: ImagenService, @Inject(PLATFORM_ID) private platformId: Object, private votoService: VotoService, private authService: AuthService) {
+  constructor(private imagenService: ImagenService, @Inject(PLATFORM_ID) private platformId: Object, private votoService: VotoService, private authService: AuthService, private ruta: Router) {
     // Para listar todas las imagenes de todos los usuarios
     this.imagenService.listarImagenesTotales().subscribe({
       next: (resultado: any) => {
@@ -59,32 +60,38 @@ export class GaleriaComponent {
   // Para votar una imagen
   votarImagen(imagenId: number) {
     let idUsuario = localStorage.getItem('idUsuario');
-    this.votoService.comprobarVotoUsuario(imagenId, idUsuario).subscribe({
-      next: (resultado) => {
-        if (resultado) {
-          alert("El usuario ya ha votado en esta imagen.");
-        } else {
-          this.votoService.votarImagen(imagenId, idUsuario).subscribe({
-            next: (resultadoVoto) => {
-              this.imagenService.seleccionarImagen(imagenId).subscribe({
-                next: (resultadoImg) => {
-                  let index = this.imagenes.findIndex(img => img.id === resultadoImg.id);
-                  if (index !== -1) {
-                    this.imagenes[index].votosImagen = resultadoImg.votosImagen;
+    if (!idUsuario) {
+      this.ruta.navigate(['/registro-simple']);
+    } else {
+      this.votoService.comprobarVotoUsuario(imagenId, idUsuario).subscribe({
+        next: (resultado) => {
+          if (resultado) {
+            alert("El usuario ya ha votado en esta imagen.");
+          } else {
+            this.votoService.votarImagen(imagenId, idUsuario).subscribe({
+              next: (resultadoVoto) => {
+                this.imagenService.seleccionarImagen(imagenId).subscribe({
+                  next: (resultadoImg) => {
+                    let index = this.imagenes.findIndex(img => img.id === resultadoImg.id);
+                    if (index !== -1) {
+                      this.imagenes[index].votosImagen = resultadoImg.votosImagen;
+                    }
+                  },
+                  error: (error) => {
+                    console.error("Error al obtener la imagen votada:", error);
                   }
-                },
-                error: (error) => {
-                  console.error("Error al obtener la imagen votada:", error);
-                }
-              });
-            },
-            error: (error) => {
-              console.error("Error al votar por la imagen:", error);
-            }
-          });
+                });
+              },
+              error: (error) => {
+                console.error("Error al votar por la imagen:", error);
+              }
+            });
+          }
         }
-      }
-    });
+      });
+    }
+
+
   }
 
   // Para ver más o menos de la descripción de la imagen

@@ -6,11 +6,12 @@ import { Router } from '@angular/router';
 import { ImagenService } from '../../servicios/imagen.service';
 import { Imagen } from '../../modelos/imagen';
 import { ImagenesListarComponent } from "../imagenes-listar/imagenes-listar.component";
+import { ImagenesValidarComponent } from "../imagenes-validar/imagenes-validar.component";
 
 
 @Component({
   selector: 'app-perfil',
-  imports: [CommonModule, ImagenesListarComponent],
+  imports: [CommonModule, ImagenesListarComponent, ImagenesValidarComponent],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'
 })
