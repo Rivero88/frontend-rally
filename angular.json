@@ -29,9 +29,9 @@
               "src/favicon.ico",
               "src/assets",
               {
-                "input": "src/static.json",
-                "output": "/static.json",
-                "glob": "static.json"
+                "glob": "static.json",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [
