@@ -8,8 +8,7 @@ import { environment } from '../../environments/environment.prod';
 })
 export class VotoService {
 
-  private apiUrl = 'http://localhost:8080/votos';
-  //private apiUrl = `${environment.API_URL}/votos`;
+  private apiUrl = `${environment.API_URL}/votos`;
 
   constructor(private http: HttpClient) { }
 

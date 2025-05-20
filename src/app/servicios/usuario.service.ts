@@ -8,8 +8,7 @@ import { environment } from '../../environments/environment.prod';
 })
 export class UsuarioService {
 
-  private apiUrl = 'http://localhost:8080/usuarios';
-  //private apiUrl = `${environment.API_URL}/usuarios`;
+  private apiUrl = `${environment.API_URL}/usuarios`;
 
   constructor(private http: HttpClient) { }
 

@@ -8,8 +8,7 @@ import { environment } from '../../environments/environment.prod';
 })
 export class CategoriaService {
 
-  private apiUrl = 'http://localhost:8080/categorias';
-  //private apiUrl = `${environment.API_URL}/categorias`;
+  private apiUrl = `${environment.API_URL}/categorias`;
 
   constructor(private http: HttpClient) { }
 

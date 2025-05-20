@@ -7,8 +7,8 @@ import { environment } from '../../environments/environment.prod';
   providedIn: 'root'
 })
 export class ParametroService {
-  private apiUrl = 'http://localhost:8080/parametros';
-  //private apiUrl = `${environment.API_URL}/parametros`;
+  
+  private apiUrl = `${environment.API_URL}/parametros`;
   
   constructor(private http: HttpClient) { }
 

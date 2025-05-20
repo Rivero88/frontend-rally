@@ -8,8 +8,7 @@ import { environment } from '../../environments/environment.prod';
 })
 export class ImagenService {
 
-  private apiUrl = 'http://localhost:8080/imagenes';
-  //private apiUrl = `${environment.API_URL}/imagenes`;
+  private apiUrl = `${environment.API_URL}/imagenes`;
 
   constructor(private http: HttpClient) { }
 
