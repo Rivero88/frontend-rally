@@ -27,12 +27,7 @@
                 "input": "public"
               },
               "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "static.json",
-                "input": "src",
-                "output": "/"
-              }
+              "src/assets"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css" 
