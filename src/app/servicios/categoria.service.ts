@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Categoria } from '../modelos/categoria';
 import { environment } from '../../environments/environment';
+import { Parametro } from '../modelos/parametro';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,18 @@ export class CategoriaService {
 
   // Para crear una nueva categoria
   nuevaCategoria(categoria: Categoria){
+    let parametro:Parametro = {
+      id: 0,
+      numMaxFotografias: 0,
+      tema: '',
+      fInicioInscripcion: new Date(),
+      fFinInscripcion: new Date(),
+      fInicioVotacion: new Date(),
+      fFinVotacion: new Date(),
+      fGanador: new Date(),
+      categorias: []
+    }
+    categoria.parametro = parametro;
     return this.http.post<Categoria>(`${this.apiUrl}/nuevaCategoria`, categoria);
   }
 
