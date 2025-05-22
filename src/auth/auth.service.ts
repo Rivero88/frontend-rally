@@ -21,9 +21,21 @@ export class AuthService {
     return  typeof window !== 'undefined' && !!localStorage.getItem('token');
   }
 
-  // Devuelve true si el rol es admin y false si es participante
+  // Devuelve true si el rol es admin y false si es participante/general
   isAdmin(): boolean {
     const rol = localStorage.getItem('rol');
     return  typeof window !== 'undefined' && rol === 'admin'; 
+  }
+
+  // Devuelve true si el rol es participante y false si es admin/general
+  isParticipante(): boolean {
+    const rol = localStorage.getItem('rol');
+    return  typeof window !== 'undefined' && rol === 'participante';
+  }
+
+  // Devuelve true si el rol es general y false si es admin/participante
+  isGeneral(): boolean {
+    const rol = localStorage.getItem('rol');
+    return  typeof window !== 'undefined' && rol === 'general';
   }
 }

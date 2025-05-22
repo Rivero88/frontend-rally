@@ -19,8 +19,6 @@ export class RegistroSimpleComponent {
 
   constructor(private fb: FormBuilder,private usuarioService: UsuarioService, private ruta: Router) {
     this.formUsuarioVoto = this.fb.group({
-      nombre: this.fb.control('', [Validators.required, Validators.minLength(3)]),
-      apellidos: this.fb.control('', [Validators.required, Validators.minLength(6)]),
       alias: this.fb.control('', [Validators.required, Validators.minLength(3)]),
       email: this.fb.control('', [Validators.required, Validators.email]),
       password: this.fb.control('', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).+$/)]),
@@ -37,7 +35,7 @@ export class RegistroSimpleComponent {
       this.formUsuarioVoto.markAllAsTouched();
       return;
     }
-    this.usuarioService.nuevoUsuario(this.formUsuarioVoto.value).subscribe({
+    this.usuarioService.nuevoUsuarioVoto(this.formUsuarioVoto.value).subscribe({
       next: (resultado: Usuario) => {
         this.mensajeError = null;
         this.registroCorrecto = true;

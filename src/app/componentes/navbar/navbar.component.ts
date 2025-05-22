@@ -24,6 +24,14 @@ export class NavbarComponent {
     return this.authService.isAdmin();
   }
 
+  isParticipante(): boolean {
+    return this.authService.isParticipante();
+  }
+
+  isGeneral(): boolean {
+    return this.authService.isGeneral();
+  }
+
   // Devuelve true si hay token
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();

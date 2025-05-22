@@ -90,8 +90,6 @@ export class GaleriaComponent {
         }
       });
     }
-
-
   }
 
   // Para ver más o menos de la descripción de la imagen
@@ -99,13 +97,11 @@ export class GaleriaComponent {
     this.estadoDescripcion[id] = !this.estadoDescripcion[id];
   }
 
-  // Para verificar si el rol es admin
-  isAdmin(): boolean {
-    return this.authService.isAdmin();
+  isParticipante(): boolean {
+    return this.authService.isParticipante();
   }
 
-  // Devuelve true si hay token
-  isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
+  isGeneral(): boolean {
+    return this.authService.isGeneral();
   }
 }

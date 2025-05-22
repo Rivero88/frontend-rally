@@ -40,4 +40,15 @@
             </div>
         </div>
     </section>
+
+    <section class="text-center">
+        <div class="text-center mt-4">
+            <div *ngIf="mensajeError !== null" class="alert alert-danger text-center">
+                {{ mensajeError }}
+            </div>
+            <div *ngIf="mensajeExito !== null" class="alert alert-success text-center">
+                {{ mensajeExito }}
+            </div>
+        </div>
+    </section>
 </div>

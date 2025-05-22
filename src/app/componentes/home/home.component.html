@@ -12,7 +12,7 @@
             <h2 class="text-center" style="color: #254D42;">Bases de Participación</h2>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Concurso abierto a aficionados y profesionales.</li>
-                <li class="list-group-item">Máximo <strong>{{ parametros.numMaxFotografias }}</strong> fotografías en total. Sólo se permite 1 fotografía por categoría.</li>
+                <li class="list-group-item">Máximo <strong>{{ parametros.numMaxFotografias }}</strong> fotografías por usuario registrado. Sólo se permite 1 fotografía por categoría.</li>
                 <li class="list-group-item">Temática: <strong>{{ parametros.tema }}</strong>.</li>
                 <li class="list-group-item">Las fotos deben ser originales. No se permiten ediciones ni creaciones de IA. </li>
             </ul>
@@ -56,56 +56,71 @@
         </div>
     </section>
 
-    <section class="mb-5 text-center">
-        <div class="container rounded" style="background-color: #F3F1ED;">
-            <h2 class="text-center" style="color: #254D42;">Premios</h2>
-            <div class="table-responsive">
-                <table class="table table-bordered text-center custom-table-bg">
-                    <tbody>
-                        <tr><th>Primer premio</th><td>200€</td></tr>
-                        <tr><th>Segundo premio</th><td>100€</td></tr>
-                        <tr><th>Tercer premio</th><td>50€</td></tr>
-                    </tbody>
-                </table>
+    @if(isAuthenticated() && !isGeneral()){
+        <section class="mb-5 text-center">
+            <div class="container rounded" style="background-color: #F3F1ED;">
+                <h2 class="text-center" style="color: #254D42;">Premios</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center custom-table-bg">
+                        <tbody>
+                            <tr><th>Primer premio</th><td>800€, lote de productos de fotografía valorado en 500€  y tarjeta regalo de Amazon (valorada en 120€)</td></tr>
+                            <tr><th>Segundo premio</th><td>500€, lote de productos de fotografía valorado en 200€ y tarjeta regalo de Amazon (valorada en 100€)</td></tr>
+                            <tr><th>Tercer premio</th><td>200€ , lote de productos de fotografía valorado en 50€ y tarjeta regalo de Amazon (valorada en 60€)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    }
     
-    <section class="mb-5 text-center">
-        <div class="container rounded" style="background-color: #F3F1ED;">
-            @if(isAuthenticated() && isAdmin()){ 
-                <h2 class="text-center" style="color: #254D42;">Validación de Fotografías</h2>
+    @if(isAuthenticated() && isAdmin()){
+        <section class="mb-5 text-center">
+            <div class="container rounded" style="background-color: #F3F1ED;">
+                <h2 class="text-center" style="color: #254D42;">Gestión de Fotografías</h2>
                 <button type="button" class="btn btn-custom btn-lg" routerLink="/imagen-validar">Validar fotografías</button>
                 <br>
-            }@else if(isAuthenticated()){
+                <br>
+            </div>
+        </section>
+    }@else if(isAuthenticated() && isParticipante()){
+        <section class="mb-5 text-center">
+            <div class="container rounded" style="background-color: #F3F1ED;">
                 <h2 class="text-center" style="color: #254D42;">Fotografías</h2>
                 <button type="button" class="btn btn-custom btn-lg" routerLink="/imagen-cargar">Cargar fotografías</button>
                 <br>
-            }@else {
+                <br>
+            </div>
+        </section> 
+    }@else if(!isAuthenticated()){
+        <section class="mb-5 text-center">
+            <div class="container rounded" style="background-color: #F3F1ED;">
                 <h2 class="text-center" style="color: #254D42;">Subida de Fotografías</h2>
                 <p>Para participar, debes registrarte en el siguiente enlace:</p>
-                <button type="button" class="btn btn-custom btn-lg" routerLink="/registro">Registro</button>
+                <button type="button" class="btn btn-custom btn-lg" routerLink="/registro">Registro participación</button>
                 <br>
                 <br>
                 <p>Podrás subir tu foto desde tu perfil.</p>
                 <button type="button" class="btn btn-custom btn-lg" routerLink="/login">Login</button>
                 <br>
-            }
-            <br>
-        </div>
-    </section>
+                <br>
+            </div>
+        </section>
+    }
 
-    <section class="mb-5 text-center">
-        <div class="container rounded" style="background-color: #F3F1ED;">
-            @if(!isAuthenticated()){ 
-            <h2 class="text-center" style="color: #254D42;">Votaciones</h2>
-            <p>Las fotos deberán ser aprobadas por nuestro administrador y después serán publicadas para ser votadas por el público.</p>
-            <button type="button" class="btn btn-custom btn-lg" routerLink="/galeria">Votar</button>
-            <br>
-            <br>
-            }
-        </div>
-    </section>
+    @if(!isAuthenticated()){ 
+        <section class="mb-5 text-center">
+            <div class="container rounded" style="background-color: #F3F1ED;">
+                <h2 class="text-center" style="color: #254D42;">Votaciones</h2>
+                <p>Para votar, debes registrarte en el siguiente enlace:</p>
+                <button type="button" class="btn btn-custom btn-lg" routerLink="/registro-simple">Registro para votación</button>
+                <br>
+                <br>
+                <p>Una vez registrado, podrás votar en la galería de fotos.</p>
+                <p>Las fotos previamente deberán ser aprobadas por nuestro administrador. Hasta ese momento no estarán disponibles.</p>
+                <br>
+            </div>
+        </section>
+    }
 
     @if(isAuthenticated() && isAdmin()){
         <section class="mb-5 text-center">

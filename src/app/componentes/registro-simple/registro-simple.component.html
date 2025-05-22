@@ -5,43 +5,6 @@
     <h1 class="fw-bold text-center mb-4" style="color: #254D42;">Registro para votar</h1>
     <div class="row g-3 mb-4">
         <div class="col-md-6">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" id="nombre" required formControlName="nombre" class="form-control"
-                placeholder="Introduce nombre" />
-            @if(formUsuarioVoto.controls["nombre"].invalid && (formUsuarioVoto.controls["nombre"].dirty || formUsuarioVoto.controls["nombre"].touched)){
-                @if(formUsuarioVoto.controls["nombre"].errors?.["required"]){
-                    <div class="text-danger">
-                        El nombre es obligatorio.
-                    </div>
-                }
-                @if(formUsuarioVoto.controls["nombre"].errors?.["minlength"]){
-                    <div class="text-danger">
-                        El nombre debe tener al menos 3 caracteres.
-                    </div>
-                }
-            }
-        </div>
-        <div class="col-md-6">
-            <label for="apellidos" class="form-label">Apellidos</label>
-            <input type="text" id="apellidos" required formControlName="apellidos" class="form-control"
-                placeholder="Introduce apellidos" />
-            @if(formUsuarioVoto.controls["apellidos"].invalid && (formUsuarioVoto.controls["apellidos"].dirty || formUsuarioVoto.controls["apellidos"].touched)){
-                @if(formUsuarioVoto.controls["apellidos"].errors?.["required"]){
-                    <div class="text-danger">
-                        Los apellidos son obligatorios.
-                    </div>
-                }
-                @if(formUsuarioVoto.controls["apellidos"].errors?.["minlength"]){
-                    <div class="text-danger">
-                        Los apellidos debe tener al menos 6 caracteres.
-                    </div>
-                }
-            }
-        </div>
-    </div>
-
-    <div class="row g-3 mb-4">
-        <div class="col-md-6">
             <label for="alias" class="form-label">Alias</label>
             <input type="text" id="alias" required formControlName="alias" class="form-control"
                 placeholder="Introduce alias" />

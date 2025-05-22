@@ -31,7 +31,9 @@
                               <strong>Votos:</strong> {{ img.votosImagen }}<br>
                             </p>
                             <button class="btn btn-custom btn-lg" type="button" (click)="verImagen(img.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
-                            <button class="btn btn-success btn-lg ms-2" (click)="votarImagen(img.id)" title="Votar"><i class="bi bi-star-fill"></i></button>
+                            @if(isGeneral() || isParticipante()){
+                              <button class="btn btn-success btn-lg ms-2" (click)="votarImagen(img.id)" title="Votar"><i class="bi bi-star-fill"></i></button>
+                            }
                         </div>
                       </div>
                     </div>

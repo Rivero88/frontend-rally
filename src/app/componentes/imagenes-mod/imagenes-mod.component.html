@@ -42,8 +42,17 @@
             </div>
         </div>
         <div class="text-center mt-4">
-            <button class="btn btn-custom btn-lg" type="submit" [disabled]="!formImagenMod.valid || !formImagenMod.touched || !formImagenMod.dirty">Modificar</button>
+            <button class="btn btn-custom btn-lg" type="submit" [disabled]="!formImagenMod.valid || !formImagenMod.dirty">Modificar</button>
             <button class="btn btn-custom btn-lg ms-3" type="button" (click)="cancelar()">Cancelar</button>
         </div>
+        <!-- Cuadro texto para mensaje satisfactorio o de error -->
+        <div class="text-center mt-4">
+            <div *ngIf="mensajeError" class="alert alert-danger text-center">
+                {{ mensajeError }}
+            </div>
+            <div *ngIf="imagenModificada " class="alert alert-success text-center">
+                Imagen editada correctamente.
+            </div>
+        </div>  
     </form>
 </div>

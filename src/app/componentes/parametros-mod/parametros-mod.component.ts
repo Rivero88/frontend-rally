@@ -18,6 +18,7 @@ export class ParametrosModComponent {
   public formParametrosMod: FormGroup;
   mensajeError: string | null = null;
   categoriaBorradaCorrectamente: boolean = false;
+  parametroModificado: boolean = false;
 
   constructor(private fb: FormBuilder, private parametroService: ParametroService, private categoriaService: CategoriaService, private ruta: Router) {
     this.formParametrosMod = this.fb.group({
@@ -34,7 +35,7 @@ export class ParametrosModComponent {
   }
 
   ngOnInit(){
-    // Petición al servicio parametro para obtener los datos del rally por el id
+    // Petición al servicio parametro para obtener los datos del rally
     this.parametroService.listarParametros().subscribe({
       next: (resultado: Parametro) => {
         this.formParametrosMod.patchValue({
@@ -47,7 +48,7 @@ export class ParametrosModComponent {
           fFinVotacion: formatoFecha(resultado.fFinVotacion),
           fGanador: formatoFecha(resultado.fGanador),
         });
-        // Carga las categorías al FormArray
+        // Carga las categorías a un FormArray
         let categoriasParaEditar = this.formParametrosMod.get('categorias') as FormArray;
         resultado.categorias.forEach(cat => {
           categoriasParaEditar.push(this.fb.group({
@@ -58,7 +59,7 @@ export class ParametrosModComponent {
         });
       },
       error: (error: any) => {
-        console.error('Error al cargar los parámetros del rally:', error);
+        this.mensajeError = 'Error al cargar los parámetros del rally.';
       },
     });
   }
@@ -71,36 +72,46 @@ export class ParametrosModComponent {
   editar(){
     this.parametroService.editarParametros(this.formParametrosMod.value).subscribe({
       next: () => {
-        this.ruta.navigate(['/']);
+        this.mensajeError = null;
+        this.parametroModificado = true;
+        setTimeout(() => {
+          this.ruta.navigate(['/']);
+        }, 1000); // Navega después de 1 segundo
       }
       , error: (error: any) => {
-        console.error('Error al editar los parámetros:', error);
+        if (error.error && error.error.message) {
+          this.mensajeError = error.error.message;
+        } else {
+          this.mensajeError = 'Error inesperado al modificar el parámetro.';
+        }
       }
     });
   }
 
   eliminarCategoria(categoriaId: number,  index: number){
     if (confirm("¿Estás seguro de que deseas eliminar esta categoría?")) {
-    this.categoriaService.eliminarCategoria(categoriaId).subscribe({
-      next: () => {
-        this.mensajeError = null;
-        this.categoriaBorradaCorrectamente = true;
-        // Elimina del FormArray también
-        this.categorias.removeAt(index);
-        console.log(`Categoría con id ${categoriaId} eliminada`);
-      },
-      error: error => {
-        if (error.error && error.error.message) {
-          this.mensajeError = error.error.message;
-        } else {
-          this.mensajeError = 'Error inesperado al eliminar la categoría.';
+      this.categoriaService.eliminarCategoria(categoriaId).subscribe({
+        next: () => {
+          this.mensajeError = null;
+          this.categoriaBorradaCorrectamente = true;
+          // Elimina del FormArray también
+          this.categorias.removeAt(index);
+          setTimeout(() => {
+            this.ruta.navigate(['/']);
+          }, 1000); // Navega después de 1 segundo
+        },
+        error: error => {
+          if (error.error && error.error.message) {
+            this.mensajeError = error.error.message;
+          } else {
+            this.mensajeError = 'Error inesperado al eliminar la categoría.';
+          }
         }
-      }
-    });
-  }
+      });
+    }
   }
 
-  // Metdodo para volver a home cuando le demos al boton cancelar
+  // Metodo para volver a home cuando le demos al boton cancelar
   cancelar(){
     this.ruta.navigate(['/']);
   }

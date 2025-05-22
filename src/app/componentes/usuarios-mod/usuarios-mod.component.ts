@@ -3,10 +3,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UsuarioService } from '../../servicios/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-usuarios-mod',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './usuarios-mod.component.html',
   styleUrl: './usuarios-mod.component.css'
 })
@@ -14,6 +16,8 @@ export class UsuariosModComponent {
 
   public formUsuarioMod: FormGroup;
   idUsuario: number = 0;
+  mensajeError: string | null = null;
+  usuarioEditadoCorrectamente: boolean = false;
 
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private authService: AuthService, private ruta: Router, private rutaActiva: ActivatedRoute) {
@@ -47,14 +51,33 @@ export class UsuariosModComponent {
   editar(){
     this.usuarioService.editarUsuario(this.formUsuarioMod.value).subscribe({
       next: (resultado: any) => {
-        console.log('Usuario editado:', resultado)
-          this.ruta.navigate(['/']);
+        this.mensajeError = null;
+        this.usuarioEditadoCorrectamente = true;
+        let idUsuarioLogueado = localStorage.getItem('idUsuario');
+        let idUsuarioEditado = this.formUsuarioMod.value.id
+        setTimeout(() => {
+          if(this.isAdmin()){
+            if (idUsuarioLogueado === idUsuarioEditado.toString()) {
+              // Admin editando su propio perfil
+              this.ruta.navigate(['/perfil']);
+            } else {
+              // Admin editando otro usuario
+              this.ruta.navigate(['/listar-usuarios']);
+            }
+          } else {
+            // Usuario participante editando su propio perfil
+            this.ruta.navigate(['/perfil']);
+          }
+        }, 1000); // Navega después de 1 segundo
       },
       error: (error: any) => {
-        console.error('Error al editar el usuario:', error);
+        if (error.error && error.error.message) {
+          this.mensajeError = error.error.message;
+        } else {
+          this.mensajeError = 'Error inesperado al modificar el usuario.';
+        }
       }
     });
-
   }
 
   // Para volver a la lista de usuarios si se le da al boton cancelar

@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 export class UsuariosListarComponent {
 
   usuarios: Usuario[] = [];
+  mensajeError: string | null = null;
+  mensajeExito: string | null = null;
 
   constructor(private usuarioService: UsuarioService, private ruta: Router) {  }
 
@@ -21,8 +23,8 @@ export class UsuariosListarComponent {
       next: (resultado: any) => {
         this.usuarios = resultado;
       },
-      error: (error: any) => {
-        console.error('Error al obtener los usuarios:', error);
+      error: (error) => {
+        this.mensajeError = "Error al cargar los usuarios";
       },
     });
   }
@@ -38,9 +40,16 @@ export class UsuariosListarComponent {
       this.usuarioService.eliminarUsuario(idUsuario).subscribe({
         next: () => {
           this.usuarios = this.usuarios.filter(usuario => usuario.id !== idUsuario);
+          this.mensajeExito = "Usuario eliminado correctamente";
+          setTimeout(() => {
+            this.ruta.navigate(['/']);
+          }, 1000); // Navega después de 1 segundo
         },
-        error: (error: any) => {
-          console.error('Error al eliminar el usuario:', error);
+        error: (error) => {
+          this.mensajeError = "Error al eliminar el usuario";
+          setTimeout(() => {
+            this.ruta.navigate(['/']);
+          }, 1000); // Navega después de 1 segundo
         },
       })
     }

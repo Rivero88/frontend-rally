@@ -107,8 +107,8 @@ export class ImagenesSubirComponent {
           this.mensajeError = null;
           this.cargaCorrecta = true;
           setTimeout(() => {
-            this.ruta.navigate(['/']);
-          }, 1000); // Navega después de 3 segundos
+            this.ruta.navigate(['/perfil']);
+          }, 1000); // Navega después de 1 segundos
         },
         error: (error: any) => {
           if (error.error && error.error.message) {

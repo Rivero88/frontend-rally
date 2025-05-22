@@ -9,26 +9,37 @@
             <button type="button" class="btn btn-custom" (click)="logout()">Logout</button>
         }
     </div>
-    <div class="container-fluid d-flex justify-content-center gap-3">
-        @if(isAuthenticated() && isAdmin()){
+
+    @if(isAuthenticated() && isAdmin()){
+        <div class="container-fluid d-flex justify-content-center gap-3">
             <button type="button" class="btn btn-custom" routerLink="/">Ver parámetros</button>
             <button type="button" class="btn btn-custom" routerLink="/parametros-mod">Modificar parámetros</button>
             <button type="button" class="btn btn-custom" routerLink="/listar-usuarios">Gestión usuarios</button>
             <button type="button" class="btn btn-custom" routerLink="/perfil">Perfil</button>
-            <button type="button" class="btn btn-custom" routerLink="/imagen-validar">Gestión fotografías</button>
             <button type="button" class="btn btn-custom" routerLink="/galeria">Galeria</button>
             <button type="button" class="btn btn-custom" routerLink="/ranking">Estadísticas y resultados</button>
-        }@else if(isAuthenticated()){
+        </div>
+    }@else if(isAuthenticated() && isParticipante()){
+        <div class="container-fluid d-flex justify-content-center gap-3">
             <button type="button" class="btn btn-custom" routerLink="/">Inicio</button>
             <button type="button" class="btn btn-custom" routerLink="/perfil">Perfil</button>
             <button type="button" class="btn btn-custom" routerLink="/imagen-cargar">Cargar fotografías</button>
             <button type="button" class="btn btn-custom" routerLink="/galeria">Galería</button>
             <button type="button" class="btn btn-custom" routerLink="/ranking">Rankings</button>
-        }@else {
+        </div>
+    }@else if(isAuthenticated() && isGeneral()){
+        <div class="container-fluid d-flex justify-content-center gap-3">
             <button type="button" class="btn btn-custom" routerLink="/">Inicio</button>
-            <button type="button" class="btn btn-custom" routerLink="/registro">Registro participantes</button>
             <button type="button" class="btn btn-custom" routerLink="/galeria">Galería fotos</button>
             <button type="button" class="btn btn-custom" routerLink="/ranking">Rankings</button>
-        }
-    </div>
+        </div>
+    }@else if(!isAuthenticated() ){
+        <div class="container-fluid d-flex justify-content-center gap-3">
+            <button type="button" class="btn btn-custom" routerLink="/">Inicio</button>
+            <button type="button" class="btn btn-custom" routerLink="/registro">Registro participantes</button>
+            <button type="button" class="btn btn-custom" routerLink="/registro-simple">Registro para votaciones</button>
+            <button type="button" class="btn btn-custom" routerLink="/galeria">Galería fotos</button>
+            <button type="button" class="btn btn-custom" routerLink="/ranking">Rankings</button>
+        </div>
+    }
 </nav>

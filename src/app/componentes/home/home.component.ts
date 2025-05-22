@@ -31,11 +31,19 @@ export class HomeComponent {
 
   ngOnInit() { 
     this.obtenerParametros();
-   }
+  }
 
-  // Para verificar si el rol es admin
+    // Para verificar si el rol es admin
   isAdmin(): boolean {
     return this.authService.isAdmin();
+  }
+
+  isParticipante(): boolean {
+    return this.authService.isParticipante();
+  }
+
+  isGeneral(): boolean {
+    return this.authService.isGeneral();
   }
 
   // Devuelve true si hay token

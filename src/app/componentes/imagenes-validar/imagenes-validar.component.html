@@ -36,13 +36,13 @@
                 <tbody>
                     <tr *ngFor="let imagen of imagenes">
                         <td>
-                            <button type="button" class="btn btn-custom btn-xs" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
+                            <button type="button" class="btn btn-custom btn-xs" (click)="verImagen(imagen.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
                         </td>
                         <td>{{ imagen.usuario.nombre }} {{ imagen.usuario.apellidos }}</td>
                         <td>{{ imagen.categoria.nombre }}</td>
                         <td>{{ imagen.nombre }}</td>
                         <td>{{ imagen.descripcion }}</td>
-                        <td>{{ imagen.tamanno }}</td>
+                        <td>{{ imagen.tamanno / 1024 / 1024 | number:'1.2-2' }} MB</td>
                         <td>{{ imagen.formato }}</td>
                         <td>{{ imagen.fechaSubida | date:'dd/MM/yyyy' }}</td>
                         <td>{{ imagen.estadoValidacion }}</td>
@@ -56,4 +56,20 @@
             <br>
         </div>
     </section>
+</div>
+
+<!-- Modal para ver la imagen en grande al dar al boton Ver fotografía-->
+<div class="modal fade" id="verImagenModal" tabindex="-1" aria-labelledby="verImagenModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="verImagenModalLabel">Visualización Imagen</h5>
+        <!-- Botón de cierre -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <img [src]="imagenSeleccionadaUrl" class="img-fluid" alt="Imagen" />
+      </div>
+    </div>
+  </div>
 </div>

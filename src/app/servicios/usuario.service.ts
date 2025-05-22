@@ -40,9 +40,14 @@ export class UsuarioService {
     return this.http.put(`${this.apiUrl}/modificarContrasenna`, null, { params });
   }
 
-  // Crea un nuevo usuario
+  // Crea un nuevo usuario participante
   nuevoUsuario(usuario: Usuario) {
     return this.http.post<Usuario>(`${this.apiUrl}/registrar`, usuario);
+  }
+
+  // Crea un nuevo usuario votante
+  nuevoUsuarioVoto(usuario: Usuario) {
+    return this.http.post<Usuario>(`${this.apiUrl}/registrarVoto`, usuario);
   }
 
 }

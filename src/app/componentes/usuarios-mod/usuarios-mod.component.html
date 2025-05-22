@@ -13,6 +13,7 @@
                     <select id="rol" formControlName="rol" class="form-select">
                         <option value="admin">Administrador</option>
                         <option value="participante">Participante</option>
+                        <option value="general">General</option>
                     </select>
                 </div>
             </div>
@@ -142,8 +143,18 @@
         </div>
 
         <div class="text-center mt-4">
-            <button class="btn btn-custom btn-lg" type="submit" [disabled]="!formUsuarioMod.valid || !formUsuarioMod.touched || !formUsuarioMod.dirty">Modificar</button>
+            <button class="btn btn-custom btn-lg" type="submit" [disabled]="!formUsuarioMod.valid || !formUsuarioMod.dirty">Modificar</button>
             <button class="btn btn-custom btn-lg ms-3" type="button" (click)="cancelar()">Cancelar</button>
         </div>
+
+        <!-- Cuadro texto para mensaje satisfactorio o de error -->
+        <div class="text-center mt-4">
+            <div *ngIf="mensajeError" class="alert alert-danger text-center">
+                {{ mensajeError }}
+            </div>
+            <div *ngIf="usuarioEditadoCorrectamente " class="alert alert-success text-center">
+                Usuario editado correctamente.
+            </div>
+        </div>  
     </form>
 </div>
