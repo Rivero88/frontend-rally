@@ -16,7 +16,7 @@
                         <div class="card-body" style="text-align: center;">
                             <h5 class="card-title">{{ img.nombre }}</h5>
                             <p class="card-text">
-                            <strong>Autor:</strong> {{ img.usuario.nombre }}  {{ img.usuario.apellidos }}<br>
+                            <strong>Autor:</strong> {{ img.usuario.nombre }}<br>
                             <strong>Categoría:</strong> {{ img.categoria.nombre }}<br>
                             <strong>Descripción:</strong>
                             <span *ngIf="!estadoDescripcion[img.id]">

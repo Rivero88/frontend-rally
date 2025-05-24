@@ -5,10 +5,11 @@ import { AuthService } from '../../../auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth } from '../../modelos/auth';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule,RouterLink, ReactiveFormsModule],
+  imports: [FormsModule,RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -17,6 +18,9 @@ export class LoginComponent {
   username = '';
   password = '';
   public form: FormGroup;
+  mensajeError: string | null = null;
+  loginCorrecto: string | null = null;
+
 
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     this.form = new FormBuilder().group({
@@ -36,10 +40,18 @@ export class LoginComponent {
         localStorage.setItem('token', token); // Se guarda el token en el localStorage
         localStorage.setItem('rol', rol); // Se guarda el rol en el localStorage
         localStorage.setItem('idUsuario', id.toString()); // Se guarda el idUsuario en el localStorage
-        this.router.navigate(['/']);
+        this.mensajeError = null;
+        this.loginCorrecto = "Inicio de sesión exitoso.";
+         setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 1000);
       },
       error: (error) => {
-        alert('Credenciales incorrectas.');
+        if (error.error && error.error.message) {
+          this.mensajeError = error.error.message;
+        } else {
+          this.mensajeError = 'Error inesperado al iniciar sesión.';
+        }
       }
     });
   }

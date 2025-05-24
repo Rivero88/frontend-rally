@@ -70,7 +70,7 @@
             <div class="col-md-6">
                 <label for="alias" class="form-label">Alias</label>
                 <input type="text" id="alias" required formControlName="alias" class="form-control"
-                    placeholder="Introduce alias" />
+                    placeholder="Introduce alias" [readOnly]="isParticipante()"/>
                 @if(formUsuarioMod.controls["alias"].invalid && (formUsuarioMod.controls["alias"].dirty || formUsuarioMod.controls["alias"].touched)){
                     @if(formUsuarioMod.controls["alias"].errors?.["required"]){
                         <div class="text-danger">

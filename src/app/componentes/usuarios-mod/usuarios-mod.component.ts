@@ -89,5 +89,11 @@ export class UsuariosModComponent {
   isAdmin(): boolean {
     return this.authService.isAdmin();
   }
+
+  // Para verificar si el rol es participante
+  isParticipante(): boolean {
+    return this.authService.isParticipante();
+  }
+
   
 }

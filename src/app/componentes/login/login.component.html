@@ -32,6 +32,17 @@
         <button type="submit" class="btn btn-custom btn-lg">Iniciar sesión</button>
         <button type="button" routerLink="/" class="btn btn-custom btn-lg ms-3">Volver</button>
     </div>
+
+    <section class="text-center">
+        <div class="text-center mt-4">
+            <div *ngIf="mensajeError !== null" class="alert alert-danger text-center">
+                {{ mensajeError }}
+            </div>
+            <div *ngIf="loginCorrecto !== null" class="alert alert-success text-center">
+                {{ loginCorrecto }}
+            </div>
+        </div>
+    </section>
 </form>
 
 

@@ -18,41 +18,43 @@
         <div class="container" style="background-color: #F3F1ED; max-width: 1800px;"> 
             <h1 class="fw-bold" style="color: #254D42; text-align: center;">Imágenes</h1> 
             <br>
-            <table class="table table-bordered text-center custom-table-bg align-middle">
-                <thead>
-                    <tr>
-                        <th style="white-space: nowrap;">FOTOGRAFÍA</th>
-                        <th style="white-space: nowrap;">USUARIO</th>
-                        <th style="white-space: nowrap;">CATEGORÍA</th>
-                        <th style="white-space: nowrap;">NOMBRE</th>
-                        <th style="width: 20%;">DESCRIPCIÓN</th>
-                        <th style="white-space: nowrap">TAMAÑO</th>
-                        <th style="white-space: nowrap">FORMATO</th>
-                        <th style="white-space: nowrap;">FECHA CARGA</th>
-                        <th style="white-space: nowrap;">ESTADO</th>
-                        <th style="white-space: nowrap;">ACCIONES</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let imagen of imagenes">
-                        <td>
-                            <button type="button" class="btn btn-custom btn-xs" (click)="verImagen(imagen.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
-                        </td>
-                        <td>{{ imagen.usuario.nombre }} {{ imagen.usuario.apellidos }}</td>
-                        <td>{{ imagen.categoria.nombre }}</td>
-                        <td>{{ imagen.nombre }}</td>
-                        <td>{{ imagen.descripcion }}</td>
-                        <td>{{ imagen.tamanno / 1024 / 1024 | number:'1.2-2' }} MB</td>
-                        <td>{{ imagen.formato }}</td>
-                        <td>{{ imagen.fechaSubida | date:'dd/MM/yyyy' }}</td>
-                        <td>{{ imagen.estadoValidacion }}</td>
-                        <td>
-                            <button type="button" class="btn btn-custom btn-xs ms-2" (click)="validarImagen(imagen.id)" [disabled]="imagen.estadoValidacion === 'Validada'" title="Validar"><i class="bi bi-check-lg"></i></button>
-                            <button type="button" class="btn btn-custom btn-xs ms-2" (click)="rechazarImagen(imagen.id)" [disabled]="imagen.estadoValidacion === 'Rechazada'" title="Rechazar"><i class="bi bi-x-lg"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered text-center custom-table-bg align-middle">
+                    <thead>
+                        <tr>
+                            <th style="white-space: nowrap;">FOTOGRAFÍA</th>
+                            <th style="white-space: nowrap;">USUARIO</th>
+                            <th style="white-space: nowrap;">CATEGORÍA</th>
+                            <th style="white-space: nowrap;">NOMBRE</th>
+                            <th style="width: 20%;">DESCRIPCIÓN</th>
+                            <th style="white-space: nowrap">TAMAÑO</th>
+                            <th style="white-space: nowrap">FORMATO</th>
+                            <th style="white-space: nowrap;">FECHA CARGA</th>
+                            <th style="white-space: nowrap;">ESTADO</th>
+                            <th style="white-space: nowrap;">ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let imagen of imagenes">
+                            <td>
+                                <button type="button" class="btn btn-custom btn-xs" (click)="verImagen(imagen.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
+                            </td>
+                            <td>{{ imagen.usuario.nombre }} {{ imagen.usuario.apellidos }}</td>
+                            <td>{{ imagen.categoria.nombre }}</td>
+                            <td>{{ imagen.nombre }}</td>
+                            <td>{{ imagen.descripcion }}</td>
+                            <td>{{ imagen.tamanno / 1024 / 1024 | number:'1.2-2' }} MB</td>
+                            <td>{{ imagen.formato }}</td>
+                            <td>{{ imagen.fechaSubida | date:'dd/MM/yyyy' }}</td>
+                            <td>{{ imagen.estadoValidacion }}</td>
+                            <td>
+                                <button type="button" class="btn btn-custom btn-xs ms-2" (click)="validarImagen(imagen.id)" [disabled]="imagen.estadoValidacion === 'Validada'" title="Validar"><i class="bi bi-check-lg"></i></button>
+                                <button type="button" class="btn btn-custom btn-xs ms-2" (click)="rechazarImagen(imagen.id)" [disabled]="imagen.estadoValidacion === 'Rechazada'" title="Rechazar"><i class="bi bi-x-lg"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <br>
         </div>
     </section>

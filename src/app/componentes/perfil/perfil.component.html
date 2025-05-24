@@ -6,38 +6,40 @@
                     <h1 class="fw-bold mb-4" style="color: #254D42;">Perfil</h1>
                     <h2 style="color: #D47F62;">{{ usuario.nombre }} {{ usuario.apellidos }}</h2>
                     <div class="d-flex justify-content-center">
-                        <table class="table table-bordered text-center custom-table-bg" style="max-width: 1600px;">
-                            <thead>
-                                <tr>
-                                    <th>ALIAS</th>
-                                    <th>NOMBRE</th>
-                                    <th>APELLIDOS</th>
-                                    <th>FECHA NACIMIENTO</th>
-                                    <th>NUMERO TELEFONO</th>
-                                    <th>EMAIL</th>
-                                    <th>ROL</th>
-                                    <th>MODIFICAR PERFIL</th>
-                                    <th>MODIFICAR CONTRASEÑA</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{ usuario.alias }}</td>
-                                    <td>{{ usuario.nombre }}</td>
-                                    <td>{{ usuario.apellidos }}</td>
-                                    <td>{{ usuario.fNacimiento | date:'dd/MM/yyyy'}}</td>
-                                    <td>{{ usuario.numTelefono }}</td>
-                                    <td>{{ usuario.email }}</td>
-                                    <td>{{ usuario.rol }}</td>
-                                    <td>
-                                        <button class="btn btn-custom btn-lg" type="button" (click)="editarUsuario(usuario.id)" title="Editar"><i class="bi bi-pencil-fill"></i></button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-custom btn-lg" type="button" (click)="editarContrasenna(usuario.id)" title="Editar Contraseña"><i class="bi bi-shield-lock-fill"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive"> 
+                            <table class="table table-bordered text-center custom-table-bg" style="max-width: 1600px;">
+                                <thead>
+                                    <tr>
+                                        <th>ALIAS</th>
+                                        <th>NOMBRE</th>
+                                        <th>APELLIDOS</th>
+                                        <th>FECHA NACIMIENTO</th>
+                                        <th>NUMERO TELEFONO</th>
+                                        <th>EMAIL</th>
+                                        <th>ROL</th>
+                                        <th>MODIFICAR PERFIL</th>
+                                        <th>MODIFICAR CONTRASEÑA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ usuario.alias }}</td>
+                                        <td>{{ usuario.nombre }}</td>
+                                        <td>{{ usuario.apellidos }}</td>
+                                        <td>{{ usuario.fNacimiento | date:'dd/MM/yyyy'}}</td>
+                                        <td>{{ usuario.numTelefono }}</td>
+                                        <td>{{ usuario.email }}</td>
+                                        <td>{{ usuario.rol }}</td>
+                                        <td>
+                                            <button class="btn btn-custom btn-lg" type="button" (click)="editarUsuario(usuario.id)" title="Editar"><i class="bi bi-pencil-fill"></i></button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-custom btn-lg" type="button" (click)="editarContrasenna(usuario.id)" title="Editar Contraseña"><i class="bi bi-shield-lock-fill"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>              
                     </div>
                 </div>
         </section>
@@ -48,11 +50,13 @@
                 <div *ngIf="usuario.rol === 'participante'">
                     <h1 class="fw-bold" style="color: #254D42;">Imágenes</h1>
                     <div *ngIf="imagenesUsuario && imagenesUsuario.length > 0" class="d-flex justify-content-center">
-                        <table>
-                          <tr>
-                            <app-imagenes-listar [idUsuario]="usuario.id"></app-imagenes-listar>
-                          </tr>
-                        </table>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <app-imagenes-listar [idUsuario]="usuario.id"></app-imagenes-listar>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div> 
             </div>
