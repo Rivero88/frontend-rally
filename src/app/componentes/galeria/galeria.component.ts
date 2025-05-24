@@ -18,6 +18,8 @@ export class GaleriaComponent {
   imagenes: Imagen[] = [];
   imagenSeleccionadaUrl: string = '';
   estadoDescripcion: { [key: number]: boolean } = {};
+  mensajeVoto: string | null = null;
+  tipoMensaje: 'success' | 'danger' | 'info' = 'info';
 
   constructor(private imagenService: ImagenService, @Inject(PLATFORM_ID) private platformId: Object, private votoService: VotoService, private authService: AuthService, private ruta: Router) {
     // Para listar todas las imagenes de todos los usuarios
@@ -66,10 +68,19 @@ export class GaleriaComponent {
       this.votoService.comprobarVotoUsuario(imagenId, idUsuario).subscribe({
         next: (resultado) => {
           if (resultado) {
-            alert("El usuario ya ha votado en esta imagen.");
+            this.tipoMensaje = 'danger';
+            this.mensajeVoto = "Ya has votado esta imagen.";
+            setTimeout(() => {
+              this.mensajeVoto = null;
+            }, 3000);
           } else {
             this.votoService.votarImagen(imagenId, idUsuario).subscribe({
               next: (resultadoVoto) => {
+                this.tipoMensaje = 'success';
+                this.mensajeVoto = "Tu voto ha sido registrado.";
+                setTimeout(() => {
+                  this.mensajeVoto = null;
+                }, 3000);
                 this.imagenService.seleccionarImagen(imagenId).subscribe({
                   next: (resultadoImg) => {
                     let index = this.imagenes.findIndex(img => img.id === resultadoImg.id);

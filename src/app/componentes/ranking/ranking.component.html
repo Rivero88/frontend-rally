@@ -7,7 +7,6 @@
                 <tr>
                     <th>Posición</th>
                     <th>Nombre</th>
-                    <th>Autor</th>
                     <th>Categoría</th>
                     <th>Votos</th>
                 </tr>
@@ -16,7 +15,6 @@
                 <tr *ngFor="let img of rankingImagenes; let i = index">
                     <td>{{ i + 1 }}</td>
                     <td>{{ img.nombre }}</td>
-                    <td>{{ img.autor }}</td>
                     <td>{{ img.categoria }}</td>
                     <td>{{ img.votos }}</td>
                 </tr>

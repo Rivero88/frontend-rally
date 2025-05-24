@@ -41,7 +41,7 @@ export class RegistroSimpleComponent {
         this.registroCorrecto = true;
         setTimeout(() => {
           this.ruta.navigate(['/']);
-        }, 1000); // Navega después de 1 segundo
+        }, 1000);
       },
       error: (error: any) => {
         if (error.error && error.error.message) {

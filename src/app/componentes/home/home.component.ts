@@ -14,6 +14,7 @@ import { ParametroService } from '../../servicios/parametro.service';
 export class HomeComponent {
 
   parametros!: Parametro;
+  mensajeError: string | null = null;
 
   constructor(private authService: AuthService, private ruta: Router, private parametroService: ParametroService) { 
     this.parametros ={
@@ -57,8 +58,8 @@ export class HomeComponent {
       next: (parametro: any) => {
         this.parametros = parametro;
       },
-      error: (error: any) => {
-        console.error('Error al cargar los parámetros del rally:', error);
+      error: () => {
+        this.mensajeError = 'Error al cargar los parámetros del rally.';
       },
     });
   }

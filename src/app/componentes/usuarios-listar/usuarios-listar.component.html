@@ -1,3 +1,4 @@
+<!-- Tabla de usuarios -->
 <div class="container-fluid py-5">
     <section class="text-center">
         <div class="container" style="background-color: #F3F1ED; max-width: 1400px;">
@@ -29,7 +30,7 @@
                                 <td>{{ usuario.email }}</td>
                                 <td>{{ usuario.rol }}</td>
                                 <td>
-                                    <button class="btn btn-custom btn-lg" type="button" (click)="editarUsuario(usuario.id)" title="Editar"><i class="bi bi-pencil-fill"></i></button>
+                                    <button class="btn btn-custom btn-lg" type="button" (click)="editarUsuario(usuario.id)" [disabled]="usuario.rol == 'general'" title="Editar"><i class="bi bi-pencil-fill"></i></button>
                                     <button class="btn btn-custom btn-lg ms-3" type="button" (click)="eliminarUsuario(usuario.id)" title="Eliminar"><i class="bi bi-trash-fill"></i></button>
                                     <button class="btn btn-custom btn-lg ms-3" type="button" (click)="editarContrasenna(usuario.id)" title="Editar Contraseña"><i class="bi bi-shield-lock-fill"></i></button>
                                 </td>
@@ -41,8 +42,9 @@
         </div>
     </section>
 
+    <!-- Para mensajes de éxito y error -->
     <section class="text-center">
-        <div class="text-center mt-4">
+        <div class="container mt-4" style="max-width: 1400px;">
             <div *ngIf="mensajeError !== null" class="alert alert-danger text-center">
                 {{ mensajeError }}
             </div>
@@ -51,4 +53,23 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal Confirmar Eliminar Usuario -->
+    <div class="modal fade" id="modalEliminarUsuario" tabindex="-1" aria-labelledby="modalEliminarUsuarioLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header text-white">
+                <h5 class="modal-title" id="modalEliminarUsuarioLabel">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro de que desea eliminar el usuario con ID <strong>{{ usuarioIdAEliminar }}</strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-custom btn-lg" (click)="confirmarEliminarUsuario()">Eliminar</button>
+                <button type="button" class="btn btn-custom btn-lg ms-3" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+            </div>
+        </div>
+    </div>
 </div>

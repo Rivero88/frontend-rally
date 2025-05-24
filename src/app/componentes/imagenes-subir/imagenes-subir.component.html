@@ -27,7 +27,7 @@
         <!-- INPUT de Imágenes -->
         <div class="mb-3">
           <label for="imagenes" class="form-label">Selecciona fotografía</label>
-          <input type="file" id="imagenes" multiple (change)="seleccionarImagen($event)" accept="image/*" class="form-control" [disabled]="todasCategoriasOcupadas">
+          <input type="file" id="imagenes" #fileInput (change)="seleccionarImagen($event)" accept="image/*" class="form-control" [disabled]="todasCategoriasOcupadas">
         </div>
         <div class="mb-3" *ngIf="imagenesSeleccionadas.length > 0">
             <label for="nombre" class="form-label">Nombre de la fotografía</label>
@@ -69,6 +69,7 @@
             <button type="submit" class="btn btn-custom btn-lg" [disabled]="!formImagen.valid || todasCategoriasOcupadas">Guardar</button>
             <button type="button" routerLink="/" class="btn btn-custom btn-lg ms-3">Volver</button>
         </div>
+        <!-- Para mensajes de éxito y error -->
         <div class="text-center mt-4">
             <div *ngIf="mensajeError" class="alert alert-danger text-center">
                 {{ mensajeError }}

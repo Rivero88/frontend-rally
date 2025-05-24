@@ -111,7 +111,7 @@
         <section class="mb-5 text-center">
             <div class="container rounded" style="background-color: #F3F1ED;">
                 <h2 class="text-center" style="color: #254D42;">Votaciones</h2>
-                <p>Para votar, debes registrarte en el siguiente enlace:</p>
+                <p>Podrán votar tanto usuarios registrados como participantes como público general que se registre en el siguiente enlace:</p>
                 <button type="button" class="btn btn-custom btn-lg" routerLink="/registro-simple">Registro para votación</button>
                 <br>
                 <br>
@@ -132,4 +132,13 @@
             </div>
         </section>
     }
+
+    <!-- Para mensajes de éxito y error -->
+    <section class="text-center">
+        <div class="container mt-4" style="max-width: 1400px;">
+            <div *ngIf="mensajeError !== null" class="alert alert-danger text-center">
+                {{ mensajeError }}
+            </div>
+        </div>
+    </section>
 </div>

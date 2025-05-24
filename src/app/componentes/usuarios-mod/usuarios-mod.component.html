@@ -70,7 +70,7 @@
             <div class="col-md-6">
                 <label for="alias" class="form-label">Alias</label>
                 <input type="text" id="alias" required formControlName="alias" class="form-control"
-                    placeholder="Introduce alias" [readOnly]="isParticipante()"/>
+                    placeholder="Introduce alias" readonly/>
                 @if(formUsuarioMod.controls["alias"].invalid && (formUsuarioMod.controls["alias"].dirty || formUsuarioMod.controls["alias"].touched)){
                     @if(formUsuarioMod.controls["alias"].errors?.["required"]){
                         <div class="text-danger">
@@ -147,7 +147,7 @@
             <button class="btn btn-custom btn-lg ms-3" type="button" (click)="cancelar()">Cancelar</button>
         </div>
 
-        <!-- Cuadro texto para mensaje satisfactorio o de error -->
+        <!-- Para mensajes de éxito y error -->
         <div class="text-center mt-4">
             <div *ngIf="mensajeError" class="alert alert-danger text-center">
                 {{ mensajeError }}

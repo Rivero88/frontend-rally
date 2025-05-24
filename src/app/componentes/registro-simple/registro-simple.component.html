@@ -1,81 +1,82 @@
-<!-- Formaulario Registro usuarios votantes -->
-<br />
-<br />
-<form [formGroup]="formUsuarioVoto" class="container p-4 rounded shadow-sm" style="background-color: #F3F1ED;" (ngSubmit)="nuevoUsuario()">
-    <h1 class="fw-bold text-center mb-4" style="color: #254D42;">Registro para votar</h1>
-    <div class="row g-3 mb-4">
-        <div class="col-md-6">
-            <label for="alias" class="form-label">Alias</label>
-            <input type="text" id="alias" required formControlName="alias" class="form-control"
-                placeholder="Introduce alias" />
-            @if(formUsuarioVoto.controls["alias"].invalid && (formUsuarioVoto.controls["alias"].dirty || formUsuarioVoto.controls["alias"].touched)){
-                @if(formUsuarioVoto.controls["alias"].errors?.["required"]){
-                    <div class="text-danger">
-                        El alias es obligatorio.
-                    </div>
+<!-- Formulario Registro usuarios nuevos con rol general -->
+<div class="container-fluid py-5">
+    <form [formGroup]="formUsuarioVoto" class="container p-4 rounded shadow-sm" style="background-color: #F3F1ED;" (ngSubmit)="nuevoUsuario()">
+        <h1 class="fw-bold text-center mb-4" style="color: #254D42;">Registro para votar</h1>
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label for="alias" class="form-label">Alias</label>
+                <input type="text" id="alias" required formControlName="alias" class="form-control"
+                    placeholder="Introduce alias" />
+                @if(formUsuarioVoto.controls["alias"].invalid && (formUsuarioVoto.controls["alias"].dirty || formUsuarioVoto.controls["alias"].touched)){
+                    @if(formUsuarioVoto.controls["alias"].errors?.["required"]){
+                        <div class="text-danger">
+                            El alias es obligatorio.
+                        </div>
+                    }
+                    @if(formUsuarioVoto.controls["alias"].errors?.["minlength"]){
+                        <div class="text-danger">
+                            El alias debe tener al menos 2 caracteres.
+                        </div>
+                    }
                 }
-                @if(formUsuarioVoto.controls["alias"].errors?.["minlength"]){
-                    <div class="text-danger">
-                        El alias debe tener al menos 2 caracteres.
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" required formControlName="email" class="form-control" placeholder="Introduce email" />
+                @if(formUsuarioVoto.controls["email"].invalid && (formUsuarioVoto.controls["email"].dirty || formUsuarioVoto.controls["email"].touched)){
+                    @if(formUsuarioVoto.controls["email"].errors?.["required"]){
+                        <div class="text-danger">
+                            El email es obligatorio.
+                        </div>
+                    }
+                    @if(formUsuarioVoto.controls["email"].errors?.["email"]){
+                        <div class="text-danger">
+                            Formato de email incorrecto.
+                        </div>
+                    }
                 }
-            }
+            </div>
         </div>
-        <div class="col-md-6">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" required formControlName="email" class="form-control" placeholder="Introduce email" />
-            @if(formUsuarioVoto.controls["email"].invalid && (formUsuarioVoto.controls["email"].dirty || formUsuarioVoto.controls["email"].touched)){
-                @if(formUsuarioVoto.controls["email"].errors?.["required"]){
-                    <div class="text-danger">
-                        El email es obligatorio.
-                    </div>
-                }
-                @if(formUsuarioVoto.controls["email"].errors?.["email"]){
-                    <div class="text-danger">
-                        Formato de email incorrecto.
-                    </div>
-                }
-            }
-        </div>
-    </div>
 
-    <div class="row g-3 mb-4">
-        <div class="col-md-6">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" id="password" required formControlName="password" class="form-control" placeholder="Introduce contraseña" />
-            @if(formUsuarioVoto.controls["password"].invalid && (formUsuarioVoto.controls["password"].dirty || formUsuarioVoto.controls["password"].touched)){
-                @if(formUsuarioVoto.controls["password"].errors?.["required"]){
-                    <div class="text-danger">
-                        La contraseña es obligatoria.
-                    </div>
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" id="password" required formControlName="password" class="form-control" placeholder="Introduce contraseña" />
+                @if(formUsuarioVoto.controls["password"].invalid && (formUsuarioVoto.controls["password"].dirty || formUsuarioVoto.controls["password"].touched)){
+                    @if(formUsuarioVoto.controls["password"].errors?.["required"]){
+                        <div class="text-danger">
+                            La contraseña es obligatoria.
+                        </div>
+                    }
+                    @if(formUsuarioVoto.controls["password"].errors?.["minlength"]){
+                        <div class="text-danger">
+                            La contraseña debe tener al menos 6 caracteres.
+                        </div>
+                    }
+                    @if(formUsuarioVoto.controls["password"].errors?.["pattern"]){
+                        <div class="text-danger">
+                            La contraseña debe contener al menos un número, una letra y un carácter especial.
+                        </div>
+                    }
                 }
-                @if(formUsuarioVoto.controls["password"].errors?.["minlength"]){
-                    <div class="text-danger">
-                        La contraseña debe tener al menos 6 caracteres.
-                    </div>
-                }
-                @if(formUsuarioVoto.controls["password"].errors?.["pattern"]){
-                    <div class="text-danger">
-                        La contraseña debe contener al menos un número, una letra y un carácter especial.
-                    </div>
-                }
-            }
+            </div>
         </div>
-    </div>
 
-    <!-- Botones -->
-    <div class="text-center mt-4">
-        <button type="submit" class="btn btn-custom btn-lg" [disabled]="!formUsuarioVoto.valid">Registrarse</button>
-        <button type="button" routerLink="/" class="btn btn-custom btn-lg ms-3">Volver</button>
-    </div>
+        <!-- Botones -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-custom btn-lg" [disabled]="!formUsuarioVoto.valid">Registrarse</button>
+            <button type="button" routerLink="/" class="btn btn-custom btn-lg ms-3">Volver</button>
+        </div>
 
-    <!-- Cuadro texto para mensaje satisfactorio o de error -->
-    <div class="text-center mt-4">
-        <div *ngIf="mensajeError" class="alert alert-danger text-center">
-            {{ mensajeError }}
+        <!-- Cuadro texto para mensaje satisfactorio o de error -->
+        <div class="text-center mt-4">
+            <div *ngIf="mensajeError" class="alert alert-danger text-center">
+                {{ mensajeError }}
+            </div>
+            <div *ngIf="registroCorrecto" class="alert alert-success text-center">
+                Usuario se ha registrado correctamente.
+            </div>
         </div>
-        <div *ngIf="registroCorrecto" class="alert alert-success text-center">
-            Usuario se ha registrado correctamente. Puede proceder a votar.
-        </div>
-    </div>
-</form>
+    </form>
+</div>   
+

@@ -14,5 +14,9 @@ th, td {
   padding: 12px;
 }
 
+.modal-header {
+    background-color: #D47F62 !important; /* Color de fondo del encabezado del modal */
+}
+
 
 

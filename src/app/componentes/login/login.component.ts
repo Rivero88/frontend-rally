@@ -52,6 +52,9 @@ export class LoginComponent {
         } else {
           this.mensajeError = 'Error inesperado al iniciar sesión.';
         }
+        setTimeout(() => {
+          this.mensajeError = null;
+        }, 3000);
       }
     });
   }

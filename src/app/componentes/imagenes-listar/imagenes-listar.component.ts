@@ -3,6 +3,8 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ImagenService } from '../../servicios/imagen.service';
 import { Router } from '@angular/router';
 import { Imagen } from '../../modelos/imagen';
+import { ViewChild, ElementRef } from '@angular/core';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-imagenes-listar',
@@ -15,6 +17,12 @@ export class ImagenesListarComponent implements OnInit {
   @Input() idUsuario!:number; 
   imagenes: Imagen[] = [];
   imagenSeleccionadaUrl: string = '';  //Se guarda la URL de la imagen seleccionada
+  mensajeError: string | null = null;
+  mensajeExito: string | null = null;
+  @ViewChild('modalEliminar') modalEliminar!: ElementRef;
+  imagenIdAEliminar: number | null = null;
+  imagenNombreModal: string = '';
+  imagenCategoriaModal: string = '';
 
   constructor(private imagenService: ImagenService, private ruta: Router, @Inject(PLATFORM_ID) private platformId: Object) {
   }
@@ -24,8 +32,8 @@ export class ImagenesListarComponent implements OnInit {
       next: (resultado) => {
         this.imagenes = resultado;
       },
-      error: (error: any) => {
-        console.error("Error al obtener las imágenes del usuario:", error);
+      error: () => {
+        this.mensajeError = "Error al obtener las imágenes del usuario.";
       }
     });
   }
@@ -40,9 +48,9 @@ export class ImagenesListarComponent implements OnInit {
   
         if (isPlatformBrowser(this.platformId)) {
           import('bootstrap').then(bootstrap => {
-            let modalElement = document.getElementById('verImagenModal');
-            if (modalElement) {
-              let modal = new bootstrap.Modal(modalElement, {
+            let modalVerImagen = document.getElementById('verImagenModal');
+            if (modalVerImagen) {
+              let modal = new bootstrap.Modal(modalVerImagen, {
                 backdrop: false    // No se muestra el fondo difuso
               });
               modal.show();
@@ -50,27 +58,64 @@ export class ImagenesListarComponent implements OnInit {
           });
         }
       },
-      error: (error) => {
-        console.error('Error al obtener la imagen como archivo:', error);
+      error: () => {
+        this.mensajeError = 'Error al obtener la imagen como archivo.';
       }
     });
   }
 
+  // Para modificar una imagen. Redirecciona al componente
   modificarImagen(imagenId: number){
     this.ruta.navigate(['/imagen-mod', imagenId]);
   }
 
   // Para eliminar una imagen
   eliminarImagen(imagenId: number, imagenNombre: string, imagenCategoria: string){
-    if(confirm("¿Está seguro de que desea eliminar la imagen de la categoria " + imagenCategoria + " con nombre " + imagenNombre + "?")){ 
-      this.imagenService.eliminarImagen(imagenId).subscribe({
+    this.imagenIdAEliminar = imagenId;
+    this.imagenNombreModal = imagenNombre;
+    this.imagenCategoriaModal = imagenCategoria;
+    this.mostrarModalEliminarImagen();    
+  }
+
+  //Confirmar la eliminación de la imagen
+  confirmarEliminarImagen() {
+    if (this.imagenIdAEliminar !== null) {
+      this.imagenService.eliminarImagen(this.imagenIdAEliminar).subscribe({
         next: () => {
-          this.imagenes = this.imagenes.filter(img => img.id !== imagenId);
+          this.imagenes = this.imagenes.filter(img => img.id !== this.imagenIdAEliminar);
+          this.imagenIdAEliminar = null;
+          this.ocultarModalEliminarImagen();
+          this.mensajeExito = 'Fotografía eliminada correctamente.';
+          setTimeout(() => {
+            this.mensajeExito = null;
+          }, 2000);
         },
-        error: (error: any) => {
-          console.error('Error al eliminar la fotografía:', error);
-        },
-      })
+        error: () => {
+          this.ocultarModalEliminarImagen();
+          this.mensajeError = 'Error al eliminar la fotografía.';
+          setTimeout(() => {
+            this.mensajeError = null;
+          }, 3000);
+        }
+      });
+    }
+  }
+
+   mostrarModalEliminarImagen(){
+    let modalEliminar = document.getElementById('modalEliminarImagen');
+    if (modalEliminar) {
+      let modal = new bootstrap.Modal(modalEliminar, {
+        backdrop: false    // No se muestra el fondo difuso
+      });
+      modal.show();
+    }
+   }
+
+  ocultarModalEliminarImagen() {
+    let modalEliminar = document.getElementById('modalEliminarImagen');
+    if (modalEliminar) {
+      let modal = bootstrap.Modal.getInstance(modalEliminar);
+      modal?.hide();
     }
   }
 }

@@ -46,21 +46,22 @@ export class ImagenesSubirComponent {
             this.categoriasConFoto = resultado;
             this.verificarCategoriasDisponibles(); // Verifica si hay categorías disponibles
           },
-          error: (error: any) => {
-            console.error('Error al obtener las categorías con imagen:', error);
+          error: () => {
+            this.mensajeError = "Error al obtener las categorías con imagen.";
           }
         });
       },
-      error: (error: any) => {
-        console.error('Error al obtener las categorías:', error);
+      error: () => {
+        this.mensajeError = "Error al obtener las categorías.";
       },
-    }); 
+    });
   }
 
   // Para mostrar la descripción de la categoría seleccionada
   mostrarDescripcionCategoriaSeleccionada(){
     let categoriaIdSeleccionada = this.formImagen.value.categoriaId;
-    //Busca en el array de categorías  totos los id de categorias y compara con el id de la categoría seleccionada. El + delate del categoriasIdSeleccionada convierte el string a number
+    // Busca en el array de categorías  totos los id de categorias y compara con el id de la categoría seleccionada. 
+    // El + delante del categoriasIdSeleccionada convierte el string a number
     let categoria = this.categorias.find(categoria => categoria.id === +categoriaIdSeleccionada);
 
     // Si encuentra la categoría, asigna la descripción y si no la deja vacía
@@ -98,17 +99,16 @@ export class ImagenesSubirComponent {
       formData.append('categoriaId', this.formImagen.value.categoriaId.toString());
       formData.append('usuarioId', obtenerUsuarioLogueado().toString());
       formData.append('file', this.imagenesSeleccionadas[0].file);
-  
+
       this.imagenService.subirImagen(formData).subscribe({
         next: (resultado) => {
-          //console.log('Imagen subida correctamente:', resultado);
           this.imagenesSeleccionadas = [];
           this.formImagen.reset(); // Reinicia el formulario
           this.mensajeError = null;
           this.cargaCorrecta = true;
           setTimeout(() => {
             this.ruta.navigate(['/perfil']);
-          }, 1000); // Navega después de 1 segundos
+          }, 1000);
         },
         error: (error: any) => {
           if (error.error && error.error.message) {
@@ -116,7 +116,23 @@ export class ImagenesSubirComponent {
           } else {
             this.mensajeError = 'Error inesperado al cargar la fotografía.';
           }
+          this.limpiarFormularioParcial();
+          setTimeout(() => {
+            this.mensajeError = null;
+          }, 3000);
         }
       });
+  }
+
+  limpiarFormularioParcial(): void {
+    this.imagenesSeleccionadas = [];
+    this.formImagen.patchValue({
+      nombre: '',
+      descripcion: ''
+    });
+    this.formImagen.get('nombre')?.markAsPristine();
+    this.formImagen.get('descripcion')?.markAsPristine();
+    this.formImagen.get('nombre')?.markAsUntouched();
+    this.formImagen.get('descripcion')?.markAsUntouched();
   }
 }

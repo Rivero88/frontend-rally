@@ -39,6 +39,9 @@
                     </div>
                   }
                 }
+                <div *ngIf="mensajeVoto" class="alert alert-{{ tipoMensaje }} alert-dismissible fade show" role="alert">
+                  {{ mensajeVoto }}
+                </div>
             </div>
         </div>
       </div>

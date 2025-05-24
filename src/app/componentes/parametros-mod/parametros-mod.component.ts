@@ -76,7 +76,7 @@ export class ParametrosModComponent {
         this.parametroModificado = true;
         setTimeout(() => {
           this.ruta.navigate(['/']);
-        }, 1000); // Navega después de 1 segundo
+        }, 2000); // Navega después de 1 segundo
       }
       , error: (error: any) => {
         if (error.error && error.error.message) {

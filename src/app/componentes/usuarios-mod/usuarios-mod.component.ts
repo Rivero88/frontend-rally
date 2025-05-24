@@ -36,13 +36,12 @@ export class UsuariosModComponent {
 
   ngOnInit() {
     this.idUsuario = this.rutaActiva.snapshot.params['idUsuario']; // Recoge el id del usuario de la url
-    // Se seleccionan los datos de la bbdd con el id del usuario para cargarlo en el formulario de modificación
     this.usuarioService.seleccionarUsuario(this.idUsuario).subscribe({
       next: (resultado: any) => {
         this.formUsuarioMod.patchValue(resultado);
       },
-      error: (error: any) => {
-        console.error('Error al cargar los datos del usuario:', error);
+      error: () => {
+        this.mensajeError = 'Error al cargar los datos del usuario.';
       }
     });
   }
@@ -50,7 +49,7 @@ export class UsuariosModComponent {
   // Para editar el usuario
   editar(){
     this.usuarioService.editarUsuario(this.formUsuarioMod.value).subscribe({
-      next: (resultado: any) => {
+      next: () => {
         this.mensajeError = null;
         this.usuarioEditadoCorrectamente = true;
         let idUsuarioLogueado = localStorage.getItem('idUsuario');
@@ -68,7 +67,7 @@ export class UsuariosModComponent {
             // Usuario participante editando su propio perfil
             this.ruta.navigate(['/perfil']);
           }
-        }, 1000); // Navega después de 1 segundo
+        }, 1000);
       },
       error: (error: any) => {
         if (error.error && error.error.message) {
@@ -80,9 +79,13 @@ export class UsuariosModComponent {
     });
   }
 
-  // Para volver a la lista de usuarios si se le da al boton cancelar
+  // Para volver donde corresponda al dar al botón de cancelar
   cancelar(){
-    this.ruta.navigate(['/']);
+    if(this.isAdmin()) {
+      this.ruta.navigate(['/listar-usuarios']);
+    } else {
+      this.ruta.navigate(['/perfil']);
+    }
   }
 
   // Para verificar si el rol es admin
