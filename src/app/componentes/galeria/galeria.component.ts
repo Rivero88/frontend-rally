@@ -19,16 +19,25 @@ export class GaleriaComponent {
   imagenSeleccionadaUrl: string = '';
   estadoDescripcion: { [key: number]: boolean } = {};
   mensajeVoto: string | null = null;
+  mensajeError: string | null = null;
   tipoMensaje: 'success' | 'danger' | 'info' = 'info';
 
   constructor(private imagenService: ImagenService, @Inject(PLATFORM_ID) private platformId: Object, private votoService: VotoService, private authService: AuthService, private ruta: Router) {
+
+  }
+
+  ngOnInit() {
     // Para listar todas las imagenes de todos los usuarios
     this.imagenService.listarImagenesTotales().subscribe({
       next: (resultado: any) => {
         this.imagenes = resultado;
       },
-      error: (error: any) => {
-        console.error("Error al obtener las imágenes del usuario:", error);
+      error: () => {
+        this.tipoMensaje = 'danger';
+        this.mensajeError ="Error al obtener las imágenes.";
+        setTimeout(() => {
+          this.mensajeError = null;
+        }, 3000);
       }
     });
   }
@@ -53,8 +62,12 @@ export class GaleriaComponent {
           });
         }
       },
-      error: (error) => {
-        console.error('Error al obtener la imagen como archivo:', error);
+      error: () => {
+        this.tipoMensaje = 'danger';
+        this.mensajeError ="Error al obtener la imagen como archivo.";
+        setTimeout(() => {
+          this.mensajeError = null;
+        }, 3000);
       }
     });
   }
@@ -62,45 +75,50 @@ export class GaleriaComponent {
   // Para votar una imagen
   votarImagen(imagenId: number) {
     let idUsuario = localStorage.getItem('idUsuario');
-    if (!idUsuario) {
-      this.ruta.navigate(['/registro-simple']);
-    } else {
-      this.votoService.comprobarVotoUsuario(imagenId, idUsuario).subscribe({
-        next: (resultado) => {
-          if (resultado) {
-            this.tipoMensaje = 'danger';
-            this.mensajeVoto = "Ya has votado esta imagen.";
-            setTimeout(() => {
-              this.mensajeVoto = null;
-            }, 3000);
-          } else {
-            this.votoService.votarImagen(imagenId, idUsuario).subscribe({
-              next: (resultadoVoto) => {
-                this.tipoMensaje = 'success';
-                this.mensajeVoto = "Tu voto ha sido registrado.";
-                setTimeout(() => {
-                  this.mensajeVoto = null;
-                }, 3000);
-                this.imagenService.seleccionarImagen(imagenId).subscribe({
-                  next: (resultadoImg) => {
-                    let index = this.imagenes.findIndex(img => img.id === resultadoImg.id);
-                    if (index !== -1) {
-                      this.imagenes[index].votosImagen = resultadoImg.votosImagen;
-                    }
-                  },
-                  error: (error) => {
-                    console.error("Error al obtener la imagen votada:", error);
+    this.votoService.comprobarVotoUsuario(imagenId, idUsuario).subscribe({
+      next: (resultado) => {
+        if (resultado) {
+          this.tipoMensaje = 'danger';
+          this.mensajeVoto = "Ya has votado esta imagen.";
+          setTimeout(() => {
+            this.mensajeVoto = null;
+          }, 3000);
+        } else {
+          this.votoService.votarImagen(imagenId, idUsuario).subscribe({
+            next: () => {
+              // Actualizar la imagen votada para reflejar el nuevo voto
+              this.imagenService.seleccionarImagen(imagenId).subscribe({
+                next: (resultadoImg) => {
+                  let index = this.imagenes.findIndex(img => img.id === resultadoImg.id);
+                  if (index !== -1) {
+                    this.imagenes[index].votosImagen = resultadoImg.votosImagen;
                   }
-                });
-              },
-              error: (error) => {
-                console.error("Error al votar por la imagen:", error);
-              }
-            });
-          }
+                  this.tipoMensaje = 'success';
+                  this.mensajeVoto = "Tu voto ha sido registrado.";
+                  setTimeout(() => {
+                    this.mensajeVoto = null;
+                  }, 3000);
+                },
+                error: () => {
+                  this.tipoMensaje = 'danger';
+                  this.mensajeError ="Error al añadir el voto en la imagen.";
+                  setTimeout(() => {
+                    this.mensajeError = null;
+                  }, 3000);
+                }
+              });
+            },
+            error: () => {
+              this.tipoMensaje = 'danger';
+                  this.mensajeError ="El voto no ha podido ser registrado.";
+                  setTimeout(() => {
+                    this.mensajeError = null;
+                  }, 3000);
+            }
+          });
         }
-      });
-    }
+      }
+    });
   }
 
   // Para ver más o menos de la descripción de la imagen

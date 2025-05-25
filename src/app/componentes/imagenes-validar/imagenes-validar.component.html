@@ -22,7 +22,8 @@
                 <table class="table table-bordered text-center custom-table-bg align-middle">
                     <thead>
                         <tr>
-                            <th style="white-space: nowrap;">FOTOGRAFÍA</th>
+                            <th style="white-space: nowrap;"></th>
+                            <th style="white-space: nowrap;">ID</th>
                             <th style="white-space: nowrap;">USUARIO</th>
                             <th style="white-space: nowrap;">CATEGORÍA</th>
                             <th style="white-space: nowrap;">NOMBRE</th>
@@ -39,6 +40,7 @@
                             <td>
                                 <button type="button" class="btn btn-custom btn-xs" (click)="verImagen(imagen.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
                             </td>
+                            <td>{{ imagen.id }}</td>
                             <td>{{ imagen.usuario.nombre }} {{ imagen.usuario.apellidos }}</td>
                             <td>{{ imagen.categoria.nombre }}</td>
                             <td>{{ imagen.nombre }}</td>
@@ -50,6 +52,8 @@
                             <td>
                                 <button type="button" class="btn btn-custom btn-xs ms-2" (click)="validarImagen(imagen.id)" [disabled]="imagen.estadoValidacion === 'Validada'" title="Validar"><i class="bi bi-check-lg"></i></button>
                                 <button type="button" class="btn btn-custom btn-xs ms-2" (click)="rechazarImagen(imagen.id)" [disabled]="imagen.estadoValidacion === 'Rechazada'" title="Rechazar"><i class="bi bi-x-lg"></i></button>
+                                <button type="button" class="btn btn-custom btn-xs ms-2" (click)="eliminarImagen(imagen.id, imagen.nombre, imagen.categoria.nombre, imagen.estadoValidacion)" title="Eliminar"><i class="bi bi-trash-fill"></i></button>
+                                <button type="button" class="btn btn-custom btn-xs ms-2" (click)="verVotos(imagen.id)" title="Ver votos"><i class="bi bi-star-fill"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -75,3 +79,37 @@
     </div>
   </div>
 </div>
+
+<!-- Para mensajes de éxito y error -->
+ <div class="container-fluid py-5">
+    <section class="text-center">
+        <div class="container mt-4" style="max-width: 1400px;">
+            <div *ngIf="mensajeError !== null" class="alert alert-danger text-center">
+                {{ mensajeError }}
+            </div>
+            <div *ngIf="mensajeExito !== null" class="alert alert-success text-center">
+                {{ mensajeExito }}
+            </div>
+        </div>
+    </section>
+ </div>
+
+<!-- Modal de confirmación de eliminación-->
+<div class="modal fade" id="modalEliminarImagen" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white">
+        <h5 class="modal-title" id="modalEliminarLabel">Confirmar eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        ¿Está seguro de que desea eliminar la imagen <strong>{{ imagenNombreModal }}</strong> de la categoría <strong>{{ imagenCategoriaModal }}</strong> con estado de validación <strong><u>{{ imagenEstadoModal }}</u></strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-custom btn-lg" (click)="confirmarEliminarImagen()">Aceptar</button>
+        <button type="button" class="btn btn-custom btn-lg ms-3" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+

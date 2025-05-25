@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 
@@ -24,10 +24,12 @@ export class NavbarComponent {
     return this.authService.isAdmin();
   }
 
+  // Para verificar si el rol es participante
   isParticipante(): boolean {
     return this.authService.isParticipante();
   }
 
+  // Para verificar si el rol es general
   isGeneral(): boolean {
     return this.authService.isGeneral();
   }

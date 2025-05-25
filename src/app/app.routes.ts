@@ -15,6 +15,7 @@ import { ImagenesModComponent } from './componentes/imagenes-mod/imagenes-mod.co
 import { RankingComponent } from './componentes/ranking/ranking.component';
 import { CategoriaComponent } from './componentes/categoria/categoria.component';
 import { RegistroSimpleComponent } from './componentes/registro-simple/registro-simple.component';
+import { VotosComponent } from './componentes/votos/votos.component';
 
 export const routes: Routes = [ 
     { path: '', component: HomeComponent },
@@ -33,6 +34,6 @@ export const routes: Routes = [
     { path: 'ranking', component: RankingComponent},
     { path: 'categoria', component: CategoriaComponent},
     { path: 'registro-simple', component: RegistroSimpleComponent},
-        
+    { path: 'votos/:idImagen', component: VotosComponent}
 
 ];

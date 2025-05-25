@@ -24,4 +24,14 @@ export class VotoService {
       .set('idUsuario', idUsuario);
     return this.http.get<boolean>(`${this.apiUrl}/comprobar`, { params });
   }
+
+  // Listar votos por imagen
+  listarVotosPorImagen(imagenId: number) {
+    return this.http.get<Voto[]>(`${this.apiUrl}/obtenerVotos/${imagenId}`);
+  }
+
+  // Eliminar un voto por su id
+  eliminarVoto(votoId: number) {
+    return this.http.delete(`${this.apiUrl}/${votoId}`);
+  }
 }

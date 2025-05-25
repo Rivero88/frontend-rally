@@ -1,48 +1,45 @@
 <!-- Formulario login -->
-<br/>
-<br/>
-<form [formGroup]="form" class="container p-4 rounded shadow-sm" style="max-width: 400px; background-color: #F3F1ED;" (ngSubmit)="login()">
-    <h3 class="text-center mb-4" style="color: #254D42;">Iniciar Sesión</h3>
+<div class="container-fluid py-5">
+    <form [formGroup]="form" class="container p-4 rounded shadow-sm" style="max-width: 400px; background-color: #F3F1ED;" (ngSubmit)="login()">
+        <h3 class="text-center mb-4" style="color: #254D42;">Iniciar Sesión</h3>
 
-    <div class="mb-3">
-        <label for="username" class="form-label">Usuario</label>
-        <input type="text"  id="username" required formControlName="username" class="form-control" placeholder="Ingrese su usuario">
-        @if(form.controls["username"].invalid && (form.controls["username"].dirty || form.controls["username"].touched)){
-            @if(form.controls["username"].errors?.["required"]){
-                <div class="text-danger">
-                    La usuario es obligatoria.
+        <div class="mb-3">
+            <label for="username" class="form-label">Usuario</label>
+            <input type="text"  id="username" required formControlName="username" class="form-control" placeholder="Ingrese su usuario">
+            <div *ngIf="form.controls['username'].invalid && (form.controls['username'].dirty || form.controls['username'].touched)">
+                <div *ngIf="form.controls['username'].errors?.['required']" class="text-danger">
+                    El usuario es obligatorio.
                 </div>
-            }
-        }
-    </div>
-
-    <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
-        <input type="password" id="password" required formControlName="password"  class="form-control" placeholder="Ingrese su contraseña">
-        @if(form.controls["password"].invalid && (form.controls["password"].dirty || form.controls["password"].touched)){
-            @if(form.controls["password"].errors?.["required"]){
-                <div class="text-danger">
-                    La contraseña es obligatoria.
-                </div>
-            }
-        }
-    </div>
-
-    <div class="text-center mt-4">
-        <button type="submit" class="btn btn-custom btn-lg">Iniciar sesión</button>
-        <button type="button" routerLink="/" class="btn btn-custom btn-lg ms-3">Volver</button>
-    </div>
-
-    <section class="text-center">
-        <div class="text-center mt-4">
-            <div *ngIf="mensajeError !== null" class="alert alert-danger text-center">
-                {{ mensajeError }}
-            </div>
-            <div *ngIf="loginCorrecto !== null" class="alert alert-success text-center">
-                {{ loginCorrecto }}
             </div>
         </div>
-    </section>
-</form>
 
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <div class="input-group">
+                <input [type]="showPassword ? 'text' : 'password'" id="password" required formControlName="password"  class="form-control" placeholder="Ingrese su contraseña"/>
+                <button type="button" class="btn btn-custom btn-lg" (click)="showPassword = !showPassword" tabindex="-1"> <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i> </button>
+            </div>
+            <div *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)">
+                <div *ngIf="form.controls['password'].errors?.['required']" class="text-danger">
+                    La contraseña es obligatoria.
+                </div>
+            </div>
+        </div>
 
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-custom btn-lg">Iniciar sesión</button>
+            <button type="button" routerLink="/" class="btn btn-custom btn-lg ms-3">Volver</button>
+        </div>
+
+        <section class="text-center">
+            <div class="text-center mt-4">
+                <div *ngIf="mensajeError !== null" class="alert alert-danger text-center">
+                    {{ mensajeError }}
+                </div>
+                <div *ngIf="loginCorrecto !== null" class="alert alert-success text-center">
+                    {{ loginCorrecto }}
+                </div>
+            </div>
+        </section>
+    </form>
+</div>  

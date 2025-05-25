@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Usuario } from '../../modelos/usuario';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../auth/auth.service';
 declare var bootstrap: any; 
 
 @Component({
@@ -20,7 +19,7 @@ export class UsuariosListarComponent {
   mensajeExito: string | null = null;
   usuarioIdAEliminar: number | null = null;
 
-  constructor(private usuarioService: UsuarioService, private authService: AuthService, private ruta: Router) {  }
+  constructor(private usuarioService: UsuarioService, private ruta: Router) {  }
 
   ngOnInit() {
     // Se cargan los usuarios al iniciar el componente

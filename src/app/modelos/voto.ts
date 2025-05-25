@@ -1,6 +1,7 @@
+import { Usuario } from "./usuario";
+
 export interface Voto {
     id: number;
-    usuarioId: number;
-    imagenId: number;
-    fechaVoto: Date;
+    usuario: Usuario;
+    fecha: Date;
 }

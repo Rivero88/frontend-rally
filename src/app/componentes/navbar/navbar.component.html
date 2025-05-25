@@ -1,7 +1,9 @@
 <!-- Menú navbar para opciones de navegación en la página -->
 <nav class="navbar navbar-light bg-light rounded w-100">
     <div class="container-fluid">
-        <img src="assets/logo4.png" alt="Logo" width="75" height="75">
+        <a routerLink="/" title="Ir al inicio">
+            <img src="assets/logo.png" alt="Logo" width="75" height="75">
+        </a>
         <h1 style= "color:#254D42">Cazadores De Momentos</h1>
         @if(!isAuthenticated()){ 
             <button type="button" class="btn btn-custom" routerLink="/login">Login</button>

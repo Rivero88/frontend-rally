@@ -1,0 +1,73 @@
+<div class="container-fluid py-5">
+    <section class="text-center">
+        <div class="container mt-4" style="background-color: #F3F1ED; max-width: 1400px;">
+            <h1 class="fw-bold" style="color: #254D42; text-align: center;">Lista de Votos</h1>
+            <br>
+            <div *ngIf="votos.length === 0" class="alert alert-info text-center">
+                No hay votos para esta imagen.
+            </div>
+            <div *ngIf="votos.length > 0">
+                <table class="table table-bordered text-center custom-table-bg align-middle">
+                    <thead>
+                        <tr>
+                            <th style="white-space: nowrap;">ID</th>
+                            <th style="white-space: nowrap;">USUARIO</th>
+                            <th style="white-space: nowrap;">ALIAS</th>
+                            <th style="white-space: nowrap;">FECHA</th>
+                            <th style="white-space: nowrap;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let voto of votos">
+                            <td>{{ voto.id }}</td>
+                            <td>{{ voto.usuario.nombre }} {{ voto.usuario.apellidos }}</td>
+                            <td>{{ voto.usuario.alias }}</td>
+                            <td>{{ voto.fecha | date:'dd/MM/yyyy' }}</td>
+                            <td>
+                                <button type="button" class="btn btn-custom btn-xs ms-2" (click)="eliminarVoto(voto.id)" title="Eliminar"><i class="bi bi-trash-fill"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="container mt-4" style="max-width: 1400px;">
+                <button type="button" class="btn btn-custom btn-lg" routerLink="/perfil">Volver</button>
+            </div>
+            <br>
+        </div>
+    </section>
+</div>
+
+<!-- Para mensajes de éxito y error -->
+ <div class="container-fluid py-5">
+    <section class="text-center">
+        <div class="container mt-4" style="max-width: 1400px;">
+            <div *ngIf="mensajeError !== null" class="alert alert-danger text-center">
+                {{ mensajeError }}
+            </div>
+            <div *ngIf="mensajeExito !== null" class="alert alert-success text-center">
+                {{ mensajeExito }}
+            </div>
+        </div>
+    </section>
+ </div>
+
+<!-- Modal de confirmación de eliminación-->
+<div class="modal fade" id="modalEliminarVoto" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-white">
+        <h5 class="modal-title" id="modalEliminarLabel">Confirmar eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        ¿Está seguro de que desea eliminar este voto?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-custom btn-lg" (click)="confirmarEliminarVoto()">Aceptar</button>
+        <button type="button" class="btn btn-custom btn-lg ms-3" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@
 <div class="container-fluid py-5">
     <header class="text-center mb-5 text-white p-4 rounded container" style="background-color: #F3F1ED;">
         <h1 class="fw-bold text-center mb-4" style="color: #254D42;">Galería</h1>
-        <p class="lead" style="color: #254D42;">Explora las mejores fotografías por temática</p>
+        <p class="lead" style="color: #254D42;">Explora las mejores fotografías</p>
     </header>
     <section class="text-center" >
       <div class="container" >
@@ -12,7 +12,6 @@
                   @if(img.estadoValidacion == "Validada"){
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                       <div class="card h-100 shadow-sm" style="background-color: #F3F1ED;">
-                        <!-- <img [src]="img.url" class="card-img-top" [alt]="img.nombre"> -->
                         <div class="card-body" style="text-align: center;">
                             <h5 class="card-title">{{ img.nombre }}</h5>
                             <p class="card-text">
@@ -39,8 +38,8 @@
                     </div>
                   }
                 }
-                <div *ngIf="mensajeVoto" class="alert alert-{{ tipoMensaje }} alert-dismissible fade show" role="alert">
-                  {{ mensajeVoto }}
+                <div *ngIf="mensajeVoto || mensajeError" class="alert alert-{{ tipoMensaje }} alert-dismissible fade show" role="alert">
+                  {{ mensajeVoto || mensajeError }}
                 </div>
             </div>
         </div>

@@ -12,8 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(alias: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { alias: alias,
-      password: password });
+    return this.http.post(`${this.apiUrl}/login`, { alias: alias, password: password });
   }
 
   // Devuelve true si hay token

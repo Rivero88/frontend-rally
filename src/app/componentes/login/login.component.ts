@@ -20,6 +20,7 @@ export class LoginComponent {
   public form: FormGroup;
   mensajeError: string | null = null;
   loginCorrecto: string | null = null;
+  showPassword = false;
 
 
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
