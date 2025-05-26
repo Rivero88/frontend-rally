@@ -21,3 +21,7 @@
     border-color: #D47F62 !important; /* Color del borde */
     color: white !important;
 }
+
+.modal-header {
+    background-color: #D47F62 !important; /* Color de fondo del encabezado del modal */
+}

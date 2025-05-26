@@ -77,7 +77,6 @@ export class ImagenesValidarComponent {
         let imagenEstadoMod = this.imagenes.findIndex(img => img.id === resultado.id);
         if (imagenEstadoMod !== -1) {
           this.imagenes[imagenEstadoMod] = resultado; // reemplaza el objeto entero
-          //this.imagenes[imagenEstadoMod].estadoValidacion = resultado.estadoValidacion; // Actualiza el campo estadoValidacion
           this.mensajeExito = 'Imagen validada.';
           setTimeout(() => {
             this.mensajeExito = null;
@@ -100,7 +99,6 @@ export class ImagenesValidarComponent {
         let imagenEstadoMod = this.imagenes.findIndex(img => img.id === resultado.id);
         if (imagenEstadoMod !== -1) {
           this.imagenes[imagenEstadoMod] = resultado; // reemplaza el objeto entero
-          //this.imagenes[imagenEstadoMod].estadoValidacion = resultado.estadoValidacion; // Actualiza el campo estadoValidacion
           this.mensajeExito = 'Imagen rechazada.';
           setTimeout(() => {
             this.mensajeExito = null;

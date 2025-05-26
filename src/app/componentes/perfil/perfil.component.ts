@@ -19,6 +19,7 @@ export class PerfilComponent implements OnInit {
 
   usuario!: Usuario;
   imagenesUsuario: Imagen[] = [];
+  mensajeError: string | null = null;
   @Input() idUsuario!:number; 
 
   constructor(private usuarioService: UsuarioService, private ruta: Router, private imagenService: ImagenService) {}
@@ -34,13 +35,19 @@ export class PerfilComponent implements OnInit {
             next: (resultado_imagenes) => {
               this.imagenesUsuario = resultado_imagenes;
             },
-            error: (error: any) => {
-              console.error("Error al obtener las imágenes del usuario:", error);
+            error: () => {
+              this.mensajeError = 'Error al obtener las imágenes del usuario.';
+              setTimeout(() => {
+                this.mensajeError = null;
+              }, 3000);
             }
           });
         },
-        error: (error) => {
-          console.error("Error al obtener el perfil:", error);
+        error: () => {
+          this.mensajeError = 'Error al obtener el perfil.';
+          setTimeout(() => {
+            this.mensajeError = null;
+          }, 3000);
         }
       });
     }

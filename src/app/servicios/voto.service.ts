@@ -34,4 +34,10 @@ export class VotoService {
   eliminarVoto(votoId: number) {
     return this.http.delete(`${this.apiUrl}/${votoId}`);
   }
+
+  // Obtiene una lista de votos
+  votosPorFecha(){
+    return this.http.get<any[]>(`${this.apiUrl}/votosRanking`);
+  }
+
 }

@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { NgChartsModule } from 'ng2-charts';
 import { Chart } from 'chart.js';
 import { isPlatformBrowser } from '@angular/common';
+import { AuthService } from '../../../auth/auth.service';
+import { VotoService } from '../../servicios/voto.service';
+
 
 @Component({
   selector: 'app-ranking',
@@ -14,35 +17,69 @@ import { isPlatformBrowser } from '@angular/common';
 export class RankingComponent {
 
   rankingImagenes: any[] = [];
+  mensajeError: string | null = null;
+  // Referencias a los elementos canvas para los gráficos
   @ViewChild('canvasRanking', { static: false }) canvasRef!: ElementRef;
+  @ViewChild('canvasLinea', { static: false }) canvasLineaRef!: ElementRef;
+  //Instancias de graficos para poder destuirlos, crearlos de nuevo y evitar errores
   chartInstance: any;
-
-  constructor(private imagenService: ImagenService, @Inject(PLATFORM_ID) private platformId: Object) { }
+  chartInstanceLinea: any;
+ 
+  constructor(private imagenService: ImagenService, private authService: AuthService, private votoService: VotoService, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
     this.obtenerRanking();
+    this.obtenerVotosPorDia();
   }
 
-  // Para obtener el ranking según los votos del backend
+  // Para obtener el ranking según los votos de cada fotografía
   obtenerRanking(): void {
     this.imagenService.rankingImagenes().subscribe({
       next: (resultado) => {
         this.rankingImagenes = resultado;
         setTimeout(() => {
-          this.crearGrafico();
+          this.crearGraficoBarras();
         }, 0);
       },
-      error: (error) => {
-        console.error("Error al obtener ranking de imágenes", error);
+      error: () => {
+        this.mensajeError = "Error al obtener ranking de imágenes.";
+        setTimeout(() => {
+          this.mensajeError = null;
+        }, 3000);
       }
     });
   }
 
+  // Para obtener los votos por día
+  obtenerVotosPorDia(): void {
+    this.votoService.votosPorFecha().subscribe({
+      next: (resultado) => {
+        // Se extraen los resultados que alimentarán el gráfico
+        let fechas = resultado.map(res => res.fecha);
+        let votos = resultado.map(res => res.votos);
+        setTimeout(() => {
+        this.crearGraficoLinea(fechas, votos);
+        }, 0);
+      },
+      error: () => {
+        this.mensajeError = "Error al obtener votos por día.";
+        setTimeout(() => {
+          this.mensajeError = null;
+        }, 3000);
+      }
+    });
+  }
+
+  // Para verificar si el rol es admin
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
   // Para crear gráfico de barras
-  crearGrafico(): void {
+  crearGraficoBarras(): void {
     // Verifica si se está ejecutando en el navegador la creación del gráfico 
     if (isPlatformBrowser(this.platformId)) {
-      // Etiquetas para el gráfico
+      //Etiquetas para el gráfico
       let categorias = this.rankingImagenes.map(i => i.categoria);
       let nombres = this.rankingImagenes.map(i => i.nombre);
       let votos = this.rankingImagenes.map(i => i.votos);
@@ -60,14 +97,15 @@ export class RankingComponent {
       // Se asigna color por categoría si no el color por defecto
       let colores = categorias.map(categoria => colorPorCategoria[categoria] || '#D47F62');
 
+      // Obtiene el elemento canvas para dibujar el gráfico
       let canvas = this.canvasRef?.nativeElement as HTMLCanvasElement;
 
-      // Limpia gráfico anterior si existe
+      // Si ya hay un gráfico creado, lo destruye para no duplicar
       if (this.chartInstance) {
         this.chartInstance.destroy();
       }
 
-      // Crea gráfico nuevo
+      // Crea gráfico de barra
       this.chartInstance = new Chart(canvas, {
         type: 'bar',
         data: {
@@ -102,8 +140,60 @@ export class RankingComponent {
         }
       });
     } else {
-      console.error("El gráfico solo se puede crear en el navegador.");
+      this.mensajeError = "El gráfico solo se puede crear en el navegador.";
+        setTimeout(() => {
+          this.mensajeError = null;
+      }, 3000);
     }
   }
 
+  // Para crear gráfico de linea
+  crearGraficoLinea(fechas: string[], votos: number[]): void {
+    // Verifica si se está ejecutando en el navegador la creación del gráfico 
+    if (isPlatformBrowser(this.platformId)) {
+      // Obtiene el elemento canvas para dibujar el gráfico
+      let canvas = this.canvasLineaRef?.nativeElement as HTMLCanvasElement;
+
+      // Si ya hay un gráfico creado, lo destruye para no duplicar
+      if (this.chartInstanceLinea) {
+        this.chartInstanceLinea.destroy();
+      }
+
+      this.chartInstanceLinea = new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: fechas,
+          datasets: [{
+            label: 'Votos por día',
+            data: votos,
+            borderColor: '#00ACC1',
+            backgroundColor: '#00ACC1',
+            pointBackgroundColor: '#D2A734',
+            pointBorderColor: '#D2A734',
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            borderWidth: 2,
+            tension: 0.3,
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              display: true
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 1
+              }
+            }
+          }
+        }
+      });
+    }
+  }
 }

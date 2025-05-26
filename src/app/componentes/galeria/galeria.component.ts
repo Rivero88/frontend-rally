@@ -46,16 +46,20 @@ export class GaleriaComponent {
   verImagen(imagenId: number) {
     this.imagenService.obtenerImagen(imagenId).subscribe({
       next: (arrayBuffer) => {
-        let blob = new Blob([arrayBuffer], { type: 'image/jpeg' }); // Ajusta el tipo si es PNG u otro
+        // Convierte el arrayBuffer recibido en un Blob con tipo de imagen
+        let blob = new Blob([arrayBuffer], { type: 'image/jpeg' }); // Ajusta el tipo si es necesario
+         // Crea una URL que puede usarse en el src de una etiqueta <img>
         let objectURL = URL.createObjectURL(blob);
-        this.imagenSeleccionadaUrl = objectURL;
+        this.imagenSeleccionadaUrl = objectURL;// Actualiza la URL para mostrar la imagen
 
+        // Si estamos en navegador, carga el modal usando Bootstrap dinámicamente
         if (isPlatformBrowser(this.platformId)) {
           import('bootstrap').then(bootstrap => {
             let modalElement = document.getElementById('verImagenModal');
             if (modalElement) {
+              // Crea y muestra el modal de Bootstrap sin fondo difuso (backdrop false)
               let modal = new bootstrap.Modal(modalElement, {
-                backdrop: false    // No se muestra el fondo difuso
+                backdrop: false 
               });
               modal.show();
             }
@@ -75,6 +79,7 @@ export class GaleriaComponent {
   // Para votar una imagen
   votarImagen(imagenId: number) {
     let idUsuario = localStorage.getItem('idUsuario');
+    // Primero se comprueba si el usuario ya ha votado esta imagen
     this.votoService.comprobarVotoUsuario(imagenId, idUsuario).subscribe({
       next: (resultado) => {
         if (resultado) {
@@ -84,11 +89,13 @@ export class GaleriaComponent {
             this.mensajeVoto = null;
           }, 3000);
         } else {
+          // Si no ha votado, se proce al voto
           this.votoService.votarImagen(imagenId, idUsuario).subscribe({
             next: () => {
               // Actualizar la imagen votada para reflejar el nuevo voto
               this.imagenService.seleccionarImagen(imagenId).subscribe({
                 next: (resultadoImg) => {
+                  // Busca la imagen en el array y actualiza sus votos
                   let index = this.imagenes.findIndex(img => img.id === resultadoImg.id);
                   if (index !== -1) {
                     this.imagenes[index].votosImagen = resultadoImg.votosImagen;
@@ -126,10 +133,12 @@ export class GaleriaComponent {
     this.estadoDescripcion[id] = !this.estadoDescripcion[id];
   }
 
+  // Para verificar si el rol es participante
   isParticipante(): boolean {
     return this.authService.isParticipante();
   }
 
+  // Para verificar si el rol es general
   isGeneral(): boolean {
     return this.authService.isGeneral();
   }

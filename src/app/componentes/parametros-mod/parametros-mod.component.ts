@@ -58,12 +58,13 @@ export class ParametrosModComponent {
           }));
         });
       },
-      error: (error: any) => {
+      error: () => {
         this.mensajeError = 'Error al cargar los parámetros del rally.';
       },
     });
   }
 
+  // Getter para acceder fácilmente al FormArray de categorías
   get categorias(): FormArray {
     return this.formParametrosMod.get('categorias') as FormArray;
   }
@@ -88,6 +89,7 @@ export class ParametrosModComponent {
     });
   }
 
+  //Método para eliminar una categoría
   eliminarCategoria(categoriaId: number,  index: number){
     if (confirm("¿Estás seguro de que deseas eliminar esta categoría?")) {
       this.categoriaService.eliminarCategoria(categoriaId).subscribe({

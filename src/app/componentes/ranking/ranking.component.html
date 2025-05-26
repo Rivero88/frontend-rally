@@ -1,3 +1,4 @@
+<!-- Muestra un ranking de las imagenes por sus votos -->
 <div class="container rounded my-5" style="background-color: #F3F1ED;">
     <section class="text-center">
         <h1 class="fw-bold mb-4" style="color: #254D42;">Ranking de Imágenes</h1>
@@ -20,13 +21,20 @@
                 </tr>
             </tbody>
         </table>
-        </div>
+    </div>
         
     </section>
     <section class="text-center">
         <div class="mt-5">
-            <h1 class="fw-bold mb-4" style="color: #254D42;">Gráfico de Votos</h1>
+            <h1 class="fw-bold mb-4" style="color: #254D42;">Gráfico de votos</h1>
             <canvas #canvasRanking></canvas>
+        </div>
+    </section>
+
+    <section class="text-center" *ngIf="isAdmin()">
+        <div class="mt-5">
+            <h1 class="fw-bold mb-4" style="color: #254D42;">Gráfico votos por día</h1>
+            <canvas #canvasLinea></canvas>
         </div>
     </section>
 </div>
