@@ -45,8 +45,14 @@ export class CategoriaComponent {
       error: (error: any) => {
         if (error.error && error.error.message) {
           this.mensajeError = error.error.message;
+          setTimeout(() => {
+              this.mensajeError = null;
+          }, 3000);
         } else {
           this.mensajeError = 'Error al crear nueva categoria.';
+          setTimeout(() => {
+              this.mensajeError = null;
+          }, 3000);
         }
       }
     })

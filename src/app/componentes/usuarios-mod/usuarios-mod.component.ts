@@ -18,6 +18,7 @@ export class UsuariosModComponent {
   idUsuario: number = 0;
   mensajeError: string | null = null;
   usuarioEditadoCorrectamente: boolean = false;
+  idUsuarioLogueadoCancelar: string | null = null;
 
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private authService: AuthService, private ruta: Router, private rutaActiva: ActivatedRoute) {
@@ -36,6 +37,7 @@ export class UsuariosModComponent {
 
   ngOnInit() {
     this.idUsuario = this.rutaActiva.snapshot.params['idUsuario']; // Recoge el id del usuario de la url
+    this.idUsuarioLogueadoCancelar = localStorage.getItem('idUsuario'); // Recoge el id del usuario logueado para el botón de cancelar
     this.usuarioService.seleccionarUsuario(this.idUsuario).subscribe({
       next: (resultado: any) => {
         this.formUsuarioMod.patchValue(resultado);
@@ -82,11 +84,18 @@ export class UsuariosModComponent {
   // Para volver donde corresponda al dar al botón de cancelar
   cancelar(){
     if(this.isAdmin()) {
-      this.ruta.navigate(['/listar-usuarios']);
-    } else {
-      this.ruta.navigate(['/perfil']);
-    }
-  }
+      if (this.idUsuarioLogueadoCancelar === this.idUsuario.toString()) {
+          // Admin editando su propio perfil
+          this.ruta.navigate(['/perfil']);
+        } else {
+            // Admin editando otro usuario
+            this.ruta.navigate(['/listar-usuarios']);
+        }
+      } else {
+        // Usuario participante editando su propio perfil
+        this.ruta.navigate(['/perfil']);
+      }
+    } 
 
   // Para verificar si el rol es admin
   isAdmin(): boolean {
@@ -97,6 +106,4 @@ export class UsuariosModComponent {
   isParticipante(): boolean {
     return this.authService.isParticipante();
   }
-
-  
 }

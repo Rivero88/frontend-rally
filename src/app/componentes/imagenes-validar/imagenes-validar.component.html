@@ -38,7 +38,7 @@
                     <tbody>
                         <tr *ngFor="let imagen of imagenes">
                             <td>
-                                <button type="button" class="btn btn-custom btn-xs" (click)="verImagen(imagen.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
+                                <button type="button" class="btn btn-custom btn-xs ms-2" (click)="verImagen(imagen.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
                             </td>
                             <td>{{ imagen.id }}</td>
                             <td>{{ imagen.usuario.nombre }} {{ imagen.usuario.apellidos }}</td>
@@ -53,7 +53,7 @@
                                 <button type="button" class="btn btn-custom btn-xs ms-2" (click)="validarImagen(imagen.id)" [disabled]="imagen.estadoValidacion === 'Validada'" title="Validar"><i class="bi bi-check-lg"></i></button>
                                 <button type="button" class="btn btn-custom btn-xs ms-2" (click)="rechazarImagen(imagen.id)" [disabled]="imagen.estadoValidacion === 'Rechazada'" title="Rechazar"><i class="bi bi-x-lg"></i></button>
                                 <button type="button" class="btn btn-custom btn-xs ms-2" (click)="eliminarImagen(imagen.id, imagen.nombre, imagen.categoria.nombre, imagen.estadoValidacion)" title="Eliminar"><i class="bi bi-trash-fill"></i></button>
-                                <button type="button" class="btn btn-custom btn-xs ms-2" (click)="verVotos(imagen.id)" title="Ver votos"><i class="bi bi-star-fill"></i></button>
+                                <button type="button" class="btn btn-custom btn-xs ms-2" (click)="verVotos(imagen.id)" title="Ver votos"><i class="bi bi-card-checklist"></i></button>
                             </td>
                         </tr>
                     </tbody>

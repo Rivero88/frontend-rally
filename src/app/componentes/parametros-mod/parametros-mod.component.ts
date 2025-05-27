@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { formatoFecha } from '../../../util';
 import { CategoriaService } from '../../servicios/categoria.service';
+declare var bootstrap: any; 
 
 @Component({
   selector: 'app-parametros-mod',
@@ -19,6 +20,8 @@ export class ParametrosModComponent {
   mensajeError: string | null = null;
   categoriaBorradaCorrectamente: boolean = false;
   parametroModificado: boolean = false;
+  categoriaIdAEliminar: number | null = null;
+  indexAEliminar: number = 0;
 
   constructor(private fb: FormBuilder, private parametroService: ParametroService, private categoriaService: CategoriaService, private ruta: Router) {
     this.formParametrosMod = this.fb.group({
@@ -91,25 +94,57 @@ export class ParametrosModComponent {
 
   //Método para eliminar una categoría
   eliminarCategoria(categoriaId: number,  index: number){
-    if (confirm("¿Estás seguro de que deseas eliminar esta categoría?")) {
-      this.categoriaService.eliminarCategoria(categoriaId).subscribe({
+    this.mostrarModalEliminarCategoria();
+    this.categoriaIdAEliminar = categoriaId;
+    this.indexAEliminar = index;
+  }
+
+  confirmarEliminarCategoria() {
+    if (this.categoriaIdAEliminar !== null && this.indexAEliminar !== null) {
+      this.categoriaService.eliminarCategoria(this.categoriaIdAEliminar).subscribe({
         next: () => {
           this.mensajeError = null;
           this.categoriaBorradaCorrectamente = true;
+          this.ocultarModalEliminarCategoria();
           // Elimina del FormArray también
-          this.categorias.removeAt(index);
+          this.categorias.removeAt(this.indexAEliminar);
           setTimeout(() => {
-            this.ruta.navigate(['/']);
-          }, 1000); // Navega después de 1 segundo
+            this.categoriaBorradaCorrectamente = false;
+          }, 2000);
         },
         error: error => {
+          this.ocultarModalEliminarCategoria();
           if (error.error && error.error.message) {
             this.mensajeError = error.error.message;
+            setTimeout(() => {
+              this.mensajeError = null;
+            }, 3000);
           } else {
             this.mensajeError = 'Error inesperado al eliminar la categoría.';
+            setTimeout(() => {
+              this.mensajeError = null;
+            }, 3000);
           }
         }
       });
+    }
+  }
+
+  mostrarModalEliminarCategoria(){
+    let modalEliminar = document.getElementById('modalEliminarCategoria');
+      if (modalEliminar) {
+        let modal = new bootstrap.Modal(modalEliminar, {
+          backdrop: false    // No se muestra el fondo difuso
+        });
+        modal.show();
+      } 
+  }
+
+  ocultarModalEliminarCategoria(){
+    let modalEliminar = document.getElementById('modalEliminarCategoria');
+      if (modalEliminar) {
+        let modal = bootstrap.Modal.getInstance(modalEliminar);
+        modal?.hide();
     }
   }
 
