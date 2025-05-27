@@ -46,8 +46,14 @@ export class RegistroSimpleComponent {
       error: (error: any) => {
         if (error.error && error.error.message) {
           this.mensajeError = error.error.message;
+          setTimeout(() => {
+            this.mensajeError = null;
+          }, 3000);
         } else {
           this.mensajeError = 'Error inesperado al registrar el usuario.';
+          setTimeout(() => {
+            this.mensajeError = null;
+          }, 3000);
         }
       }
     })

@@ -60,6 +60,9 @@ export class HomeComponent {
       },
       error: () => {
         this.mensajeError = 'Error al cargar los parámetros del rally.';
+        setTimeout(() => {
+            this.mensajeError = null;
+        }, 3000);
       },
     });
   }

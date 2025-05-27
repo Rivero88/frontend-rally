@@ -80,7 +80,7 @@ export class ImagenesValidarComponent {
           this.mensajeExito = 'Imagen validada.';
           setTimeout(() => {
             this.mensajeExito = null;
-          }, 2000);
+          }, 3000);
         }
       },
       error: () => {
@@ -102,7 +102,7 @@ export class ImagenesValidarComponent {
           this.mensajeExito = 'Imagen rechazada.';
           setTimeout(() => {
             this.mensajeExito = null;
-          }, 2000);
+          }, 3000);
         }
       },
       error: () => {
@@ -134,7 +134,7 @@ export class ImagenesValidarComponent {
           this.mensajeExito = 'Fotografía eliminada correctamente.';
           setTimeout(() => {
             this.mensajeExito = null;
-          }, 2000);
+          }, 3000);
         },
         error: () => {
           this.ocultarModalEliminarImagen();
