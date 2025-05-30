@@ -55,13 +55,22 @@ export class ContrasennaModComponent {
         error: (error) => {
           if (error.error && error.error.message) {
             this.mensajeError = error.error.message;
+            setTimeout(() => {
+                this.mensajeError = null;
+            }, 3000);
           } else {
             this.mensajeError = 'Error inesperado al modificar la contraseña.';
+            setTimeout(() => {
+                this.mensajeError = null;
+            }, 3000);
           }
         },
       });
     } else {
       this.contrasennaNoConciden = "Las contraseñas no coinciden";
+      setTimeout(() => {
+          this.contrasennaNoConciden = null;
+      }, 4000);
     }
   }
 
