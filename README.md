@@ -6,8 +6,6 @@ Interfaz de usuario para la aplicación Rally Fotográfico Cazadores de Momentos
 
 ## 📌 Descripción
 
-Este backend expone una API REST que permite:
-
 - Registrar usuarios
 - Subir imágenes
 - Realizar votaciones
