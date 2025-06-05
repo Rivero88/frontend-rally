@@ -90,10 +90,20 @@ export const environment = {
 
 Puedes acceder a la app desde el navegador en:
 
-```
-http://localhost:4200
-```
-O desde la URL generada por Render si se ha desplegado.
+a.	Abre el navegador:
+
+  ```
+  http://localhost:4200
+  ```
+  O desde la URL generada por Render si se ha desplegado.
+
+b.	Regístrate como usuario.
+
+c.	Sube fotos al rally.
+
+d.	Visualiza y vota las fotografías.
+
+e.	Consulta el ranking en tiempo real.
 
 ---
 ## 👥 Créditos
