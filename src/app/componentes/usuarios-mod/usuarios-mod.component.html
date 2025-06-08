@@ -71,42 +71,18 @@
                 <label for="alias" class="form-label">Alias</label>
                 <input type="text" id="alias" required formControlName="alias" class="form-control"
                     placeholder="Introduce alias" readonly/>
-                @if(formUsuarioMod.controls["alias"].invalid && (formUsuarioMod.controls["alias"].dirty || formUsuarioMod.controls["alias"].touched)){
-                    @if(formUsuarioMod.controls["alias"].errors?.["required"]){
-                        <div class="text-danger">
-                            El alias es obligatorio.
-                        </div>
-                    }
-                    @if(formUsuarioMod.controls["alias"].errors?.["minlength"]){
-                        <div class="text-danger">
-                            El alias debe tener al menos 2 caracteres.
-                        </div>
-                    }
-                }
             </div>
             <div class="col-md-6">
                 <label for="fNacimiento" class="form-label">Fecha nacimiento</label>
-                <input type="date" id="fNacimiento" required formControlName="fNacimiento" class="form-control" />
-                @if(formUsuarioMod.controls["fNacimiento"].invalid && (formUsuarioMod.controls["fNacimiento"].dirty || formUsuarioMod.controls["fNacimiento"].touched)){
-                    @if(formUsuarioMod.controls["fNacimiento"].errors?.["required"]){
-                        <div class="text-danger">
-                            La fecha de nacimiento es obligatoria.
-                        </div>
-                    }
-                }
+                <input type="date" id="fNacimiento" formControlName="fNacimiento" class="form-control" />
             </div>
         </div>
     
         <div class="row g-3 mb-4">
             <div class="col-md-6">
                 <label for="numTelefono" class="form-label">Teléfono</label>
-                <input type="tel" id="numTelefono" required formControlName="numTelefono" class="form-control" placeholder="Introduce teléfono"/>
+                <input type="tel" id="numTelefono" formControlName="numTelefono" class="form-control" placeholder="Introduce teléfono"/>
                 @if(formUsuarioMod.controls["numTelefono"].invalid && (formUsuarioMod.controls["numTelefono"].dirty || formUsuarioMod.controls["numTelefono"].touched)){
-                    @if(formUsuarioMod.controls["numTelefono"].errors?.["required"]){
-                        <div class="text-danger">
-                            El teléfono es obligatorio.
-                        </div>
-                    }
                     @if(formUsuarioMod.controls["numTelefono"].errors?.["minlength"]){
                         <div class="text-danger">
                             El teléfono debe tener al menos 9 caracteres.

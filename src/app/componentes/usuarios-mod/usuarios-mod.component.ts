@@ -28,8 +28,8 @@ export class UsuariosModComponent {
       alias:this.fb.control('', [Validators.required, Validators.minLength(3)]),
       nombre: this.fb.control('', [Validators.required, Validators.minLength(3)]),
       apellidos: this.fb.control('', [Validators.required, Validators.minLength(6)]),
-      fNacimiento: this.fb.control('', [Validators.required]),
-      numTelefono: this.fb.control('', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]),
+      fNacimiento: this.fb.control(''),
+      numTelefono: this.fb.control('', [Validators.minLength(9), Validators.maxLength(9)]),
       email: this.fb.control('', [Validators.required, Validators.email]),
       password: this.fb.control('', []),
     })

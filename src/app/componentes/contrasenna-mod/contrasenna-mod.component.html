@@ -4,7 +4,10 @@
         <h3 class="text-center mb-4" style="color: #254D42;">Modificar contraseña</h3>
         <div class="row-md-6">
             <label for="password" class="form-label">Nueva contraseña</label>
-            <input type="password" id="password" required formControlName="password" class="form-control" placeholder="Introduce contraseña" />
+            <div class="input-group">
+                <input [type]="showPassword ? 'text' : 'password'" id="password" required formControlName="password"  class="form-control" placeholder="Introduce contraseña"/>
+                <button type="button" class="btn btn-custom btn-lg" (click)="showPassword = !showPassword" tabindex="-1"> <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i> </button>
+            </div>
             @if(formContrasennaMod.controls["password"].invalid && (formContrasennaMod.controls["password"].dirty || formContrasennaMod.controls["password"].touched)){
                 @if(formContrasennaMod.controls["password"].errors?.["required"]){
                     <div class="text-danger">
@@ -28,7 +31,10 @@
 
         <div class="row-md-6">
             <label for="passwordRep" class="form-label">Repetir contraseña</label>
-            <input type="password" id="passwordRep" required formControlName="passwordRep" class="form-control" placeholder="Repite la contraseña" />
+            <div class="input-group">
+                <input [type]="showPasswordRep ? 'text' : 'password'" id="passwordRep" required formControlName="passwordRep" class="form-control" placeholder="Repite la contraseña" />
+                <button type="button" class="btn btn-custom btn-lg" (click)="showPasswordRep = !showPasswordRep" tabindex="-1"> <i class="bi" [ngClass]="showPasswordRep ? 'bi-eye-slash' : 'bi-eye'"></i> </button>
+            </div>
             @if(formContrasennaMod.controls["passwordRep"].invalid && (formContrasennaMod.controls["passwordRep"].dirty || formContrasennaMod.controls["passwordRep"].touched)){
                 @if(formContrasennaMod.controls["passwordRep"].errors?.["required"]){
                     <div class="text-danger">

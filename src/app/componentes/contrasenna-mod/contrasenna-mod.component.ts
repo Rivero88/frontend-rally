@@ -18,6 +18,8 @@ export class ContrasennaModComponent {
   mensajeError: string | null = null;
   contrasennaModificada: boolean = false;
   contrasennaNoConciden: string | null = null;
+  showPassword = false;
+  showPasswordRep = false;
 
   constructor(private fb: FormBuilder, private rutaActiva: ActivatedRoute, private ruta: Router, private usuarioService: UsuarioService, private authService: AuthService) {
     this.formContrasennaMod = this.fb.group({
