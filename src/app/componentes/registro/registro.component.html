@@ -59,14 +59,14 @@
             </div>
             <div class="col-md-6">
                 <label for="fNacimiento" class="form-label">Fecha nacimiento</label>
-                <input type="date" id="fNacimiento" required formControlName="fNacimiento" class="form-control" />
+                <input type="date" id="fNacimiento" formControlName="fNacimiento" class="form-control" />
             </div>
         </div>
 
         <div class="row g-3 mb-4">
             <div class="col-md-6">
                 <label for="numTelefono" class="form-label">Teléfono</label>
-                <input type="tel" id="numTelefono" required formControlName="numTelefono" class="form-control" placeholder="Introduce teléfono"/>
+                <input type="tel" id="numTelefono" formControlName="numTelefono" class="form-control" placeholder="Introduce teléfono"/>
                 @if(formUsuarioNuevo.controls["numTelefono"].invalid && (formUsuarioNuevo.controls["numTelefono"].dirty || formUsuarioNuevo.controls["numTelefono"].touched)){
                     @if(formUsuarioNuevo.controls["numTelefono"].errors?.["minlength"]){
                         <div class="text-danger">

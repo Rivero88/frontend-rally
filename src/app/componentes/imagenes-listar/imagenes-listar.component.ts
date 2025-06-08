@@ -88,7 +88,7 @@ export class ImagenesListarComponent implements OnInit {
           this.mensajeExito = 'Fotografía eliminada correctamente.';
           setTimeout(() => {
             this.mensajeExito = null;
-          }, 2000);
+          }, 3000);
         },
         error: () => {
           this.ocultarModalEliminarImagen();

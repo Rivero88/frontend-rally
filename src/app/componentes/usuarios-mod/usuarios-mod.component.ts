@@ -69,7 +69,7 @@ export class UsuariosModComponent {
             // Usuario participante editando su propio perfil
             this.ruta.navigate(['/perfil']);
           }
-        }, 1000);
+        }, 3000);
       },
       error: (error: any) => {
         if (error.error && error.error.message) {

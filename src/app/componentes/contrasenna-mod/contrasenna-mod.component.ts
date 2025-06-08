@@ -50,7 +50,7 @@ export class ContrasennaModComponent {
               // Usuario participante cambiando su propia contraseña
               this.ruta.navigate(['/perfil']);
             }
-          }, 1000); // Navega después de 1 segundo
+          }, 3000); // Navega después de 1 segundo
         },
         error: (error) => {
           if (error.error && error.error.message) {
