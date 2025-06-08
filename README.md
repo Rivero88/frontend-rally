@@ -1,59 +1,111 @@
-# FrontendRally
+# 📦 Frontend – Rally Fotográfico
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
+Interfaz de usuario para la aplicación Rally Fotográfico Cazadores de Momentos.
 
-## Development server
+---
 
-To start a local development server, run:
+## 📌 Descripción
 
-```bash
-ng serve
-```
+- Registrar usuarios
+- Subir imágenes
+- Realizar votaciones
+- Consultar rankings
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🛠️ Tecnologías
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Node.js
+- Angular
+- Bootstrap
+- Render (para despliegue en la nube)
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🚀 Instalación y despliegue local
 
-```bash
-ng generate --help
-```
+### 1. Prerrequisitos
 
-## Building
+- Node.js 18+
+- Angular CLI 19
+- Bootstrap 5
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### 2. Clonar repositorio
 
 ```bash
-ng test
+git clone https://github.com/Rivero88/frontend-rally.git
+cd frontend-rally
 ```
+### 3. Instala las dependencias y otros necesarios.
+#### Instalar node.js
+https://nodejs.org/
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+Para comprobar versión instalada:
 ```bash
-ng e2e
+node --version
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+#### Instalar npm
+```bash
+npm install -g npm
+```
 
-## Additional Resources
+#### Instalar Angular cli
+```bash
+npm install -g @angular/cli
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 4. Configura la URL del backend.
+
+El archivo environment.ts debe apuntar a la URL del backend.
+```
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080'
+};
+
+```
+---
+
+## 🖥️ Despliegue
+1. Crea el build del frontend:
+```
+  ng build --configuration production
+```
+2. En https://render.com, selecciona “Static Site”.
+3. Conecta tu repositorio y define:
+   
+  * Publish directory: dist/[nombre-proyecto].
+  * Para el despliegue crear environment.prod.ts y que apunte a la URL dada por el despliegue del backend:
+    ```
+    export const environment = {
+      production: false,
+      apiUrl: 'URL'
+    };
+    
+    ```
+---
+
+## 🔧 Uso
+
+Puedes acceder a la app desde el navegador en:
+
+a.	Abre el navegador:
+
+  ```
+  http://localhost:4200
+  ```
+  O desde la URL generada por Render si se ha desplegado.
+
+b.	Regístrate como usuario.
+
+c.	Sube fotos al rally.
+
+d.	Visualiza y vota las fotografías.
+
+e.	Consulta el ranking en tiempo real.
+
+---
+## 👥 Créditos
+
+Aplicación desarrollada por Ester Rivero Goldero como parte del proyecto de fin de módulo o FCT.
