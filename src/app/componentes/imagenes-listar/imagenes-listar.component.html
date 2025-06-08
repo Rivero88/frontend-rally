@@ -18,10 +18,12 @@
         <td>{{ imagen.descripcion }}</td>
         <td>{{ imagen.fechaSubida | date:'dd/MM/yyyy' }}</td>
         <td>{{ imagen.estadoValidacion }}</td>
-        <td class="d-flex justify-content-center gap-2">
-          <button class="btn btn-custom btn-lg" type="button" (click)="verImagen(imagen.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
-          <button class="btn btn-custom btn-lg ms-3" type="button" [disabled]="imagen.estadoValidacion == 'Validada' || imagen.estadoValidacion == 'Rechazada'" (click)="modificarImagen(imagen.id)" title="Editar"><i class="bi bi-pencil-fill"></i></button>
-          <button class="btn btn-custom btn-lg ms-3" type="button" [disabled]="imagen.estadoValidacion == 'Validada' || imagen.estadoValidacion == 'Rechazada'" (click)="eliminarImagen(imagen.id, imagen.nombre, imagen.categoria.nombre)" title="Eliminar"><i class="bi bi-trash-fill"></i></button>
+        <td class="text-center align-middle">
+          <div class="d-flex justify-content-center align-items-center gap-2">
+            <button class="btn btn-custom btn-lg" type="button" (click)="verImagen(imagen.id)" title="Ver fotografía"><i class="bi bi-eye-fill"></i></button>
+            <button class="btn btn-custom btn-lg" type="button" [disabled]="imagen.estadoValidacion == 'Validada' || imagen.estadoValidacion == 'Rechazada'" (click)="modificarImagen(imagen.id)" title="Editar"><i class="bi bi-pencil-fill"></i></button>
+            <button class="btn btn-custom btn-lg" type="button" [disabled]="imagen.estadoValidacion == 'Validada' || imagen.estadoValidacion == 'Rechazada'" (click)="eliminarImagen(imagen.id, imagen.nombre, imagen.categoria.nombre)" title="Eliminar"><i class="bi bi-trash-fill"></i></button>
+          </div>
         </td>
       </tr>
     </tbody>
